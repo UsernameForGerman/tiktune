@@ -1,4 +1,5 @@
-from rest_framework.serializers import Serializer, ImageField, CharField, URLField, ModelSerializer, IntegerField, DateTimeField
+from rest_framework.serializers import Serializer, ImageField, CharField, URLField, ModelSerializer, IntegerField, \
+    DateTimeField, SerializerMethodField
 from .models import Song, Artist, SearchHistory
 
 class ArtistSerializer(ModelSerializer):
@@ -7,13 +8,36 @@ class ArtistSerializer(ModelSerializer):
         fields = ('name',)
 
 class SongSerializer(ModelSerializer):
-    itunes_url = URLField(read_only=True, allow_null=True, allow_blank=True, max_length=512)
-    play_url = URLField(read_only=True, allow_null=True, allow_blank=True, max_length=512)
+    # itunes_url = URLField(read_only=True, allow_null=True, allow_blank=True, max_length=512)
+    # play_url = URLField(read_only=True, allow_null=True, allow_blank=True, max_length=512)
+    itunes_url = SerializerMethodField()
+    play_url = SerializerMethodField()
+    spotify_url = SerializerMethodField()
+    deezer_url = SerializerMethodField()
     artists = ArtistSerializer(many=True, read_only=True)
+    image = SerializerMethodField()
 
     class Meta:
         model = Song
-        fields = ('artists', 'name', 'image', 'itunes_url', 'play_url', 'amount')
+        fields = ('artists', 'name', 'image', 'itunes_url', 'play_url', 'spotify_url', 'deezer_url', 'amount')
+
+    def get_spotify_url(self, song):
+        return song.get_spotify_url()
+
+    def get_deezer_url(self, song):
+        return song.get_deezer_url()
+
+    def get_play_url(self, song):
+        return song.get_play_url()
+
+    def get_itunes_url(self, song):
+        return song.get_itunes_url()
+
+    def get_image(self, song):
+        if song.image is None:
+            return ''
+        else:
+            return ''
 
 class TikTokSerializer(Serializer):
     tiktok_url = URLField(max_length=512)

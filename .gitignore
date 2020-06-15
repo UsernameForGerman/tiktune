@@ -133,3 +133,6 @@ dmypy.json
 
 # Redis server folder
 redis-server/
+
+# Celery staff
+tmp/

@@ -44,6 +44,7 @@ def find_save_songs(tiktok_url: str):
         # create song objs with empty artist field
         song_names = [song['title'] for song in songs]
         Song.check_list_or_create(song_names)
+        Song.update_urls_info(songs)
 
         # update created song objs with artist field
         song_objs = Song.objects.filter(name__in=song_names)

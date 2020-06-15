@@ -1,6 +1,15 @@
-from django.db.models import Model, URLField, CharField, SlugField, ForeignKey, CASCADE, ManyToManyField, DateTimeField
+from django.db.models import Model, URLField, CharField, SlugField, ForeignKey, CASCADE, ManyToManyField, DateTimeField, \
+    BigIntegerField, Manager
 
 # Create your models here.
+
+class SearchHistoryObjectsManager(Manager):
+    def bulk_create(self, items, *args, **kwargs):
+        super().bulk_create(items, *args, **kwargs)
+        songs = Song.objects.filter(id__in=[item.song.id for item in items])
+        for song in songs:
+            song.amount += 1
+        Song.objects.bulk_update(songs, ['amount'])
 
 class StreamingModel(Model):
     DEEZER = 'www.deezer.com/'
@@ -55,9 +64,9 @@ class Song(StreamingModel):
     artists = ManyToManyField(Artist, verbose_name='artists')
     name = CharField('song name', max_length=256, db_index=True, unique=True)
     image = URLField('image url', blank=True, null=True)
+    amount = BigIntegerField(default=1)
 
     def __str__(self):
-        # return "{} : {}".format(' & '.join([artist for artist in self.artists.all()]), self.name)
         return self.name
 
     @classmethod
@@ -69,7 +78,8 @@ class Song(StreamingModel):
             if song not in song_objs:
                 song_objs_to_create.append(
                     Song(
-                        name=song
+                        name=song,
+                        amount=1
                     )
                 )
 
@@ -91,4 +101,6 @@ class SearchHistory(Model):
     tiktok_url = URLField('TikTok url')
     song = ForeignKey(Song, on_delete=CASCADE, verbose_name='found song', null=True, blank=True)
     timestamp = DateTimeField(auto_now_add=True)
+
+    objects = SearchHistoryObjectsManager()
 

@@ -3,7 +3,7 @@ from celery import shared_task
 from TikTokApi import TikTokApi
 from requests import Session
 import os
-from .acrcloud.recognizer import ACRCloudRecognizer
+from acrcloud.recognizer import ACRCloudRecognizer
 from json import loads
 
 # project

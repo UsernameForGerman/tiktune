@@ -1,0 +1,514 @@
+	.mediaViewInfo {
+		--web-view-name: Search web ru;
+		--web-view-id: Search_web_ru;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Search_web_ru;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#Search_web_ru {
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+		--web-view-name: Search web ru;
+		--web-view-id: Search_web_ru;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	#logo {
+		position: absolute;
+		width: 439px;
+		height: 144px;
+		left: 873px;
+		top: 229px;
+		overflow: visible;
+	}
+	#Rectangle_7_r {
+		fill: url(#Rectangle_7_r);
+	}
+	.Rectangle_7_r {
+		position: absolute;
+		overflow: visible;
+		width: 574px;
+		height: 46px;
+		left: 738px;
+		top: 414px;
+	}
+	#__bv {
+		left: 763px;
+		top: 420px;
+		position: absolute;
+		overflow: visible;
+		width: 200px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(138,138,142,1);
+	}
+	#Group_6 {
+		position: absolute;
+		width: 175px;
+		height: 27px;
+		left: 615px;
+		top: 79px;
+		overflow: visible;
+	}
+	#_v {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 84px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(60,60,67,0.6);
+	}
+	#Rectangle_9_x {
+		fill: url(#Rectangle_9_x);
+	}
+	.Rectangle_9_x {
+		position: absolute;
+		overflow: visible;
+		width: 560px;
+		height: 1080px;
+		left: 1360px;
+		top: 0px;
+	}
+	#Group_5 {
+		position: absolute;
+		width: 86px;
+		height: 195px;
+		left: 615px;
+		top: 353px;
+		overflow: visible;
+	}
+	#Group_20 {
+		position: absolute;
+		width: 86px;
+		height: 195px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_3_bm {
+		position: absolute;
+		width: 86px;
+		height: 89px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#share_bn {
+		position: absolute;
+		width: 52px;
+		height: 52px;
+		left: 17px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_2_bo {
+		position: absolute;
+		width: 86px;
+		height: 34px;
+		left: 0px;
+		top: 55px;
+		overflow: visible;
+	}
+	#__bp {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 87px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#Group_4_bq {
+		position: absolute;
+		width: 72px;
+		height: 89px;
+		left: 7px;
+		top: 106px;
+		overflow: visible;
+	}
+	#link_br {
+		position: absolute;
+		width: 52px;
+		height: 52px;
+		left: 10px;
+		top: 0px;
+		overflow: visible;
+	}
+	#__bs {
+		left: 0px;
+		top: 55px;
+		position: absolute;
+		overflow: visible;
+		width: 73px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#Rectangle_12_ {
+		fill: url(#Rectangle_12_);
+	}
+	.Rectangle_12_ {
+		width: 560px;
+		height: 1080px;
+		position: absolute;
+		overflow: visible;
+		transform: matrix(1,0,0,1,0,0) rotate(180deg);
+		transform-origin: center;
+	}
+	#__bv {
+		left: 763px;
+		top: 420px;
+		position: absolute;
+		overflow: visible;
+		width: 200px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(138,138,142,1);
+	}
+	#_Copyright_2020_TikTune_bw {
+		left: 876px;
+		top: 1047px;
+		position: absolute;
+		overflow: visible;
+		width: 166px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#_English___bx {
+		left: 1234px;
+		top: 79px;
+		position: absolute;
+		overflow: visible;
+		width: 79px;
+		white-space: nowrap;
+		text-align: right;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Rectangle_17 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(255,0,0,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_17 {
+		position: absolute;
+		overflow: visible;
+		width: 664px;
+		height: 451px;
+		left: 634px;
+		top: 574px;
+	}
+	#Adsense_bz {
+		left: 658px;
+		top: 596px;
+		position: absolute;
+		overflow: visible;
+		width: 52px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#__bv {
+		left: 763px;
+		top: 420px;
+		position: absolute;
+		overflow: visible;
+		width: 200px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(138,138,142,1);
+	}
+	#Group_30 {
+		position: absolute;
+		width: 175px;
+		height: 27px;
+		left: 615px;
+		top: 79px;
+		overflow: visible;
+	}
+	#_bg {
+		left: 103px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 73px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#_bh {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 84px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(60,60,67,0.6);
+	}
+	#Rectangle_20_bj {
+		fill: url(#Rectangle_20_bj);
+	}
+	.Rectangle_20_bj {
+		position: absolute;
+		overflow: visible;
+		width: 560px;
+		height: 1080px;
+		left: 1360px;
+		top: 0px;
+	}
+	#Group_31 {
+		position: absolute;
+		width: 86px;
+		height: 195px;
+		left: 615px;
+		top: 353px;
+		overflow: visible;
+	}
+	#Group_20_bl {
+		position: absolute;
+		width: 86px;
+		height: 195px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_3_bm {
+		position: absolute;
+		width: 86px;
+		height: 89px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#share_bn {
+		position: absolute;
+		width: 52px;
+		height: 52px;
+		left: 17px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_2_bo {
+		position: absolute;
+		width: 86px;
+		height: 34px;
+		left: 0px;
+		top: 55px;
+		overflow: visible;
+	}
+	#__bp {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 87px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#Group_4_bq {
+		position: absolute;
+		width: 72px;
+		height: 89px;
+		left: 7px;
+		top: 106px;
+		overflow: visible;
+	}
+	#link_br {
+		position: absolute;
+		width: 52px;
+		height: 52px;
+		left: 10px;
+		top: 0px;
+		overflow: visible;
+	}
+	#__bs {
+		left: 0px;
+		top: 55px;
+		position: absolute;
+		overflow: visible;
+		width: 73px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#Rectangle_21_bu {
+		fill: url(#Rectangle_21_bu);
+	}
+	.Rectangle_21_bu {
+		width: 560px;
+		height: 1080px;
+		position: absolute;
+		overflow: visible;
+		transform: matrix(1,0,0,1,0,0) rotate(180deg);
+		transform-origin: center;
+	}
+	#__bv {
+		left: 763px;
+		top: 420px;
+		position: absolute;
+		overflow: visible;
+		width: 200px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(138,138,142,1);
+	}
+	#_Copyright_2020_TikTune_bw {
+		left: 876px;
+		top: 1047px;
+		position: absolute;
+		overflow: visible;
+		width: 166px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#_English___bx {
+		left: 1234px;
+		top: 79px;
+		position: absolute;
+		overflow: visible;
+		width: 79px;
+		white-space: nowrap;
+		text-align: right;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Rectangle_23 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(255,0,0,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_23 {
+		position: absolute;
+		overflow: visible;
+		width: 664px;
+		height: 451px;
+		left: 634px;
+		top: 574px;
+	}
+	#Adsense_bz {
+		left: 658px;
+		top: 596px;
+		position: absolute;
+		overflow: visible;
+		width: 52px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#Rectangle_24_b {
+		fill: url(#Rectangle_24_b);
+	}
+	.Rectangle_24_b {
+		position: absolute;
+		overflow: visible;
+		width: 140px;
+		height: 46px;
+		left: 1172px;
+		top: 414px;
+	}
+	#_b {
+		left: 1216px;
+		top: 420px;
+		position: absolute;
+		overflow: visible;
+		width: 77px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(0,0,0,1);
+	}

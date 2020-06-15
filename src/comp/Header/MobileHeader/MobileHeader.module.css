@@ -1,0 +1,26 @@
+.Header{
+    width: 100%;
+}
+
+.logo{
+    width: 80%;
+}
+
+.background{
+    background-color: rgba(147,244,240,1);
+}
+
+.HeaderWrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.desc{
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 10px 0px;
+}

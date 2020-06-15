@@ -13,14 +13,11 @@ django-cors-headers==3.3.0
 djangorestframework==3.11.0
 future==0.18.2
 idna==2.9
-<<<<<<< HEAD
 
-
-=======
 importlib-metadata==1.6.1
 kombu==4.6.10
-pkg-resources==0.0.0
->>>>>>> 733d8fb538454a28a7ae66b3dd68ca9ce3b9a901
+
+
 pyee==7.0.2
 pyppeteer==0.2.2
 pyppeteer-stealth==1.0.0

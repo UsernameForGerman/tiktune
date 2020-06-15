@@ -1,0 +1,10 @@
+.searchBtn{
+    background-color: black;
+    padding: 10px 10px;
+    font-size: 1.25em;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+}

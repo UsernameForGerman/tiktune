@@ -1,0 +1,17 @@
+.StatisticsSection{
+    font-weight: bold;
+}
+
+.labeledNumber{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.number{
+    font-size: 2em;
+}
+
+.label{
+    font-size: 1.5em;
+}

@@ -1,0 +1,19 @@
+.Nav{
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.link{
+    color: rgba(60,60,67,0.6);
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0px 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.active{
+    color: black;
+}

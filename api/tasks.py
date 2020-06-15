@@ -20,10 +20,10 @@ def get_mp3_bytes_code(tiktok_url):
 
 def get_songs(tiktok_url):
     config = {
-        'host': os.environ.get("ACR_HOST"),
-        'access_key': os.environ.get("ACR_ACCESS_KEY"),
-        'access_secret': os.environ.get("ACR_ACCESS_SECRET"),
-        'timeout': 5
+        'host': "identify-eu-west-1.acrcloud.com",
+        'access_key': "41b3ef28fd1208650ba1836883fe39a6",
+        'access_secret': "2TLwLMyd7KpEnZyPRRXpKlCwUnmiocFbsgP63my1",
+        'timeout': 10
     }
 
     re = ACRCloudRecognizer(config)

@@ -1,0 +1,26 @@
+.Instruction{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.instructionPoint{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 10px;
+}
+
+.img{
+    width: 10vw;
+}
+
+.instructionDesc{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.instructionDesc{
+    font-size: 1em;
+}

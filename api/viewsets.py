@@ -3,7 +3,8 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED,\
+    HTTP_204_NO_CONTENT
 import datetime
 
 # project
@@ -87,13 +88,16 @@ class HistoryViewSet(ViewSet):
 
     def list(self, request: Request) -> Response:
         session_data = request.session
-        search_history = SearchHistory.objects.filter(
-            id__in=session_data['songs'],
-        ).order_by(
-            '-timestamp'
-        )
-        response_data = SearchHistorySerializer(search_history, many=True).data
-        return Response(response_data, status=HTTP_200_OK)
+        if 'songs' in session_data:
+            search_history = SearchHistory.objects.filter(
+                id__in=session_data['songs'],
+            ).order_by(
+                '-timestamp'
+            )
+            response_data = SearchHistorySerializer(search_history, many=True).data
+            return Response(response_data, status=HTTP_200_OK)
+        else:
+            return Response('No history data in session', status=HTTP_204_NO_CONTENT)
 
 
 

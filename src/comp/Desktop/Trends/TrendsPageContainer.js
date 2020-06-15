@@ -3,15 +3,16 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import trendsSelector from "../../../selectors/trendsSelector";
 import {getTrendSongsThunk} from "../../../reducers/trendsReducer";
+import renderList from "../../../DAL/utils/renderer";
 
 let TrendsPageContainer = (props) => {
     useEffect(() => {
         props.getTrends();
     }, props.songsList);
 
-    debugger;
+    let list = renderList(props.songsList);
     return(
-        <TrendsPage/>
+        <TrendsPage list={list} isFetching={props.isFetching}/>
     )
 }
 

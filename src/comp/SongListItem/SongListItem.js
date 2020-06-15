@@ -6,9 +6,9 @@ let SongListItem = (props) => {
     return(
         <div className={`${classes.SongListItem}`}>
             <div className={classes.ava}>
-                <img className={`${classes.picture}`} src={props.imgLink} alt={"Music picture"}/>
+                <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
                 <span className={classes.downloads}>
-                    {props.downloads}
+                    {props.amount}
                 </span>
             </div>
             <div className={classes.info}>
@@ -16,10 +16,10 @@ let SongListItem = (props) => {
                     {props.name}
                 </div>
                 <div className={classes.singer}>
-                    {props.singer}
+                    {props.artists}
                 </div>
                 <div className={classes.btns}>
-                    <a className={classes.appleLink} href={props.appleLink}>
+                    <a className={classes.appleLink} href={props.itunes_url}>
                         <div className={`${classes.icon}`}>
                             <img src={apple} className={classes.appleIcon} alt={"Apple music icon"}/>
                         </div>
@@ -32,7 +32,7 @@ let SongListItem = (props) => {
                             </div>
                         </div>
                     </a>
-                    <a className={classes.googlePlayLink} href={props.googleLink}>
+                    <a className={classes.googlePlayLink} href={props.play_url}>
                         <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                     </a>
                 </div>

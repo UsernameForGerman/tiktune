@@ -8,7 +8,7 @@ class search_api extends api{
     }
 
     getSongByUrl = (url) => {
-        return this.getInline("","?url=" + url);
+        return this.getInline("","?url=" + url.toString());
     }
 }
 

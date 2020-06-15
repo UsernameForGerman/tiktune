@@ -67,12 +67,24 @@ let getSongByUrlThunk = (url) => {
         dispatch(toggleFetchAC());
         search_api.getSongByUrl(url)
             .then((resp) => {
-                setList(resp.data);
-                dispatch(toggleFetchAC());
+                setTimeout(() => {
+                    search_api.getSongByUrl(url)
+                        .then(resp => {
+                            console.log(resp);
+                            debugger;
+                            dispatch(setList(resp.data));
+                            dispatch(toggleFetchAC());
+                        })
+                        .catch((err) => {
+                            let resp = err.response;
+                            dispatch(setErrorMsg(resp.data));
+                            dispatch(toggleFetchAC());
+                        })
+                }, 6000);
             })
             .catch((err) => {
-                let status = err.status;
-                dispatch(setErrorMsg("Ошибка"));
+                let resp = err.response;
+                dispatch(setErrorMsg(resp.data));
                 dispatch(toggleFetchAC());
             })
     }

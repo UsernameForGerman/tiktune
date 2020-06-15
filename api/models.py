@@ -1,5 +1,5 @@
 from django.db.models import Model, URLField, CharField, SlugField, ForeignKey, CASCADE, ManyToManyField, DateTimeField, \
-    BigIntegerField, Manager
+    BigIntegerField, Manager, SmallIntegerField
 
 # Create your models here.
 
@@ -12,8 +12,8 @@ class SearchHistoryObjectsManager(Manager):
         Song.objects.bulk_update(songs, ['amount'])
 
 class StreamingModel(Model):
-    DEEZER = 'www.deezer.com/'
-    SPOTIFY = 'www.spotify.com/'
+    DEEZER = 'https://deezer.com/'
+    SPOTIFY = 'https://open.spotify.com/'
 
     deezer_id = SlugField('deezer id', max_length=64, blank=True, null=True, unique=True)
     itunes_id = SlugField('apple id', max_length=64, blank=True, null=True, unique=True)
@@ -65,6 +65,9 @@ class Song(StreamingModel):
     name = CharField('song name', max_length=256, db_index=True, unique=True)
     image = URLField('image url', blank=True, null=True)
     amount = BigIntegerField(default=1)
+    isrc = CharField('ISRC', max_length=64, null=True, blank=True)
+
+    spotify_album_id = CharField('Spotify album id', max_length=128, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -85,6 +88,26 @@ class Song(StreamingModel):
 
         cls.objects.bulk_create(song_objs_to_create)
 
+    @classmethod
+    def update_urls_info(cls, songs_info):
+        song_objs = cls.objects.filter(name__in=[song['title'] for song in songs_info])
+        song_objs_to_update = list()
+        for song_info in songs_info:
+            song_obj = song_objs.filter(
+                name=song_info['title']
+            ).first()
+            if 'spotify' in song_info['external_metadata']:
+                song_obj.spotify_id = song_info['external_metadata']['spotify']['track']['id']
+                song_obj.spotify_album_id = song_info['external_metadata']['spotify']['album']['id']
+            if 'deezer' in song_info['external_metadata']:
+                song_obj.deezer_id = song_info['external_metadata']['deezer']['track']['id']
+            if 'external_ids' in song_info:
+                if 'isrc' in song_info['external_ids']:
+                    song_obj.isrc = song_info['external_ids']['isrc']
+            song_objs_to_update.append(song_obj)
+
+        cls.objects.bulk_update(song_objs_to_update, ['spotify_id', 'deezer_id', 'isrc', 'spotify_album_id'])
+
     def get_deezer_url(self) -> str:
         if self.DEEZER and self.deezer_id:
             return self.DEEZER + 'track/' + self.deezer_id
@@ -93,7 +116,7 @@ class Song(StreamingModel):
 
     def get_spotify_url(self) -> str:
         if self.SPOTIFY and self.spotify_id:
-            return self.SPOTIFY + 'track/' + self.spotify_id
+            return self.SPOTIFY + 'album/' + self.spotify_album_id + '?highlight=spotify:track:' + self.spotify_id
         else:
             return ''
 

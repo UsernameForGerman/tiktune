@@ -10,8 +10,8 @@ Django==3.0.7
 django-cors-headers==3.3.0
 djangorestframework==3.11.0
 idna==2.9
-pkg-resources==0.0.0
-pyacrcloud==1.0.1
+
+
 pyee==7.0.2
 pyppeteer==0.2.2
 pyppeteer-stealth==1.0.0

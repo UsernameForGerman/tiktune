@@ -133,3 +133,5 @@ dmypy.json
 
 # Redis server folder
 redis-server/
+
+node_modules

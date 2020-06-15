@@ -3,8 +3,7 @@ from celery import shared_task
 from TikTokApi import TikTokApi
 from requests import Session
 import os
-from acrcloud.recognizer import ACRCloudRecognizer
-from acrcloud import acrcloud_extr_tool
+from .acrcloud.recognizer import ACRCloudRecognizer
 from json import loads
 
 # project
@@ -37,7 +36,6 @@ def find_save_songs(tiktok_url: str):
     song_info = loads(get_songs(tiktok_url))
     if song_info['status']['msg'] == "Success":
         songs = song_info['metadata']['music']
-        # songs = set(songs)
 
         # create artists for song
         artists = [artist['name'] for song in songs for artist in song['artists']]
@@ -46,20 +44,12 @@ def find_save_songs(tiktok_url: str):
         # create song objs with empty artist field
         song_names = [song['title'] for song in songs]
         Song.check_list_or_create(song_names)
-        # songs_names = set(song['title'] for song in songs)
-        # song_objs = [Song(name=song) for song in songs_names]
-        # print(song_objs)
-        # Song.objects.bulk_create(song_objs)
 
         # update created song objs with artist field
         song_objs = Song.objects.filter(name__in=song_names)
         for song_obj in song_objs:
             artists = set(artist['name'] for song in songs for artist in song['artists'] if song['title'] == song_obj.name)
             song_obj.artists.add(*Artist.objects.filter(name__in=artists))
-            # for song in songs:
-            #     if song['title'] == song_obj.name:
-            #         song_obj.artists.add(*[artist['name'] for artist in song['artists']])
-            #         break
 
         # set song to searching history
         for song_obj in song_objs:

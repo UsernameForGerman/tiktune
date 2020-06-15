@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .viewsets import SearchViewSet, TrendsViewSet
+from .viewsets import SearchViewSet, TrendsViewSet, HistoryViewSet
 
 app_name = 'api'
 
 router = DefaultRouter()
 router.register('search', SearchViewSet, basename='Search')
 router.register('trends', TrendsViewSet, basename='Trends')
+router.register('history', HistoryViewSet, basename='History')
 
 urlpatterns = [
     path('', include(router.urls))

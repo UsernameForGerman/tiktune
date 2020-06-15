@@ -1,5 +1,5 @@
-from rest_framework.serializers import Serializer, ImageField, CharField, URLField, ModelSerializer, ReadOnlyField
-from .models import Song, Artist
+from rest_framework.serializers import Serializer, ImageField, CharField, URLField, ModelSerializer, IntegerField, DateTimeField
+from .models import Song, Artist, SearchHistory
 
 class ArtistSerializer(ModelSerializer):
     class Meta:
@@ -13,7 +13,7 @@ class SongSerializer(ModelSerializer):
 
     class Meta:
         model = Song
-        fields = ('artists', 'name', 'image', 'itunes_url', 'play_url')
+        fields = ('artists', 'name', 'image', 'itunes_url', 'play_url', 'amount')
 
 class TikTokSerializer(Serializer):
     tiktok_url = URLField(max_length=512)
@@ -23,4 +23,21 @@ class TikTokSerializer(Serializer):
             return 'tiktok.com' in self.data['tiktok_url']
         else:
             return False
+
+class TrendSerializer(Serializer):
+    song = SongSerializer(read_only=True)
+    amount = IntegerField()
+
+class SearchHistorySerializer(ModelSerializer):
+    song = SongSerializer(read_only=True)
+
+    class Meta:
+        model = SearchHistory
+        fields = ('song', 'tiktok_url', 'timestamp')
+
+class SearchHistorySessionSerializer(Serializer):
+    song = CharField(max_length=256)
+    tiktok_url = URLField()
+    timestamp = DateTimeField()
+
 

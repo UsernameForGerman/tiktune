@@ -1,18 +1,19 @@
 
 # libs
-from rest_framework.viewsets import ViewSet, GenericViewSet
+from rest_framework.viewsets import ViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
-from django.db.models import Count
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED
+import datetime
 
 # project
 from .models import SearchHistory, Song
-from .serializers import SongSerializer, TikTokSerializer
+from .serializers import SongSerializer, TikTokSerializer, SearchHistorySerializer
 from .tasks import find_save_songs
 
 
 class SearchViewSet(ViewSet):
+    MAX_HISTORY = 20
 
     def get_queryset(self):
         return SearchHistory.objects.filter(
@@ -35,19 +36,35 @@ class SearchViewSet(ViewSet):
                     if search_history.exclude(song__isnull=True):
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)
-                        SearchHistory.objects.bulk_create([
-                            SearchHistory(
+                        SearchHistory.objects.bulk_create([SearchHistory(
                                 tiktok_url=serializer.data['tiktok_url'],
                                 song=song
                             ) for song in songs
                         ])
+                        now = datetime.datetime.now()
+                        new_search_history = SearchHistory.objects.filter(
+                            tiktok_url=serializer.data['tiktok_url'],
+                            song__in=songs,
+                            timestamp__range=(now - datetime.timedelta(seconds=1), now)
+                        )
+                        if 'songs' in request.session:
+                            session_data = request.session
+                            session_search_history = SearchHistory.objects.filter(
+                                id__in=session_data['songs']
+                            ).order_by(
+                                '-timestamp'
+                            )
+                            while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
+                                session_search_history.pop()
+                            new_search_history = new_search_history | session_search_history
+                        request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)
                     else:
-                        find_save_songs(serializer.data['tiktok_url']).delay()
+                        find_save_songs.delay(serializer.data['tiktok_url'])
                         return Response(
                             headers={
-                                'retry_after': 5
+                                'retry_after': 6
                             },
                             status=HTTP_202_ACCEPTED,
                         )
@@ -59,27 +76,23 @@ class SearchViewSet(ViewSet):
 class TrendsViewSet(ViewSet):
 
     def get_queryset(self, max_amount=20):
-        song_ids = SearchHistory.objects.values_list('song', flat=True)
-        song_amount = {}
-        for song_id in song_ids:
-            if song_id in song_amount.keys():
-                song_amount[song_id] += 1
-            else:
-                song_amount[song_id] = 0
-        sorted_song_amount = {k: v for k, v in sorted(song_amount.items(), key=lambda item: item[1])}
-        cnt = 0
-        top_ids = list()
-        for key, value in sorted_song_amount.items():
-            if cnt == max_amount:
-                break
-            top_ids.append(key)
-            cnt += 1
-        return Song.objects.filter(id__in=top_ids)
-        # return SearchHistory.objects.all().distinct('song').annotate(Count('song', distinct=True)).order_by('-song__count')[:max_amount]
+        return Song.objects.order_by('amount')[:max_amount]
 
     def list(self, request: Request) -> Response:
-        trends = self.get_queryset()
-        response_data = SongSerializer(trends, many=True).data
+        songs = self.get_queryset()
+        response_data = SongSerializer(songs, many=True).data
+        return Response(response_data, status=HTTP_200_OK)
+
+class HistoryViewSet(ViewSet):
+
+    def list(self, request: Request) -> Response:
+        session_data = request.session
+        search_history = SearchHistory.objects.filter(
+            id__in=session_data['songs'],
+        ).order_by(
+            '-timestamp'
+        )
+        response_data = SearchHistorySerializer(search_history, many=True).data
         return Response(response_data, status=HTTP_200_OK)
 
 

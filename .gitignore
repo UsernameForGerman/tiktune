@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# PycharmProject
+# Pycharm project files
 .idea/
+
+# Redis server folder
+redis-server/

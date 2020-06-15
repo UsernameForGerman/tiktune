@@ -8,6 +8,7 @@ import React from "react";
 import TrendsPage from "./comp/Desktop/Trends/TrendsPage";
 import ResultPage from "./comp/Desktop/Resultpage/ResultPage";
 import MainPage from "./comp/Desktop/MainPage/MainPage";
+import TrendsPageContainer from "./comp/Desktop/Trends/TrendsPageContainer";
 
 let DesktopApp = (props) => {
     return(
@@ -23,7 +24,7 @@ let DesktopApp = (props) => {
                     <ResultPage/>
                 </Route>
                 <Route path={"/trends"}>
-                    <TrendsPage/>
+                    <TrendsPageContainer/>
                 </Route>
                 <Footer/>
             </DesktopContainer>

@@ -64,16 +64,13 @@ let setErrorMsg = (msg) => {
 
 let getSongByUrlThunk = (url) => {
     return (dispatch) => {
-        debugger;
         dispatch(toggleFetchAC());
         search_api.getSongByUrl(url)
             .then((resp) => {
-                debugger;
                 setList(resp.data);
                 dispatch(toggleFetchAC());
             })
             .catch((err) => {
-                debugger;
                 let status = err.status;
                 dispatch(setErrorMsg("Ошибка"));
                 dispatch(toggleFetchAC());

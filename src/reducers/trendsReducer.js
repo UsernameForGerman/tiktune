@@ -10,16 +10,18 @@ class TrendsReducer extends BaseReducer{
 
     getTrendSongsThunk = () => {
         return (dispatch) => {
+            debugger;
             dispatch(this.toggleFetchAC());
             trends_api.getTrendsSongs()
-                .catch((err) => {
-                    let status = err.status;
-                    dispatch(this.setErrorMsg("Ошибка"));
+                .then((resp) => {
+                    debugger;
+                    this.setList(resp.data);
                     dispatch(this.toggleFetchAC());
                 })
-
-                .then((resp) => {
-                    this.setList(resp.data);
+                .catch((err) => {
+                    debugger;
+                    let status = err.status;
+                    dispatch(this.setErrorMsg("Ошибка"));
                     dispatch(this.toggleFetchAC());
                 })
         }
@@ -29,6 +31,6 @@ class TrendsReducer extends BaseReducer{
 let obj = new TrendsReducer();
 
 let trendsReducer = obj.trendsReducer;
-let getTrendSongsThunk = obj.getTrendSongsThunk();
+let getTrendSongsThunk = obj.getTrendSongsThunk;
 
 export {trendsReducer, getTrendSongsThunk}

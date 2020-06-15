@@ -9,6 +9,7 @@ import TrendsPage from "./comp/Desktop/Trends/TrendsPage";
 import ResultPage from "./comp/Desktop/Resultpage/ResultPage";
 import MainPage from "./comp/Desktop/MainPage/MainPage";
 import TrendsPageContainer from "./comp/Desktop/Trends/TrendsPageContainer";
+import ResultPageContainer from "./comp/Desktop/Resultpage/ResultPageContainer";
 
 let DesktopApp = (props) => {
     return(
@@ -21,7 +22,7 @@ let DesktopApp = (props) => {
                     <MainPage/>
                 </Route>
                 <Route path={"/search"}>
-                    <ResultPage/>
+                    <ResultPageContainer/>
                 </Route>
                 <Route path={"/trends"}>
                     <TrendsPageContainer/>

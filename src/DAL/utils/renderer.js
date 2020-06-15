@@ -3,6 +3,7 @@ import React from "react";
 
 let formatResponse = (resp) => {
     let formatted = {...resp};
+    debugger;
     formatted.artists = resp.artists.reduce((a = "", b) => {
         return a + " & " + b;
     })
@@ -17,6 +18,7 @@ let formatResponse = (resp) => {
 }
 
 let renderSong = (resp) => {
+    debugger;
     let formatted = formatResponse(resp);
     return (
         <SongListItem {...formatted}/>
@@ -24,6 +26,7 @@ let renderSong = (resp) => {
 }
 
 let renderList = (data) => {
+    debugger;
     return data.map(elem => {
         return renderSong(elem);
     })

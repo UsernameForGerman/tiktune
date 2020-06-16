@@ -34,8 +34,8 @@ class SongSerializer(ModelSerializer):
         return song.get_itunes_url()
 
     def get_image(self, song):
-        if song.image is None:
-            return ''
+        if song.image is not None:
+            return song.image
         else:
             return ''
 

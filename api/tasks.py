@@ -31,8 +31,7 @@ def get_songs(tiktok_url):
 
     return re.recognize_by_filebuffer(buf, 0)
 
-@shared_task
-def find_save_songs(tiktok_url: str):
+def find_acr(tiktok_url: str):
     song_info = loads(get_songs(tiktok_url))
     if song_info['status']['msg'] == "Success":
         songs = song_info['metadata']['music']
@@ -44,7 +43,7 @@ def find_save_songs(tiktok_url: str):
         # create song objs with empty artist field
         song_names = [song['title'] for song in songs]
         Song.check_list_or_create(song_names)
-        Song.update_urls_info(songs)
+        Song.acr_update_urls_info(songs)
 
         # update created song objs with artist field
         song_objs = Song.objects.filter(name__in=song_names)
@@ -60,3 +59,64 @@ def find_save_songs(tiktok_url: str):
                 search_history.save(update_fields=['song'])
             except SearchHistory.DoesNotExist:
                 SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj)
+
+def get_mp3_url(tiktok_url):
+    file_finder = TikTokApi()
+    result = file_finder.getTikTokByUrl(url=tiktok_url)
+    mp3_url = result['itemInfo']['itemStruct']['music']['playUrl']
+
+    return mp3_url
+
+def get_audd_songs(tiktok_url):
+    song_url = get_mp3_url(tiktok_url)
+    session = Session()
+    res = session.post('https://api.audd.io/', data={
+        'url': song_url,
+        'return': 'apple_music,deezer,spotify',
+        'api_token': '71526d7877260531dfee40a059ca1a94'
+    })
+
+    return res.text
+
+def find_audd(tiktok_url: str):
+    song_info = loads(get_audd_songs(tiktok_url))
+    if song_info['status'] == "success":
+        song = song_info['result']
+
+        # create artists for song
+        artists = [song['artist']]
+        Artist.check_list_or_create(artists)
+
+        # create song objs with empty artist field
+        song_names = [song['title']]
+        Song.check_list_or_create(song_names)
+        idx = Song.audd_update_urls_info(song)
+
+        # update created song objs with artist field
+        song_obj = Song.objects.get(id=idx)
+        artist_obj = Artist.objects.get(name=song['artist'])
+        song_obj.artists.add(artist_obj)
+
+        # set song to searching history
+        try:
+            search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
+            search_history.song = song_obj
+            search_history.save(update_fields=['song'])
+        except SearchHistory.DoesNotExist:
+            SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj)
+
+        return True
+    else:
+        return False
+
+
+@shared_task
+def find_save_songs(tiktok_url: str, api='audd'):
+    if api == 'audd':
+        return find_audd(tiktok_url)
+    elif api == 'acr':
+        return find_acr(tiktok_url)
+    else:
+        raise NotImplementedError('Api {} not implemented'.format(api))
+
+

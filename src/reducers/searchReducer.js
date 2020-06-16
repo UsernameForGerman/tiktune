@@ -54,7 +54,7 @@ class SearchReducer extends BaseReducer {
                                                     dispatch(this.setErrorMsg(resp.data));
                                                     dispatch(this.toggleFetchAC());
                                                 })
-                                        },6000);
+                                        },10000);
                                     }
                                 })
                                 .catch((err) => {
@@ -62,7 +62,7 @@ class SearchReducer extends BaseReducer {
                                     dispatch(this.setErrorMsg(resp.data));
                                     dispatch(this.toggleFetchAC());
                                 })
-                            ,6000);
+                            ,10000);
                     }
                 })
                 .catch((err) => {

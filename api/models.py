@@ -14,6 +14,7 @@ class SearchHistoryObjectsManager(Manager):
 class StreamingModel(Model):
     DEEZER = 'https://deezer.com/'
     SPOTIFY = 'https://open.spotify.com/'
+    APPLE = 'https://music.apple.com/'
 
     deezer_id = SlugField('deezer id', max_length=64, blank=True, null=True, unique=True)
     itunes_id = SlugField('apple id', max_length=64, blank=True, null=True, unique=True)
@@ -89,7 +90,7 @@ class Song(StreamingModel):
         cls.objects.bulk_create(song_objs_to_create)
 
     @classmethod
-    def update_urls_info(cls, songs_info):
+    def acr_update_urls_info(cls, songs_info):
         song_objs = cls.objects.filter(name__in=[song['title'] for song in songs_info])
         song_objs_to_update = list()
         for song_info in songs_info:
@@ -108,14 +109,40 @@ class Song(StreamingModel):
 
         cls.objects.bulk_update(song_objs_to_update, ['spotify_id', 'deezer_id', 'isrc', 'spotify_album_id'])
 
+    @classmethod
+    def audd_update_urls_info(cls, songs_info):
+        song = Song.objects.get(name=songs_info['title'])
+        if 'apple_music' in songs_info and 'url' in songs_info['apple_music']:
+            song.itunes_id = songs_info['apple_music']['url']
+        if 'spotify' in songs_info:
+            if 'external_urls' in songs_info['spotify'] and 'spotify' in songs_info['spotify']['external_urls']:
+                song.spotify_id = songs_info['spotify']['external_urls']['spotify']
+            if 'album' in songs_info['spotify'] and 'images' in songs_info['spotify']['album']:
+                song.image = songs_info['spotify']['album']['images'][1]['url']
+        if 'deezer' in songs_info and 'link' in songs_info['deezer']:
+            song.deezer_id = songs_info['deezer']['link']
+
+        song.save()
+        return song.id
+
+    def get_itunes_url(self) -> str:
+        if self.APPLE in self.itunes_id:
+            return self.itunes_id
+        else:
+            return ''
+
     def get_deezer_url(self) -> str:
-        if self.DEEZER and self.deezer_id:
+        if self.DEEZER in self.deezer_id:
+            return self.deezer_id
+        elif self.DEEZER and self.deezer_id:
             return self.DEEZER + 'track/' + self.deezer_id
         else:
             return ''
 
     def get_spotify_url(self) -> str:
-        if self.SPOTIFY and self.spotify_id:
+        if self.SPOTIFY in self.spotify_id:
+            return self.spotify_id
+        elif self.SPOTIFY and self.spotify_id:
             return self.SPOTIFY + 'album/' + self.spotify_album_id + '?highlight=spotify:track:' + self.spotify_id
         else:
             return ''

@@ -18,7 +18,6 @@ class BaseReducer {
 
     reducer = (state = this.initialState, action) => {
         let stateCopy = this.copyState(state);
-        debugger;
         switch (action.type) {
             case this.TOGGLE_FETCHING : {
                 stateCopy.isFetching = !stateCopy.isFetching;

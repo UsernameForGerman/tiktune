@@ -1,12 +1,15 @@
 import axios from "axios";
+import * as rax from 'retry-axios';
+import "regenerator-runtime/runtime.js";
+import axiosRetry from "axios-retry";
 
 class api {
    constructor(url) {
       this.api = axios.create({
          baseURL: "http://localhost:8000/api/v1" + url,
          withCredentials: false,
-         headers : {
-            "Content-Type" : "application/json"
+         headers: {
+            "Content-Type": "application/json"
          }
       });
    }
@@ -23,6 +26,23 @@ class api {
       })
    }
 
+   getRetry(url = "", params = "") {
+      axiosRetry(this.api);
+      return this.api.get(url + params, {
+         'axios-retry' : {
+            retries: 5,
+            retryCondition : (resp) => {
+               debugger;
+               return resp.status !== 200
+            },
+            retryDelay: (retryCount) => {
+              return 6 * 1000;
+            }
+         }
+      }).then(resp => {
+         return resp;
+      })
+   }
 }
 
 

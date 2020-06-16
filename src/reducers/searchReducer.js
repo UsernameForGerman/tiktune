@@ -21,30 +21,48 @@ class SearchReducer extends BaseReducer {
     searchReducer = this.reducer;
 
     getSongByUrlThunk = (url) => {
-        function resend() {
-             setTimeout(async function hangle(){
-                return await search_api.getSongByUrl(url);
-            },6000)
-        }
         return (dispatch) => {
             dispatch(this.toggleFetchAC());
             search_api.getSongByUrl(url)
                 .then((resp) => {
                     let status = resp.status;
-                    while (status !== 200){
-                        debugger;
-                        if (status >= 400){
-                            dispatch(this.setErrorMsg(resp));
-                            dispatch(this.toggleFetchAC());
-                            break;
-                        } else {
-                            let resp = resend();
-                            status = resp.status;
-                        }
-                    }
                     if (status === 200){
                         dispatch(this.setList(resp.data));
                         dispatch(this.toggleFetchAC());
+                    } else {
+                        setTimeout(
+                            search_api.getSongByUrl(url)
+                                .then(resp => {
+                                    if (resp.status === 200){
+                                        dispatch(this.setList(resp.data));
+                                        dispatch(this.toggleFetchAC());
+                                    } else {
+                                        setTimeout(() => {
+                                            search_api.getSongByUrl(url)
+                                                .then(resp => {
+                                                    if (resp.status === 200){
+                                                        dispatch(this.setList(resp.data));
+                                                        dispatch(this.toggleFetchAC());
+                                                    } else {
+                                                        debugger;
+                                                        dispatch(this.setList([]));
+                                                        dispatch(this.toggleFetchAC());
+                                                    }
+                                                })
+                                                .catch((err) => {
+                                                    let resp = err.response;
+                                                    dispatch(this.setErrorMsg(resp.data));
+                                                    dispatch(this.toggleFetchAC());
+                                                })
+                                        },6000);
+                                    }
+                                })
+                                .catch((err) => {
+                                    let resp = err.response;
+                                    dispatch(this.setErrorMsg(resp.data));
+                                    dispatch(this.toggleFetchAC());
+                                })
+                            ,6000);
                     }
                 })
                 .catch((err) => {

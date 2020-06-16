@@ -1,6 +1,7 @@
 {
   "presets": [
     [ "@babel/preset-env", {
+      "useBuiltIns": "entry",
       "modules": false,
       "targets": {
         "browsers": [
@@ -16,5 +17,9 @@
     } ],
     "@babel/preset-react"
   ],
-  "plugins": [ "@babel/plugin-proposal-class-properties" ]
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-regenerator",
+    "@babel/plugin-proposal-export-default-from"
+  ]
 }

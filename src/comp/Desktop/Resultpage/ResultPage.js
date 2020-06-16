@@ -40,7 +40,7 @@ let ResultPage = (props) => {
                         </div>
                     </div>
             }
-            {props.isHistoryFetching ? <Preloader/> : props.historyList}
+            {props.isHistoryFetching ? <></> : props.historyList}
         </>
     )
 }

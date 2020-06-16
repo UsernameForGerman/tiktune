@@ -13,6 +13,7 @@ class TrendsReducer extends BaseReducer{
             dispatch(this.toggleFetchAC());
             trends_api.getTrendsSongs()
                 .then((resp) => {
+                    debugger;
                     dispatch(this.setList(resp.data));
                     dispatch(this.toggleFetchAC());
                 })

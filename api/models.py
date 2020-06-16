@@ -126,13 +126,13 @@ class Song(StreamingModel):
         return song.id
 
     def get_itunes_url(self) -> str:
-        if self.APPLE in self.itunes_id:
+        if self.itunes_id is not None and self.APPLE in self.itunes_id:
             return self.itunes_id
         else:
             return ''
 
     def get_deezer_url(self) -> str:
-        if self.DEEZER in self.deezer_id:
+        if self.deezer_id is not None and self.DEEZER in self.deezer_id:
             return self.deezer_id
         elif self.DEEZER and self.deezer_id:
             return self.DEEZER + 'track/' + self.deezer_id
@@ -140,7 +140,7 @@ class Song(StreamingModel):
             return ''
 
     def get_spotify_url(self) -> str:
-        if self.SPOTIFY in self.spotify_id:
+        if self.spotify_id is not None and self.SPOTIFY in self.spotify_id:
             return self.spotify_id
         elif self.SPOTIFY and self.spotify_id:
             return self.SPOTIFY + 'album/' + self.spotify_album_id + '?highlight=spotify:track:' + self.spotify_id

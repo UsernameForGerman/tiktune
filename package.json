@@ -37,6 +37,7 @@
     "redux-thunk": "^2.3.0",
     "retry-axios": "^2.2.0",
     "style-loader": "^1.2.1",
+    "svg-url-loader": "^6.0.0",
     "video-react": "^0.14.1"
   },
   "scripts": {

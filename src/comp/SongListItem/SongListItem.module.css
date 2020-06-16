@@ -25,20 +25,6 @@
     flex-direction: row;
 }
 
-.appleLink{
-    padding: 5px 5px;
-    color: white;
-    text-decoration: none;
-    width: 45%;
-    display: flex;
-    height: fit-content;
-    padding-bottom: 9px;
-    background-color: black;
-    border-radius: 10px;
-    flex-direction: row;
-    margin-right: 10px;
-}
-
 .googlePlayLinkIcon{
     width: 70%;
 }

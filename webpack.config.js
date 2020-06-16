@@ -37,6 +37,10 @@ module.exports = {
                 use: 'file-loader'
             },
             {
+                test: /\.(svg)?$/,
+                use: 'url-loader'
+            },
+            {
                 test: /\.(mp4)?$/,
                 use: 'file-loader'
             },

@@ -8,7 +8,7 @@ import renderList from "../../../DAL/utils/renderer";
 let TrendsPageContainer = (props) => {
     useEffect(() => {
         props.getTrends();
-    }, props.songsList);
+    }, props.songsList.length);
     debugger;
 
     let list = renderList(props.songsList);

@@ -1,4 +1,5 @@
 import search_api from "../DAL/search_api/search_api";
+import BaseReducer from "./baseReducer";
 
 let initialState = {
     isFetching : false,
@@ -12,88 +13,51 @@ let copyState = (state) => {
     return copy;
 }
 
-const TOGGLE_FETCHING = "SEARCH/FETCHING";
-const SET_LIST = "SEARCH/SET_LIST";
-const SET_ERROR_MSG = "SEARCH/SET_ERROR"
+class SearchReducer extends BaseReducer {
+    constructor() {
+        super('SEARCH');
+    }
 
-let searchReducer = (state = initialState, action) => {
-    let stateCopy = copyState(state);
-    switch (action.type) {
-        case TOGGLE_FETCHING : {
-            stateCopy.isFetching = !stateCopy.isFetching;
-            break;
+    searchReducer = this.reducer;
+
+    getSongByUrlThunk = (url) => {
+        function resend() {
+             setTimeout(async function hangle(){
+                return await search_api.getSongByUrl(url);
+            },6000)
         }
-        
-        case SET_LIST : {
-            stateCopy.songsList = action.list;
-            break;
+        return (dispatch) => {
+            dispatch(this.toggleFetchAC());
+            search_api.getSongByUrl(url)
+                .then((resp) => {
+                    let status = resp.status;
+                    while (status !== 200){
+                        debugger;
+                        if (status >= 400){
+                            dispatch(this.setErrorMsg(resp));
+                            dispatch(this.toggleFetchAC());
+                            break;
+                        } else {
+                            let resp = resend();
+                            status = resp.status;
+                        }
+                    }
+                    if (status === 200){
+                        dispatch(this.setList(resp.data));
+                        dispatch(this.toggleFetchAC());
+                    }
+                })
+                .catch((err) => {
+                    let resp = err.response;
+                    dispatch(this.setErrorMsg(resp.data));
+                    dispatch(this.toggleFetchAC());
+                })
         }
-        
-        case SET_ERROR_MSG : {
-            stateCopy.errorMsg = action.msg;
-            break;
-        }
-
-        default : {
-            break;
-        }
-    }
-
-    return stateCopy;
-}
-
-let toggleFetchAC = () => {
-    return {
-        type : TOGGLE_FETCHING
     }
 }
 
-let setList = (list) => {
-    return {
-        type : SET_LIST,
-        list : list
-    }
-}
+let obj = new SearchReducer();
+let searchReducer = obj.searchReducer;
+let getSongByUrlThunk = obj.getSongByUrlThunk;
 
-let setErrorMsg = (msg) => {
-    return {
-        type : SET_ERROR_MSG,
-        msg : msg
-    }
-}
-
-let getSongByUrlThunk = (url) => {
-    return (dispatch) => {
-        dispatch(toggleFetchAC());
-        search_api.getSongByUrl(url)
-            .then((resp) => {
-                debugger;
-                let status = resp.status;
-                if (status === 200){
-                    dispatch(setList(resp.data));
-                    dispatch(toggleFetchAC());
-                } else {
-                    setTimeout(() => {
-                        search_api.getSongByUrl(url)
-                            .then(resp => {
-                                debugger;
-                                dispatch(setList(resp.data));
-                                dispatch(toggleFetchAC());
-                            })
-                            .catch((err) => {
-                                let resp = err.response;
-                                dispatch(setErrorMsg(resp));
-                                dispatch(toggleFetchAC());
-                            })
-                    }, 6000);
-                }
-            })
-            .catch((err) => {
-                let resp = err.response;
-                dispatch(setErrorMsg(resp.data));
-                dispatch(toggleFetchAC());
-            })
-    }
-}
-
-export {searchReducer, getSongByUrlThunk};
+export {searchReducer, getSongByUrlThunk}

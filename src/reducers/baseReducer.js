@@ -50,7 +50,6 @@ class BaseReducer {
     }
 
     setList = (list) => {
-        debugger;
         return {
             type : this.SET_LIST,
             list : list

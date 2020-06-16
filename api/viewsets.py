@@ -34,6 +34,7 @@ class SearchViewSet(ViewSet):
                 if search_history.filter(song__isnull=True):
                     return Response('Song not found', status=HTTP_404_NOT_FOUND)
                 else:
+                    print(search_history.exclude(song__isnull=True))
                     if search_history.exclude(song__isnull=True):
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)

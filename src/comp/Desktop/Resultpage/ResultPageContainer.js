@@ -10,7 +10,7 @@ import renderList from "../../../DAL/utils/renderer";
 let ResultPageContainer = (props) => {
     useEffect(() => {
         props.getHistory()
-    }, props.historyList);
+    }, props.historyList.length);
 
     debugger;
     let resultList = renderList(props.resultSet);

@@ -74,7 +74,7 @@ let getHistoryThunk = () => {
             })
 
             .then((resp) => {
-                setList(resp.data);
+                setList([]);
                 dispatch(toggleFetchAC());
             })
     }

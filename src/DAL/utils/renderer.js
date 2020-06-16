@@ -3,9 +3,8 @@ import React from "react";
 
 let formatResponse = (resp) => {
     let formatted = {...resp};
-    debugger;
     formatted.artists = resp.artists.reduce((a = "", b) => {
-        return a + " & " + b;
+        return a + " & " + b.name;
     })
 
     if (formatted.amount >= 1000000){
@@ -18,7 +17,6 @@ let formatResponse = (resp) => {
 }
 
 let renderSong = (resp) => {
-    debugger;
     let formatted = formatResponse(resp);
     return (
         <SongListItem {...formatted}/>
@@ -26,7 +24,6 @@ let renderSong = (resp) => {
 }
 
 let renderList = (data) => {
-    debugger;
     return data.map(elem => {
         return renderSong(elem);
     })

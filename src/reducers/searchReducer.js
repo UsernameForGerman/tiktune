@@ -70,12 +70,14 @@ let getSongByUrlThunk = (url) => {
                 setTimeout(() => {
                     search_api.getSongByUrl(url)
                         .then(resp => {
-                            dispatch(setList([resp.data]));
+                            debugger;
+                            dispatch(setList(resp.data));
                             dispatch(toggleFetchAC());
                         })
                         .catch((err) => {
                             let resp = err.response;
-                            dispatch(setErrorMsg(resp.data));
+                            debugger;
+                            dispatch(setErrorMsg(resp));
                             dispatch(toggleFetchAC());
                         })
                 }, 6000);

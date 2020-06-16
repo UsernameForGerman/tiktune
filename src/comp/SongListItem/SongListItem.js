@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./SongListItem.module.css";
-import apple from "../../assets/img/Small_Badge/Apple_Music_Small_Badge_RGB.png";
+import apple from "../../assets/img/Apple_Music_Badge/Web_SVG/US-UK_Apple_Music_Badge_RGB.png";
+import appleLogo from "../../assets/img/appleMusic.png"
 import spotify from "../../assets/img/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png"
 import googlePlay from "../../assets/img/googlePlay.png";
 let SongListItem = (props) => {
@@ -27,7 +28,8 @@ let SongListItem = (props) => {
                         <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
                     </a>
                     <a className={classes.appleLink} href={props.itunes_url}>
-                        <img src={apple} alt={"apple icon"}/>
+                        <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
+                        <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
                     </a>
                 </div>
             </div>

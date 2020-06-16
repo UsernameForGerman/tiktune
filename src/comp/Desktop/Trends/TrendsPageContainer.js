@@ -9,6 +9,7 @@ let TrendsPageContainer = (props) => {
     useEffect(() => {
         props.getTrends();
     }, props.songsList);
+    debugger;
 
     let list = renderList(props.songsList);
     return(

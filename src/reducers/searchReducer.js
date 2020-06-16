@@ -67,20 +67,26 @@ let getSongByUrlThunk = (url) => {
         dispatch(toggleFetchAC());
         search_api.getSongByUrl(url)
             .then((resp) => {
-                setTimeout(() => {
-                    search_api.getSongByUrl(url)
-                        .then(resp => {
-                            debugger;
-                            dispatch(setList(resp.data));
-                            dispatch(toggleFetchAC());
-                        })
-                        .catch((err) => {
-                            let resp = err.response;
-                            debugger;
-                            dispatch(setErrorMsg(resp));
-                            dispatch(toggleFetchAC());
-                        })
-                }, 6000);
+                debugger;
+                let status = resp.status;
+                if (status === 200){
+                    dispatch(setList(resp.data));
+                    dispatch(toggleFetchAC());
+                } else {
+                    setTimeout(() => {
+                        search_api.getSongByUrl(url)
+                            .then(resp => {
+                                debugger;
+                                dispatch(setList(resp.data));
+                                dispatch(toggleFetchAC());
+                            })
+                            .catch((err) => {
+                                let resp = err.response;
+                                dispatch(setErrorMsg(resp));
+                                dispatch(toggleFetchAC());
+                            })
+                    }, 6000);
+                }
             })
             .catch((err) => {
                 let resp = err.response;

@@ -5,7 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED,\
     HTTP_204_NO_CONTENT
-import datetime
+from django.utils.timezone import datetime, timedelta
 
 # project
 from .models import SearchHistory, Song
@@ -37,18 +37,25 @@ class SearchViewSet(ViewSet):
                     if search_history.exclude(song__isnull=True):
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)
-                        SearchHistory.objects.bulk_create([SearchHistory(
+                        search_history_objs = [
+                            SearchHistory(
                                 tiktok_url=serializer.data['tiktok_url'],
                                 song=song
                             ) for song in songs
-                        ])
-                        now = datetime.datetime.now()
+                        ]
+                        SearchHistory.objects.bulk_create(search_history_objs)
                         new_search_history = SearchHistory.objects.filter(
                             tiktok_url=serializer.data['tiktok_url'],
                             song__in=songs,
+<<<<<<< HEAD
                             timestamp__range=(now - datetime.timedelta(seconds=4), now)
                         )
                         print([obj.id for obj in new_search_history])
+=======
+                            timestamp__range=(datetime.now() - timedelta(seconds=1), datetime.now())
+                        )
+                        print([_.id for _ in new_search_history])
+>>>>>>> 0fafaf712964d0f01a88886de857250e62ccca92
                         if 'songs' in request.session:
                             session_data = request.session
                             session_search_history = SearchHistory.objects.filter(
@@ -59,7 +66,11 @@ class SearchViewSet(ViewSet):
                             while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
                                 session_search_history.pop()
                             new_search_history = new_search_history | session_search_history
+<<<<<<< HEAD
                         print([obj.id for obj in new_search_history])
+=======
+                        print([_.id for _ in new_search_history])
+>>>>>>> 0fafaf712964d0f01a88886de857250e62ccca92
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)
@@ -90,6 +101,7 @@ class HistoryViewSet(ViewSet):
 
     def list(self, request: Request) -> Response:
         session_data = request.session
+        print(session_data)
         if 'songs' in session_data:
             print(session_data['songs'])
             search_history = SearchHistory.objects.filter(

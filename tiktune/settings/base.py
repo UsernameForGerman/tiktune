@@ -51,9 +51,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Cors staff
-CORS_ORIGIN_ALLOW_ALL = True
-
 ROOT_URLCONF = 'tiktune.urls'
 
 STATICFILES_FINDERS = (

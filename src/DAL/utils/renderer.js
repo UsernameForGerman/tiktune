@@ -1,5 +1,6 @@
 import SongListItem from "../../comp/SongListItem/SongListItem";
 import React from "react";
+import SongList from "../../comp/common/SongList/SongList";
 
 let formatResponse = (resp) => {
     let formatted = {...resp};
@@ -24,9 +25,11 @@ let renderSong = (resp) => {
 }
 
 let renderList = (data) => {
-    return data.map(elem => {
-        return renderSong(elem);
-    })
+    return(<SongList list={
+        data.map(elem => {
+            return renderSong(elem);
+        })
+    }/>);
 }
 
 export default renderList;

@@ -68,15 +68,14 @@ let getHistoryThunk = () => {
         dispatch(toggleFetchAC());
         history_api.getHistory()
             .catch((err) => {
-                debugger;
                 let status = err.status;
                 dispatch(setErrorMsg("Ошибка"));
                 dispatch(toggleFetchAC());
             })
 
             .then((resp) => {
-
-                setList([]);
+                let songs = resp.data.map(elem => elem.song);
+                dispatch(setList(songs));
                 dispatch(toggleFetchAC());
             })
     }

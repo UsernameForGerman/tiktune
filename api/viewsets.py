@@ -66,7 +66,13 @@ class SearchViewSet(ViewSet):
                         return Response(response_data, status=HTTP_200_OK)
                     elif search_history.filter(song__isnull=True, finding=True):
                         return Response(
-                            status=HTTP_304_NOT_MODIFIED,
+                            headers={
+                                'retry-after': 1
+                            },
+                            status=HTTP_202_ACCEPTED,
+                            data={
+                                'retry-after': 1,
+                            }
                         )
                     else:
                         SearchHistory.objects.create(

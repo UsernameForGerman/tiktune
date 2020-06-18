@@ -22,9 +22,11 @@ class SearchReducer extends BaseReducer {
 
     getSongByUrlThunk = (url) => {
         return (dispatch) => {
+            debugger;
             dispatch(this.toggleFetchAC());
             search_api.getSongByUrl(url)
                 .then((resp) => {
+                    debugger;
                     let status = resp.status;
                     if (status === 200){
                         dispatch(this.setList(resp.data));
@@ -66,6 +68,7 @@ class SearchReducer extends BaseReducer {
                     }
                 })
                 .catch((err) => {
+                    debugger;
                     let resp = err.response;
                     dispatch(this.setErrorMsg(resp.data));
                     dispatch(this.toggleFetchAC());

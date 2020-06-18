@@ -23,3 +23,19 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+
+# CORS staff
+CORS_ORIGIN_WHITELIST = [
+    "https://tiktune.io",
+    "http://localhost:8000",
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'OPTIONS',
+    'HEAD',
+]
+

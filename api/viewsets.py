@@ -77,9 +77,12 @@ class SearchViewSet(ViewSet):
                         find_save_songs.delay(serializer.data['tiktok_url'])
                         return Response(
                             headers={
-                                'retry_after': 1
+                                'retry-after': 1
                             },
                             status=HTTP_202_ACCEPTED,
+                            data={
+                                'retry-after': 1,
+                            }
                         )
             else:
                 return Response('Bad link provided', status=HTTP_400_BAD_REQUEST)

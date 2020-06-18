@@ -8,3 +8,4 @@ def increment_song_search_amount(sender, instance, **kwargs):
         song = instance.song
         song.amount += 1
         song.save()
+

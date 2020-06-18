@@ -4,7 +4,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED,\
-    HTTP_204_NO_CONTENT
+    HTTP_204_NO_CONTENT, HTTP_304_NOT_MODIFIED
 from django.utils.timezone import datetime, timedelta
 
 # project
@@ -31,10 +31,10 @@ class SearchViewSet(ViewSet):
             })
             if serializer.is_valid():
                 search_history = self.get_queryset()
-                if search_history.filter(song__isnull=True):
+                if search_history.filter(song__isnull=True, finding=False):
                     return Response('Song not found', status=HTTP_404_NOT_FOUND)
                 else:
-                    if search_history.exclude(song__isnull=True):
+                    if search_history.filter(song__isnull=False, finding=False):
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)
                         search_history_objs = [
@@ -47,18 +47,9 @@ class SearchViewSet(ViewSet):
                         for search_history_obj in search_history_objs:
                             search_history_obj.save()
 
-                        # SearchHistory.objects.bulk_create(search_history_objs)
-
-                        # print([obj.id for obj in search_history_objs])
                         new_search_history = SearchHistory.objects.filter(
                             id__in=[obj.id for obj in search_history_objs]
                         )
-                        # new_search_history = SearchHistory.objects.filter(
-                        #     tiktok_url=serializer.data['tiktok_url'],
-                        #     song__in=songs,
-                        #     timestamp__range=(datetime.now() - timedelta(seconds=1), datetime.now())
-                        # )
-                        # print([_.id for _ in new_search_history])
                         if 'songs' in request.session:
                             session_data = request.session
                             session_search_history = SearchHistory.objects.filter(
@@ -72,11 +63,20 @@ class SearchViewSet(ViewSet):
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)
+                    elif search_history.filter(song__isnull=True, finding=True):
+                        return Response(
+                            status=HTTP_304_NOT_MODIFIED,
+                        )
                     else:
+                        SearchHistory.objects.create(
+                            finding=True,
+                            song=None,
+                            tiktok_url=request.query_params.get('url', '')
+                        )
                         find_save_songs.delay(serializer.data['tiktok_url'])
                         return Response(
                             headers={
-                                'retry_after': 6
+                                'retry_after': 1
                             },
                             status=HTTP_202_ACCEPTED,
                         )
@@ -99,9 +99,7 @@ class HistoryViewSet(ViewSet):
 
     def list(self, request: Request) -> Response:
         session_data = request.session
-        print(session_data)
         if 'songs' in session_data:
-            print(session_data['songs'])
             search_history = SearchHistory.objects.filter(
                 id__in=session_data['songs'],
             ).order_by(

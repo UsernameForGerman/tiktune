@@ -1,5 +1,5 @@
 from django.db.models import Model, URLField, CharField, SlugField, ForeignKey, CASCADE, ManyToManyField, DateTimeField, \
-    BigIntegerField, Manager, SmallIntegerField
+    BigIntegerField, Manager, SmallIntegerField, BooleanField
 
 # Create your models here.
 
@@ -150,6 +150,7 @@ class Song(StreamingModel):
 class SearchHistory(Model):
     tiktok_url = URLField('TikTok url')
     song = ForeignKey(Song, on_delete=CASCADE, verbose_name='found song', null=True, blank=True)
+    finding = BooleanField('Song status is finding or not', default=False)
     timestamp = DateTimeField(auto_now_add=True)
 
     objects = SearchHistoryObjectsManager()

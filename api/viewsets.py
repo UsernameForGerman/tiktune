@@ -46,8 +46,9 @@ class SearchViewSet(ViewSet):
                         new_search_history = SearchHistory.objects.filter(
                             tiktok_url=serializer.data['tiktok_url'],
                             song__in=songs,
-                            timestamp__range=(now - datetime.timedelta(seconds=1), now)
+                            timestamp__range=(now - datetime.timedelta(seconds=4), now)
                         )
+                        print([obj.id for obj in new_search_history])
                         if 'songs' in request.session:
                             session_data = request.session
                             session_search_history = SearchHistory.objects.filter(
@@ -58,6 +59,7 @@ class SearchViewSet(ViewSet):
                             while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
                                 session_search_history.pop()
                             new_search_history = new_search_history | session_search_history
+                        print([obj.id for obj in new_search_history])
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)
@@ -89,6 +91,7 @@ class HistoryViewSet(ViewSet):
     def list(self, request: Request) -> Response:
         session_data = request.session
         if 'songs' in session_data:
+            print(session_data['songs'])
             search_history = SearchHistory.objects.filter(
                 id__in=session_data['songs'],
             ).order_by(

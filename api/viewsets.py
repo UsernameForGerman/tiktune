@@ -43,13 +43,22 @@ class SearchViewSet(ViewSet):
                                 song=song
                             ) for song in songs
                         ]
-                        SearchHistory.objects.bulk_create(search_history_objs)
+
+                        for search_history_obj in search_history_objs:
+                            search_history_obj.save()
+
+                        # SearchHistory.objects.bulk_create(search_history_objs)
+
+                        # print([obj.id for obj in search_history_objs])
                         new_search_history = SearchHistory.objects.filter(
-                            tiktok_url=serializer.data['tiktok_url'],
-                            song__in=songs,
-                            timestamp__range=(datetime.now() - timedelta(seconds=1), datetime.now())
+                            id__in=[obj.id for obj in search_history_objs]
                         )
-                        print([_.id for _ in new_search_history])
+                        # new_search_history = SearchHistory.objects.filter(
+                        #     tiktok_url=serializer.data['tiktok_url'],
+                        #     song__in=songs,
+                        #     timestamp__range=(datetime.now() - timedelta(seconds=1), datetime.now())
+                        # )
+                        # print([_.id for _ in new_search_history])
                         if 'songs' in request.session:
                             session_data = request.session
                             session_search_history = SearchHistory.objects.filter(
@@ -60,7 +69,6 @@ class SearchViewSet(ViewSet):
                             while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
                                 session_search_history.pop()
                             new_search_history = new_search_history | session_search_history
-                        print([_.id for _ in new_search_history])
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)

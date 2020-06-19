@@ -108,7 +108,13 @@ def find_audd(tiktok_url: str):
 
         return True
     else:
-        return False
+        try:
+            search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
+            search_history.song = None
+            search_history.finding = False
+            search_history.save(update_fields=['song', 'finding'])
+        except SearchHistory.DoesNotExist:
+            SearchHistory.objects.create(tiktok_url=tiktok_url, song=None, finding=False)
 
 
 @shared_task

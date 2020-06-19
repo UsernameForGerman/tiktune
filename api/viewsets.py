@@ -9,7 +9,7 @@ from django.utils.timezone import datetime, timedelta
 
 # project
 from .models import SearchHistory, Song
-from .serializers import SongSerializer, TikTokSerializer, SearchHistorySerializer
+from .serializers import SongSerializer, TikTokSerializer, SearchHistorySerializer, StatsSerializer
 from .tasks import find_save_songs
 
 
@@ -119,6 +119,18 @@ class HistoryViewSet(ViewSet):
             return Response(response_data, status=HTTP_200_OK)
         else:
             return Response('No history data in session', status=HTTP_204_NO_CONTENT)
+
+class StatsViewSet(ViewSet):
+
+    def list(self, request: Request) -> Response:
+        search_requests = SearchHistory.objects.count()
+        songs = Song.objects.count()
+        response_data = StatsSerializer({
+            'search_requests': search_requests,
+            'songs': songs
+        }).data
+
+        return Response(response_data, status=HTTP_200_OK)
 
 
 

@@ -1,84 +1,33 @@
-
 import history_api from "../DAL/history_api/history_api";
+import BaseReducer from "./baseReducer";
 
-let initialState = {
-    isFetching : false,
-    songsList : [],
-    errorMsg : ""
-}
+class HistoryReducer extends BaseReducer{
+    constructor() {
+        super('HISTORY');
+    }
 
-let copyState = (state) => {
-    let copy = {...state};
-    copy.songsList = [...state.songsList];
-    return copy;
-}
+    historyReducer = this.reducer;
 
-const TOGGLE_FETCHING = "HISTORY/FETCHING";
-const SET_LIST = "HISTORY/SET_LIST";
-const SET_ERROR_MSG = "HISTORY/SET_ERROR"
+    getHistoryThunk = () => {
+        return (dispatch) => {
+            dispatch(this.toggleFetchAC());
+            history_api.getHistory()
+                .catch((err) => {
+                    let status = err.status;
+                    dispatch(this.setErrorMsg("Ошибка"));
+                    dispatch(this.toggleFetchAC());
+                })
 
-let historyReducer = (state = initialState, action) => {
-    let stateCopy = copyState(state);
-    switch (action.type) {
-        case TOGGLE_FETCHING : {
-            stateCopy.isFetching = !stateCopy.isFetching;
-            break;
-        }
-
-        case SET_LIST : {
-            stateCopy.songsList = action.list;
-            break;
-        }
-
-        case SET_ERROR_MSG : {
-            stateCopy.errorMsg = action.msg;
-            break;
-        }
-
-        default : {
-            break;
+                .then((resp) => {
+                    let songs = resp.data.map(elem => elem.song);
+                    dispatch(this.setList(songs));
+                    dispatch(this.toggleFetchAC());
+                })
         }
     }
-
-    return stateCopy;
 }
-
-let toggleFetchAC = () => {
-    return {
-        type : TOGGLE_FETCHING
-    }
-}
-
-let setList = (list) => {
-    return {
-        type : SET_LIST,
-        list : list
-    }
-}
-
-let setErrorMsg = (msg) => {
-    return {
-        type : SET_ERROR_MSG,
-        msg : msg
-    }
-}
-
-let getHistoryThunk = () => {
-    return (dispatch) => {
-        dispatch(toggleFetchAC());
-        history_api.getHistory()
-            .catch((err) => {
-                let status = err.status;
-                dispatch(setErrorMsg("Ошибка"));
-                dispatch(toggleFetchAC());
-            })
-
-            .then((resp) => {
-                let songs = resp.data.map(elem => elem.song);
-                dispatch(setList(songs));
-                dispatch(toggleFetchAC());
-            })
-    }
-}
+let obj = new HistoryReducer();
+let historyReducer = obj.historyReducer;
+let getHistoryThunk = obj.getHistoryThunk;
 
 export {historyReducer, getHistoryThunk};

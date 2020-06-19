@@ -1,18 +1,6 @@
 import search_api from "../DAL/search_api/search_api";
 import BaseReducer from "./baseReducer";
 
-let initialState = {
-    isFetching : false,
-    songsList : [],
-    errorMsg : ""
-}
-
-let copyState = (state) => {
-    let copy = {...state};
-    copy.songsList = [...state.songsList];
-    return copy;
-}
-
 class SearchReducer extends BaseReducer {
     constructor() {
         super('SEARCH');
@@ -41,6 +29,7 @@ class SearchReducer extends BaseReducer {
             dispatch(this.toggleFetchAC());
             debugger;
             let resp = loopSend();
+            dispatch(this.setList(resp.data));
         }
     }
 }

@@ -9,6 +9,7 @@ import addIcon from "./assets/img/addIcon.png";
 import ResultPage from "./comp/Mobile/ResultPage/ResultPage";
 import Footer from "./comp/Mobile/Footer/Footer";
 import React from "react";
+import StatisticSectionContainer from "./comp/Mobile/StatisticsSection/StatisticsSectionContainer";
 
 let MobileApp = (props) => {
     return(
@@ -20,11 +21,7 @@ let MobileApp = (props) => {
                     <Nav/>
                     <SearchInput/>
                     <LifehackSection/>
-                    <StatisticsSection
-                        requests={3453}
-                        songs={1245}
-                        visits={6439}
-                    />
+                    <StatisticSectionContainer/>
                 </Route>
                 <Route path={"/trends"}>
                     <Nav/>

@@ -5,15 +5,16 @@ import SearchBtn from "../../common/SearchBtn/SearchBtn";
 import Adsense from "../../Adsense/Adsense";
 import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
 import {FormattedMessage} from "react-intl";
+import {NavLink} from "react-router-dom";
 let ResultPage = (props) => {
     return(
         <MobileContainer>
-            {props.name
+            {props.list.length > 0
                 ? <div className={classes.result}>
                     <div className={classes.desc}>
                         <FormattedMessage id={"search_result_label"}/>
                     </div>
-                    <SongListItem {...props}/>
+                    {props.renderedList}
                     <div className={classes.search}>
                         <SearchBtn/>
                     </div>
@@ -36,7 +37,9 @@ let ResultPage = (props) => {
                         </ul>
                     </div>
                     <div className={classes.search}>
-                        <SearchBtn/>
+                        <NavLink to={"/"}>
+                            <SearchBtn/>
+                        </NavLink>
                     </div>
                 </div>
             }

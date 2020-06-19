@@ -1,15 +1,10 @@
-import {BrowserRouter, Redirect, Route} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import MobileHeaderContainer from "./comp/Header/MobileHeader/MobileHeaderContainer";
-import Nav from "./comp/Nav/Nav";
-import SearchInput from "./comp/Mobile/SearchInput/SearchInput";
-import LifehackSection from "./comp/Mobile/LifehackSection/LifehackSection";
-import StatisticsSection from "./comp/Mobile/StatisticsSection/StatisticsSection";
-import SongListItem from "./comp/SongListItem/SongListItem";
-import addIcon from "./assets/img/addIcon.png";
-import ResultPage from "./comp/Mobile/ResultPage/ResultPage";
 import Footer from "./comp/Mobile/Footer/Footer";
 import React from "react";
-import StatisticSectionContainer from "./comp/Mobile/StatisticsSection/StatisticsSectionContainer";
+import TrendsPageContainer from "./comp/Mobile/TrendsPage/TrendsPageContainer";
+import MainPage from "./comp/Mobile/MainPage/MainPage";
+import ResultPageContainer from "./comp/Mobile/ResultPage/ResultPageContainer";
 
 let MobileApp = (props) => {
     return(
@@ -18,24 +13,13 @@ let MobileApp = (props) => {
                 <MobileHeaderContainer/>
                 </Route>
                 <Route path={"/"} exact>
-                    <Nav/>
-                    <SearchInput/>
-                    <LifehackSection/>
-                    <StatisticSectionContainer/>
+                    <MainPage/>
                 </Route>
-                <Route path={"/trends"}>
-                    <Nav/>
-                    <SongListItem
-                        imgLink={addIcon}
-                        downloads={"100k"}
-                        name={"Название песни"}
-                        singer={"Имя артиста"}
-                        googleLink={"#"}
-                        appleLink={"#"}
-                    />
+                <Route path={"/trends"} exact>
+                    <TrendsPageContainer/>
                 </Route>
                 <Route path={"/search"}>
-                    <ResultPage/>
+                    <ResultPageContainer/>
                 </Route>
                 <Route>
                     <Redirect to={"/"}/>

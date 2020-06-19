@@ -9,8 +9,6 @@ let TrendsPageContainer = (props) => {
     useEffect(() => {
         props.getTrends();
     }, props.songsList.length);
-    debugger;
-
     let list = renderList(props.songsList);
     return(
         <TrendsPage list={list} isFetching={props.isFetching}/>

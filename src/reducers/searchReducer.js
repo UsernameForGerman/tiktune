@@ -9,27 +9,27 @@ class SearchReducer extends BaseReducer {
     searchReducer = this.reducer;
 
     getSongByUrlThunk = (url) => {
-        let loopSend = () => {
+        let loopSend = (dispatch) => {
             search_api.getSongByUrl(url).then(resp => {
                 debugger;
                 let status = resp.status;
                 if (status === 200){
-                    return resp.data;
+                    dispatch(this.setList(resp.data));
+                    dispatch(this.toggleFetchAC());
                 } else if (status === 202) {
                     let retry = resp.data['retry-after'];
                     setTimeout(() => {
-                        return loopSend();
+                        loopSend(dispatch);
                     }, retry * 1000);
                 } else {
-                    return resp;
+                    dispatch(this.toggleFetchAC());
                 }
             })
         }
         return (dispatch) => {
             dispatch(this.toggleFetchAC());
             debugger;
-            let resp = loopSend();
-            dispatch(this.setList(resp.data));
+            loopSend(dispatch);
         }
     }
 }

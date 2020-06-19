@@ -12,7 +12,6 @@ let ResultPageContainer = (props) => {
         props.getHistory()
     }, props.historyList.length);
 
-    debugger;
     let resultList = renderList(props.resultSet);
     let historyList = renderList(props.historyList);
     return(

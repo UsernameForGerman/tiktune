@@ -4,43 +4,38 @@ import classes from "./ResultPage.module.css";
 import SearchBtn from "../../common/SearchBtn/SearchBtn";
 import Adsense from "../../Adsense/Adsense";
 import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
+import {FormattedMessage} from "react-intl";
 let ResultPage = (props) => {
     return(
         <MobileContainer>
             {props.name
                 ? <div className={classes.result}>
                     <div className={classes.desc}>
-                        Результат поиска
+                        <FormattedMessage id={"search_result_label"}/>
                     </div>
                     <SongListItem {...props}/>
                     <div className={classes.search}>
-                        <div className={classes.searchLabel}>
-                            Не то, что искали?
-                        </div>
                         <SearchBtn/>
                     </div>
                 </div>
                 : <div className={classes.result}>
                     <div className={classes.desc}>
-                        К сожалению мы ничего не нашли :(
+                        <FormattedMessage id={"not_found_label"}/>
                     </div>
                     <div className={classes.reasons}>
                         <div className={classes.reasonsHeading}>
-                            Возможно:
+                            <FormattedMessage id={"probably_label"}/>
                         </div>
                         <ul className={classes.reasonsList}>
                             <li className={classes.reasonsListItem}>
-                                Данной песни нет ни в Apple Music, ни в Google Play Music
+                                <FormattedMessage id={"song_is_not_in_stores_label"}/>
                             </li>
                             <li className={classes.reasonsListItem}>
-                                Песня неразборчива
+                                <FormattedMessage id={"unable_to_resolve_label"}/>
                             </li>
                         </ul>
                     </div>
                     <div className={classes.search}>
-                        <div className={classes.searchLabel}>
-                            Попробуйте еще
-                        </div>
                         <SearchBtn/>
                     </div>
                 </div>

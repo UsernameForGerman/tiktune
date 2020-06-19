@@ -19,8 +19,9 @@
 }
 
 .desc{
+    white-space: pre-wrap;
     text-align: left;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1em;
     margin: 10px 0px;
 }

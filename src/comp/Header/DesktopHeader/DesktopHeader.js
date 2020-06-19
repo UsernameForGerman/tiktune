@@ -16,7 +16,7 @@ let DesktopHeader = (props) => {
                 }
             </div>
             <div className={`${classes.col} ${classes.secondCol}`}>
-                <LanguageSwitch styles={{
+                <LanguageSwitch setLoc={props.setLoc} styles={{
                     alignItems : "flex-end"
                 }}/>
             </div>

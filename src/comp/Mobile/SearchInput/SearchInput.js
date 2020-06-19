@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
 import Adsense from "../../Adsense/Adsense";
 import SearchBtn from "../../common/SearchBtn/SearchBtn";
+import {FormattedMessage} from "react-intl";
 let SearchInput = (props) => {
     let ref = React.createRef();
     let [hidden, setHidden] = useState(true);
@@ -14,7 +15,7 @@ let SearchInput = (props) => {
         <MobileContainer>
             <div className={classes.SearchInput}>
                 <div className={classes.label}>
-                    Вставьте ссылкy
+                    <FormattedMessage id={"paste_link_label"}/>
                 </div>
                 <div className={classes.inputWrapper}>
                     <input type={"text"} ref={ref} className={classes.input} onChange={checkHidden}/>

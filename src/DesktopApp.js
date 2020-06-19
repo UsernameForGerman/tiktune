@@ -1,12 +1,8 @@
 import {Route} from "react-router-dom";
 import DesktopHeader from "./comp/Header/DesktopHeader/DesktopHeader";
-import SearchContent from "./comp/Desktop/SearchContent/SearchContent";
-import Adsense from "./comp/Adsense/Adsense";
 import Footer from "./comp/Desktop/Footer/Footer";
 import DesktopContainer from "./comp/Containers/DesktopContainer/DesktopContainer";
 import React from "react";
-import TrendsPage from "./comp/Desktop/Trends/TrendsPage";
-import ResultPage from "./comp/Desktop/Resultpage/ResultPage";
 import MainPage from "./comp/Desktop/MainPage/MainPage";
 import TrendsPageContainer from "./comp/Desktop/Trends/TrendsPageContainer";
 import ResultPageContainer from "./comp/Desktop/Resultpage/ResultPageContainer";
@@ -16,10 +12,10 @@ let DesktopApp = (props) => {
         <>
             <DesktopContainer>
                 <Route path={"/:link"}>
-                    <DesktopHeader withLogo/>
+                    <DesktopHeader withLogo setLoc={props.setLoc}/>
                 </Route>
                 <Route path={"/"} exact>
-                    <MainPage/>
+                    <MainPage setLoc={props.setLoc}/>
                 </Route>
                 <Route path={"/search"}>
                     <ResultPageContainer/>

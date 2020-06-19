@@ -8,7 +8,7 @@ import {getSongByUrlThunk} from "../../../reducers/searchReducer";
 let MainPage = (props) => {
     return (
         <>
-            <DesktopHeader/>
+            <DesktopHeader setLoc={props.setLoc}/>
             <SearchContent {...props}/>
             <Adsense/>
         </>

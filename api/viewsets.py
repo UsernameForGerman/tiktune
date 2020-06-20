@@ -43,7 +43,6 @@ class SearchViewSet(ViewSet):
                                 song=song
                             ) for song in songs
                         ]
-                        print(len(search_history_objs))
                         SearchHistory.objects.bulk_create(search_history_objs)
                         for search_history_obj in search_history_objs:
                             search_history_obj.save()
@@ -98,7 +97,7 @@ class SearchViewSet(ViewSet):
 class TrendsViewSet(ViewSet):
 
     def get_queryset(self, max_amount=20):
-        return Song.objects.order_by('amount')[:max_amount]
+        return Song.objects.order_by('-amount')[:max_amount]
 
     def list(self, request: Request) -> Response:
         songs = self.get_queryset()

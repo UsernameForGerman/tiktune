@@ -1,4 +1,4 @@
-certbot python3-certbot-nginx
+certbot
 git-core
 nginx
 software-properties-common
@@ -8,4 +8,5 @@ python-pip
 python-virtualenv
 python-pip
 python3-dev
+python3-certbot-nginx
 supervisor

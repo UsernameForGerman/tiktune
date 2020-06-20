@@ -13,7 +13,7 @@ let ResultPage = (props) => {
     return(
         <>
             {props.isSongFetching ? <Preloader/>
-            :    props.resultSet
+            :    props.resultSet.length > 0
                     ? <div className={classes.result}>
                         <SearchInput click={handleClick} refer={ref}/>
                         <div className={classes.desc}>

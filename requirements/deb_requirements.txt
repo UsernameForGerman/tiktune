@@ -1,4 +1,7 @@
+certbot python3-certbot-nginx
 git-core
+nginx
+software-properties-common
 postgres
 python-dev
 python-pip

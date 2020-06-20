@@ -134,7 +134,7 @@ dmypy.json
 # Redis server folder
 redis-server/
 
-node_modules
+node_modules/
 =======
 # Celery staff
 tmp/

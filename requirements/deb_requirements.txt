@@ -1,0 +1,8 @@
+git-core
+postgres
+python-dev
+python-pip
+python-virtualenv
+python-pip
+python3-dev
+supervisor

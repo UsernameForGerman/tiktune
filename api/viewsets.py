@@ -43,7 +43,6 @@ class SearchViewSet(ViewSet):
                                 song=song
                             ) for song in songs
                         ]
-                        print(len(search_history_objs))
                         SearchHistory.objects.bulk_create(search_history_objs)
                         for search_history_obj in search_history_objs:
                             search_history_obj.save()

@@ -1,0 +1,26 @@
+body {
+  overflow-x: hidden;
+  margin: 0;
+  font-family: Manrope;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: local("Manrope Bold"),
+       url("assets/fonts/static/Manrope-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Manrope;
+  src: local("Manrope Regular"),
+       url("assets/fonts/static/Manrope-Regular.ttf");
+  font-weight: normal;
+}

@@ -1,0 +1,30 @@
+.Footer{
+    color: white;
+    background-color: black;
+    padding-bottom: 10px;
+}
+
+.copyright{
+    width: 100%;
+    text-align: center;
+}
+
+.feedback{
+    display: flex;
+    flex-direction: column;
+}
+
+.desc{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.link{
+    color: black;
+    font-weight: bold;
+    padding: 5px 5px;
+    border-radius: 5px;
+    width: fit-content;
+    background-color: white;
+    text-decoration: none;
+}

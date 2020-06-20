@@ -1,0 +1,6 @@
+.Container{
+    width: 60vw;
+    padding: 10px 20vw;
+    min-height: 100vh;
+    background:   linear-gradient(to right, rgb(92, 252, 223) 0%, rgba(255,255,255,1) 15%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 85%, rgb(92, 252, 223) 100%);
+}

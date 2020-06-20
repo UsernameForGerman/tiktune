@@ -1,0 +1,25 @@
+.inputWrapper{
+    position: relative;
+}
+
+.input{
+    border: none;
+    background-color: rgba(0, 0, 0, 0.161);
+    border-radius: 40px;
+    outline: none;
+    padding: 8px 15px;
+    padding-right: 2vw;
+    transform: translateX(-5vw);
+    font-size: 1.5em;
+    z-index: 1;
+    width: 100%;
+}
+
+.searchBtn{
+    position: absolute;
+    border-radius: 40px !important;
+    padding: 10px 15px !important;
+    z-index: 10;
+    right: 0;
+    transform:translateY(-44px);
+}

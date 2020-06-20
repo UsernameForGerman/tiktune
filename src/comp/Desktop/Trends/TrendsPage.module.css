@@ -1,0 +1,14 @@
+.Trends{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.col{
+    width: 40%;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+}

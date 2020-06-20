@@ -1,0 +1,41 @@
+.Lifehack{
+    width: 100%;
+    background-color: rgba(236,233,230,1);
+}
+
+.lifehackWrapper{
+
+}
+
+.desc{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.iosLabel{
+    background-color: black;
+    color: white;
+    width: fit-content;
+    font-weight: bold;
+    font-size: 1.25em;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 10px 0px;
+}
+
+.labeledIcon{
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon{
+    width: 6vw;
+}
+
+.label{
+    font-size: 1.25em;
+    font-weight: bold;
+    margin-left: 10px;
+}

@@ -1,0 +1,12 @@
+certbot
+git-core
+nginx
+software-properties-common
+postgres
+python-dev
+python-pip
+python-virtualenv
+python-pip
+python3-dev
+python3-certbot-nginx
+supervisor

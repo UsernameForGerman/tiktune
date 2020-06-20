@@ -1,0 +1,306 @@
+body {
+    margin: 0px;
+}
+@viewport {
+    zoom: 1,0;
+    width: extend-to-zoom;
+}
+#top-content {
+    background-color: #26e8e1;
+    width: 100%;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+#logo-div {
+    padding-left: 5%;
+    padding-top: 3%;
+    padding-bottom: 6%;
+}
+#top-font-div {
+    padding-left: 5%;
+}
+#top-font {
+    font-family: 'Manrope', sans-serif;
+    margin: 0px;
+    font-size: 25px;
+}
+#instructions-div {
+    padding-left: 5%;
+    padding-top: 20px;
+    padding-bottom: 4%;
+}
+#instructions-div1-img {
+    display: inline-block;
+    text-align: center;
+}
+#instructions-div2-img {
+    display: inline-block;
+    text-align: center;
+    padding-left: 25px;
+}
+#instructions-img {
+    height: 50px;
+    width: 50px;
+    padding-bottom: 8px;
+}
+#instructions-font {
+    font-family: 'Manrope', sans-serif;
+    margin: 0px;
+    font-weight: 600;
+    font-size: 15px;
+}
+#search-div {
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-bottom: 10%;
+}
+#language-div {
+    text-align: right;
+    padding-right: 5%;
+}
+#language-font {
+    font-family: 'Manrope', sans-serif;
+    display: inline;
+    font-size: 15px;
+}
+#language-link {
+    text-decoration: none;
+    color: #3C3C43;
+    opacity: 0.6;
+    padding-right: 5px;
+}
+#language-link-chosen {
+    color: black;
+    text-decoration: none;
+}
+#search-bar-div {
+    padding-top: 20%;
+    padding-left: 3%;
+}
+input,
+span,
+label,
+textarea {
+    font-family: 'Ubuntu', sans-serif;
+    display: block;
+    margin: 10px;
+    padding: 5px;
+    border: none;
+    font-size: 22px;
+}
+textarea:focus,
+input:focus {
+    outline: 0;
+}
+input.question,
+textarea.question {
+    font-size: 18px;
+    font-weight: 300;
+    border-radius: 2px;
+    margin: 0;
+    border: none;
+    width: 80%;
+    background: rgba(0, 0, 0, 0);
+    transition: padding-top 0.2s ease, margin-top 0.2s ease;
+    overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
+}
+/* Underline and Placeholder */
+input.question + label,
+textarea.question + label {
+    display: block;
+    position: relative;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    width: 15%;
+    border-top: 2px solid grey;
+    -webkit-transition: width 0.4s ease;
+    transition: width 0.4s ease;
+    height: 0px;
+}
+input.question:focus + label,
+textarea.question:focus + label {
+    width: 80%;
+}
+input.question:focus,
+input.question:valid {
+    padding-top: 35px;
+}
+textarea.question:valid,
+textarea.question:focus {
+    margin-top: 35px;
+}
+input.question:focus + label > span,
+input.question:valid + label > span {
+    top: -100px;
+    font-size: 22px;
+    color: #333;
+}
+textarea.question:focus + label > span,
+textarea.question:valid + label > span {
+    top: -150px;
+    font-size: 22px;
+    color: #333;
+}
+input.question:valid + label,
+textarea.question:valid + label {
+    border-color: green;
+}
+input.question:invalid,
+textarea.question:invalid {
+    box-shadow: none;
+}
+input.question + label > span,
+textarea.question + label > span {
+    font-weight: 300;
+    margin: 0;
+    position: absolute;
+    color: #8F8F8F;
+    font-size: 48px;
+    top: -66px;
+    left: 0px;
+    z-index: -1;
+    -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+    transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+input[type="submit"] {
+    -webkit-transition: opacity 0.2s ease, background 0.2s ease;
+    transition: opacity 0.2s ease, background 0.2s ease;
+    display: block;
+    opacity: 0;
+    margin: 10px 0 0 0;
+    width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background: #EEE;
+}
+input[type="submit"]:active {
+    background: #999;
+}
+input.question:valid ~ input[type="submit"], textarea.question:valid ~ input[type="submit"] {
+    -webkit-animation: appear 1s forwards;
+    animation: appear 1s forwards;
+}
+input.question:invalid ~ input[type="submit"], textarea.question:invalid ~ input[type="submit"] {
+    display: none;
+}
+@-webkit-keyframes appear {
+    100% {
+    opacity: 1;
+    }
+}
+@keyframes appear {
+    100% {
+    opacity: 1;
+    }
+}
+#ad-div {
+    height: 300px;
+}
+#shortcut-div {
+    background-color: #ECE9E6;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+#shortcut-content {
+    padding-left: 5%;
+    padding-top: 7%;
+    text-align: left;
+}
+#sh-font {
+    font-family: 'Manrope', sans-serif;
+    margin: 0px;
+    font-size: 20px;
+}
+#device {
+    background-color: black;
+    border-radius: 5px;
+    width: 55px;
+    height: 30px;
+}
+#device-font {
+    font-family: 'Manrope', sans-serif;
+    color: white;
+    margin: 0px;
+    padding: 5px 15px;
+    font-size: 15px;
+}
+#sh-in {
+    margin-top: 4%;
+    height: 60px;
+}
+#sh-icon {
+    display: inline-block;
+    height: 100%;
+    margin: 0px;
+}
+#sh-text {
+    display: inline-block;
+    height: 100%;
+    padding-left: 5%;
+}
+#sh-font-in {
+    font-family: 'Manrope', sans-serif;
+    margin: 0px;
+    font-size: 15px;
+}
+#sh-in-xo {
+    margin-top: 1%;
+    height: 60px;
+    padding-bottom: 7%;
+}
+#stat-div {
+    margin: 0px;
+    padding-top: 7%;
+    padding-left: 5%;
+}
+#stat-font-main {
+    font-family: 'Manrope', sans-serif;
+    margin: 0px;
+}
+#stat-font-sub {
+    font-family: 'Manrope', sans-serif;
+    margin: 0px;
+}
+
+
+
+#footer-div {
+    background-color: black;
+    padding-top: 7%;
+    padding-left: 5%;
+}
+#footer-h1 {
+    margin: 0px;
+    font-family: 'Manrope', sans-serif;
+    color: white;
+    padding-bottom: 2px;
+}
+#contact-div {
+    background-color: white;
+    border-radius: 3px;
+}
+#contact-font {
+    margin: 0px;
+    font-family: 'Manrope', sans-serif;
+    color: black;
+    margin: 5px;
+}
+
+
+
+
+
+
+
+
+/*
+#26e8e1 - blue
+
+top font
+font-family: 'Manrope', sans-serif;
+
+
+*/

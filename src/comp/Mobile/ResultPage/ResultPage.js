@@ -1,4 +1,4 @@
-import SongListItem from "../../SongListItem/SongListItem";
+
 import React from "react";
 import classes from "./ResultPage.module.css";
 import SearchBtn from "../../common/SearchBtn/SearchBtn";
@@ -7,6 +7,7 @@ import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
 import {FormattedMessage} from "react-intl";
 import {NavLink} from "react-router-dom";
 let ResultPage = (props) => {
+    debugger;
     return(
         <MobileContainer>
             {props.list.length > 0

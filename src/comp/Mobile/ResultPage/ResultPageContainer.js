@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import searchSelector from "../../../selectors/searchSelector";
 import renderList from "../../../DAL/utils/renderer";
 import Preloader from "../../common/Preloader/Preloader";
-import ResultPage from "../../Desktop/Resultpage/ResultPage";
+import ResultPage from "../../Mobile/Resultpage/ResultPage";
 import React from "react";
 
 let ResultPageContainer = (props) => {

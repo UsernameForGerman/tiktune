@@ -11,8 +11,8 @@ class SearchReducer extends BaseReducer {
     getSongByUrlThunk = (url) => {
         let loopSend = (dispatch) => {
             search_api.getSongByUrl(url).then(resp => {
-                debugger;
                 let status = resp.status;
+                debugger;
                 if (status === 200){
                     dispatch(this.setList(resp.data));
                     dispatch(this.toggleFetchAC());
@@ -28,7 +28,6 @@ class SearchReducer extends BaseReducer {
         }
         return (dispatch) => {
             dispatch(this.toggleFetchAC());
-            debugger;
             loopSend(dispatch);
         }
     }

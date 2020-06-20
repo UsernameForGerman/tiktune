@@ -7,7 +7,7 @@ import StatisticsSection from "./StatisticsSection";
 let StatisticSectionContainer = (props) => {
     useEffect(() => {
         props.getStats();
-    }, props.data.visits);
+    }, props.data.length);
 
     return (
         <>

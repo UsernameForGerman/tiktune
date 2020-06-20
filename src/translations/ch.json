@@ -21,5 +21,6 @@
   "song_is_not_in_stores_label" : "这首歌不在Apple Music或Google Play音乐中",
   "unable_to_resolve_label" : "这首歌难以辨认",
   "search_result_label" : "搜索结果",
-  "search_history_label" : "搜索历史记录"
+  "search_history_label" : "搜索历史记录",
+  "wrong_search_label" : "不是您要找的东西？"
 }

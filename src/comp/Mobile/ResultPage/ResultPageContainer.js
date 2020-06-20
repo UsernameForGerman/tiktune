@@ -7,7 +7,6 @@ import ResultPage from "./ResultPage";
 
 let ResultPageContainer = (props) => {
     let renderedList = renderList(props.list);
-    debugger;
     return(
         <>
             {props.isFetching

@@ -7,7 +7,6 @@ import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
 import {FormattedMessage} from "react-intl";
 import {NavLink} from "react-router-dom";
 let ResultPage = (props) => {
-    debugger;
     return(
         <MobileContainer>
             {props.list.length > 0
@@ -17,7 +16,10 @@ let ResultPage = (props) => {
                     </div>
                     {props.renderedList}
                     <div className={classes.search}>
-                        <SearchBtn/>
+                        <h2><FormattedMessage id={"wrong_search_label"}/></h2>
+                        <NavLink to={"/"}>
+                            <SearchBtn/>
+                        </NavLink>
                     </div>
                 </div>
                 : <div className={classes.result}>

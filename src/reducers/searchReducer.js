@@ -12,7 +12,6 @@ class SearchReducer extends BaseReducer {
         let loopSend = (dispatch) => {
             search_api.getSongByUrl(url).then(resp => {
                 let status = resp.status;
-                debugger;
                 if (status === 200){
                     dispatch(this.setList(resp.data));
                     dispatch(this.toggleFetchAC());

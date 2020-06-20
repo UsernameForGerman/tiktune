@@ -1,8 +1,12 @@
+certbot
 git-core
-postgres
+nginx
+software-properties-common
+postgresql
 python-dev
 python-pip
 python-virtualenv
 python-pip
 python3-dev
+python3-certbot-nginx
 supervisor

@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['tiktune.io']
+ALLOWED_HOSTS = ['tiktune.io', '45.143.138.48']
 
 DATABASES = {
     'default': {

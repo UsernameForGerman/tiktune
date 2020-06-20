@@ -124,10 +124,10 @@ class StatsViewSet(ViewSet):
     def list(self, request: Request) -> Response:
         search_requests = SearchHistory.objects.count()
         songs = Song.objects.count()
-        response_data = StatsSerializer({
+        response_data = StatsSerializer([{
             'search_requests': search_requests,
             'songs': songs
-        }).data
+        }], many=True).data
 
         return Response(response_data, status=HTTP_200_OK)
 

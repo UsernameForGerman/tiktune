@@ -12,10 +12,11 @@
 .feedback{
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .desc{
-    font-size: 2em;
+    font-size: 24px;
     font-weight: bold;
 }
 

@@ -13,7 +13,7 @@ let LifehackSection = (props) => {
                         <FormattedMessage id={"lifehack_label"}/>
                     </span>
                     <div className={classes.iosLabel}>
-                        ios
+                        iOS
                     </div>
                     <div className={classes.labeledIcon}>
                         <img className={classes.icon} src={share} alt={"ios share icon"}/>

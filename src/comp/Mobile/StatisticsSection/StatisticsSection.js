@@ -3,9 +3,11 @@ import classes from "./StatisticsSection.module.css";
 import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
 import {FormattedMessage} from "react-intl";
 let StatisticsSection = (props) => {
-    let data = props.data;
+    let data = props.data[0];
     return(
-        <section className={classes.StatisticsSection}>
+        <>
+            {data
+                ? <section className={classes.StatisticsSection}>
             <MobileContainer>
                 <div className={classes.labeledNumber}>
                     <span className={classes.number}>
@@ -33,6 +35,9 @@ let StatisticsSection = (props) => {
                 </div>
             </MobileContainer>
         </section>
+                : <></>
+            }
+        </>
     )
 }
 

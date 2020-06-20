@@ -27,7 +27,6 @@ CELERY_TIMEZONE = 'UTC'
 # CORS staff
 CORS_ORIGIN_WHITELIST = [
     "https://tiktune.io",
-    "http://45.143.138.48/"
     "http://localhost:8000",
     "http://localhost:3000",
 ]

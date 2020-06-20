@@ -1,6 +1,11 @@
-.SongListItem{
+.SongListItem, .row{
     display: flex;
     flex-direction: row;
+}
+
+.searchResult{
+    display: flex;
+    flex-direction: column;
 }
 
 .ava{
@@ -23,6 +28,11 @@
 .btns{
     display: flex;
     flex-direction: row;
+    width: 100%;
+}
+
+.resultBtns{
+    justify-content: space-around;
 }
 
 .googlePlayLinkIcon{

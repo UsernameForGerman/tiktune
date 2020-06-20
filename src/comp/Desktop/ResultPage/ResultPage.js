@@ -43,7 +43,7 @@ let ResultPage = (props) => {
             }
             {props.isHistoryFetching ? <></> :
                 <>
-                    <h2><FormattedMessage id={"search_result_label"}/></h2>
+                    <h2><FormattedMessage id={"search_history_label"}/></h2>
                     {props.historyList}
                 </>
             }

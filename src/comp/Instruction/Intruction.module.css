@@ -5,7 +5,7 @@
 }
 
 .instructionPoint{
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -17,10 +17,11 @@
 }
 
 .instructionDesc{
-    text-align: center;
+    text-align: left;
     margin-top: 5px;
 }
 
 .instructionDesc{
-    font-size: 1em;
+    font-weight: 600;
+    font-size: 15px;
 }

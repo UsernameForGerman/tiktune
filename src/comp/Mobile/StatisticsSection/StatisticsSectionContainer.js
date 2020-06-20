@@ -4,7 +4,7 @@ import {getDataThunk} from "../../../reducers/statsReducer";
 import React, {useEffect} from "react";
 import StatisticsSection from "./StatisticsSection";
 
-let StatisticSectionContainer = (props) => {
+let StatisticsSectionContainer = (props) => {
     useEffect(() => {
         props.getStats();
     }, props.data.length);
@@ -34,4 +34,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatisticSectionContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(StatisticsSectionContainer);

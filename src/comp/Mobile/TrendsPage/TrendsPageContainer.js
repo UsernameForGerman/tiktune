@@ -6,6 +6,9 @@ import TrendsSelector from "../../../selectors/trendsSelector";
 import {connect} from "react-redux";
 import {getTrendSongsThunk} from "../../../reducers/trendsReducer";
 import Nav from "../../Nav/Nav";
+import classes from "./TrendsPage.module.css";
+import LifehackSection from "../LifehackSection/LifehackSection";
+import StatisticsSectionContainer from "../StatisticsSection/StatisticsSectionContainer";
 
 let TrendsPageContainer = (props) => {
     useEffect(() => {
@@ -16,8 +19,12 @@ let TrendsPageContainer = (props) => {
         <>
             <Nav/>
             {props.isFetching
-                ? <Preloader/>
-                : <TrendsPage list={list}/>
+                ? <div className={classes.preloader}><Preloader/></div>
+                : <>
+                    <TrendsPage list={list}/>
+                    <LifehackSection/>
+                    <StatisticsSectionContainer/>
+                  </>
             }
         </>
     );

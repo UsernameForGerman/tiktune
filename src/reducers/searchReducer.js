@@ -24,6 +24,9 @@ class SearchReducer extends BaseReducer {
                     dispatch(this.toggleFetchAC());
                 }
             })
+                .catch(err => {
+                    dispatch(this.toggleFetchAC());
+                })
         }
         return (dispatch) => {
             dispatch(this.toggleFetchAC());

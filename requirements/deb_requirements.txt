@@ -2,7 +2,7 @@ certbot
 git-core
 nginx
 software-properties-common
-postgres
+postgresql
 python-dev
 python-pip
 python-virtualenv

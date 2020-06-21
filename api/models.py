@@ -16,11 +16,11 @@ class StreamingModel(Model):
     SPOTIFY = 'https://open.spotify.com/'
     APPLE = 'https://music.apple.com/'
 
-    deezer_id = SlugField('deezer id', max_length=64, blank=True, null=True, unique=True)
-    itunes_id = SlugField('apple id', max_length=64, blank=True, null=True, unique=True)
-    play_id = SlugField('play id', max_length=64, blank=True, null=True, unique=True)
-    spotify_id = SlugField('spotify id', max_length=64, blank=True, null=True, unique=True)
-    musicstory_id = SlugField('musicstory id', max_length=64, blank=True, null=True, unique=True)
+    deezer_id = SlugField('deezer id', max_length=512, blank=True, null=True, unique=True)
+    itunes_id = SlugField('apple id', max_length=512, blank=True, null=True, unique=True)
+    play_id = SlugField('play id', max_length=512, blank=True, null=True, unique=True)
+    spotify_id = SlugField('spotify id', max_length=512, blank=True, null=True, unique=True)
+    musicstory_id = SlugField('musicstory id', max_length=512, blank=True, null=True, unique=True)
 
     class Meta:
         abstract = True

@@ -78,36 +78,46 @@ def get_audd_songs(tiktok_url):
 
     return res.text
 
-def find_audd(tiktok_url: str):
-    song_info = loads(get_audd_songs(tiktok_url))
-    if song_info['status'] == "success":
-        song = song_info['result']
+def find_audd(tiktok_url):
+    try:
+        song_info = loads(get_audd_songs(tiktok_url))
+        if song_info['status'] == "success":
+            song = song_info['result']
 
-        # create artists for song
-        artists = [song['artist']]
-        Artist.check_list_or_create(artists)
+            # create artists for song
+            artists = [song['artist']]
+            Artist.check_list_or_create(artists)
 
-        # create song objs with empty artist field
-        song_names = [song['title']]
-        Song.check_list_or_create(song_names)
-        idx = Song.audd_update_urls_info(song)
+            # create song objs with empty artist field
+            song_names = [song['title']]
+            Song.check_list_or_create(song_names)
+            idx = Song.audd_update_urls_info(song)
 
-        # update created song objs with artist field
-        song_obj = Song.objects.get(id=idx)
-        artist_obj = Artist.objects.get(name=song['artist'])
-        song_obj.artists.add(artist_obj)
+            # update created song objs with artist field
+            song_obj = Song.objects.get(id=idx)
+            artist_obj = Artist.objects.get(name=song['artist'])
+            song_obj.artists.add(artist_obj)
 
-        # set song to searching history
-        try:
-            search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
-            search_history.song = song_obj
-            search_history.finding = False
-            search_history.save(update_fields=['song', 'finding'])
-        except SearchHistory.DoesNotExist:
-            SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=False)
+            # set song to searching history
+            try:
+                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
+                search_history.song = song_obj
+                search_history.finding = False
+                search_history.save(update_fields=['song', 'finding'])
+            except SearchHistory.DoesNotExist:
+                SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=False)
 
-        return True
-    else:
+            return True
+        else:
+            try:
+                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
+                search_history.song = None
+                search_history.finding = False
+                search_history.save(update_fields=['song', 'finding'])
+            except SearchHistory.DoesNotExist:
+                SearchHistory.objects.create(tiktok_url=tiktok_url, song=None, finding=False)
+    except Exception as e:
+        print(e)
         try:
             search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
             search_history.song = None

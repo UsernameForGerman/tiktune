@@ -6,7 +6,7 @@ import axiosRetry from "axios-retry";
 class api {
    constructor(url) {
       this.api = axios.create({
-         baseURL: "http://localhost:8000/api/v1" + url,
+         baseURL: "http://45.143.138.48/api/v1" + url,
          withCredentials: true,
          headers: {
             "Content-Type": "application/json"

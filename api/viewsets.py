@@ -52,6 +52,7 @@ class SearchViewSet(ViewSet):
                         new_search_history = SearchHistory.objects.filter(
                             id__in=[obj.id for obj in search_history_objs]
                         )
+                        songs_id = list()
                         if 'songs' in request.session:
                             session_data = request.session
                             session_search_history = SearchHistory.objects.filter(
@@ -59,18 +60,14 @@ class SearchViewSet(ViewSet):
                             ).order_by(
                                 '-timestamp'
                             )
-                            while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
-                                if len(session_search_history) > 2:
-                                    session_search_history = session_search_history[:len(session_search_history) - 2]
-                                elif len(session_search_history) == 1:
-                                    session_search_history = SearchHistory.objects.none()
-                                elif len(new_search_history) > 2:
-                                    new_search_history = new_search_history[:len(new_search_history) - 2]
-                                elif len(new_search_history) == 1:
-                                    new_search_history = SearchHistory.objects.none()
-                                else:
-                                    raise Warning('Max history number is too small')
-                            new_search_history = new_search_history | session_search_history
+                            for new_search_history_obj in new_search_history:
+                                if len(songs_id) == self.MAX_HISTORY:
+                                    break
+                                songs_id.append(new_search_history_obj.id)
+                            for old_search_history_obj in session_search_history:
+                                if len(songs_id) == self.MAX_HISTORY:
+                                    break
+                                songs_id.append(old_search_history_obj.id)
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)

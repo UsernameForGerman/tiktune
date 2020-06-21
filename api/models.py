@@ -12,7 +12,7 @@ class SearchHistoryObjectsManager(Manager):
         Song.objects.bulk_update(songs, ['amount'])
 
 class StreamingModel(Model):
-    DEEZER = 'https://deezer.com/'
+    DEEZER = 'https://www.deezer.com/'
     SPOTIFY = 'https://open.spotify.com/'
     APPLE = 'https://music.apple.com/'
 
@@ -112,15 +112,27 @@ class Song(StreamingModel):
     @classmethod
     def audd_update_urls_info(cls, songs_info):
         song = Song.objects.get(name=songs_info['title'])
-        if 'apple_music' in songs_info and 'url' in songs_info['apple_music']:
-            song.itunes_id = songs_info['apple_music']['url']
         if 'spotify' in songs_info:
             if 'external_urls' in songs_info['spotify'] and 'spotify' in songs_info['spotify']['external_urls']:
                 song.spotify_id = songs_info['spotify']['external_urls']['spotify']
-            if 'album' in songs_info['spotify'] and 'images' in songs_info['spotify']['album']:
+            if 'album' in songs_info['spotify'] and 'images' in songs_info['spotify']['album'] and song.image is None:
                 song.image = songs_info['spotify']['album']['images'][1]['url']
-        if 'deezer' in songs_info and 'link' in songs_info['deezer']:
-            song.deezer_id = songs_info['deezer']['link']
+        if 'deezer' in songs_info:
+            if 'link' in songs_info['deezer']:
+                song.deezer_id = songs_info['deezer']['link']
+            if 'album' in songs_info['deezer'] and 'cover_medium' in songs_info['deezer']['album']:
+                if song.image is None:
+                    song.image = songs_info['deezer']['album']['cover_medium']
+        if 'apple_music' in songs_info:
+            if 'url' in songs_info['apple_music']:
+                song.itunes_id = songs_info['apple_music']['url']
+            if 'artwork' in songs_info['apple_music'] and 'url' in songs_info['apple_music']['artwork']:
+                if song.image is None:
+                    base_url = songs_info['apple_music']['artwork']['url']
+                    width_url = base_url.replace('{w}', '300')
+                    width_height_url = width_url.replace('{h}', '300')
+                    song.image = width_height_url
+
 
         song.save()
         return song.id

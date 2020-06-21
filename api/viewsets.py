@@ -36,6 +36,7 @@ class SearchViewSet(ViewSet):
                     return Response('Song not found', status=HTTP_404_NOT_FOUND)
                 else:
                     if search_history.filter(song__isnull=False, finding=False):
+                        print("get in db")
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)
                         search_history_objs = [
@@ -44,8 +45,7 @@ class SearchViewSet(ViewSet):
                                 song=song
                             ) for song in songs
                         ]
-                        print(len(search_history_objs))
-                        SearchHistory.objects.bulk_create(search_history_objs)
+                        # SearchHistory.objects.bulk_create(search_history_objs)
                         for search_history_obj in search_history_objs:
                             search_history_obj.save()
 
@@ -68,9 +68,42 @@ class SearchViewSet(ViewSet):
                                 if len(songs_id) == self.MAX_HISTORY:
                                     break
                                 songs_id.append(old_search_history_obj.id)
-                        request.session['songs'] = [_.id for _ in new_search_history]
+                        request.session['songs'] = songs_id
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)
+                    elif search_history.filter(song__isnull=False, finding=True):
+                        print("update")
+                        query = search_history.filter(song__isnull=False, finding=True)
+                        query.update(finding=False)
+                        song_names = set(search.song.name for search in search_history)
+                        songs = Song.objects.filter(name__in=song_names)
+                        for song in songs:
+                            song.amount -= 1
+                        Song.objects.bulk_update(songs, ('amount',))
+                        song_names = set(search.song.name for search in search_history)
+                        songs = Song.objects.filter(name__in=song_names)
+
+                        songs_id = list()
+                        if 'songs' in request.session:
+                            session_data = request.session
+                            session_search_history = SearchHistory.objects.filter(
+                                id__in=session_data['songs']
+                            ).order_by(
+                                '-timestamp'
+                            )
+                            for new_search_history_obj in query:
+                                if len(songs_id) == self.MAX_HISTORY:
+                                    break
+                                songs_id.append(new_search_history_obj.id)
+                            for old_search_history_obj in session_search_history:
+                                if len(songs_id) == self.MAX_HISTORY:
+                                    break
+                                songs_id.append(old_search_history_obj.id)
+                        request.session['songs'] = songs_id
+                        response_data = SongSerializer(songs, many=True).data
+                        return Response(response_data, status=HTTP_200_OK)
+
+
                     elif search_history.filter(song__isnull=True, finding=True):
                         return Response(
                             headers={
@@ -117,6 +150,7 @@ class HistoryViewSet(ViewSet):
     def list(self, request: Request) -> Response:
         session_data = request.session
         if 'songs' in session_data:
+            print(session_data['songs'])
             search_history = SearchHistory.objects.filter(
                 id__in=session_data['songs'],
             ).order_by(

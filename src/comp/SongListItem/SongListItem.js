@@ -8,7 +8,6 @@ let SongListItem = (props) => {
     let googleLink = (<a className={classes.googlePlayLink} href={props.play_url}>
                         <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                     </a>);
-    debugger;
     return(
         <div className={`${classes.SongListItem}`}>
             <div className={classes.ava}>

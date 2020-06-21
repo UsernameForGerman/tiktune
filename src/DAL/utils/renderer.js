@@ -4,7 +4,6 @@ import SongList from "../../comp/common/SongList/SongList";
 import not_found from "../../assets/img/not_found.png";
 
 let formatResponse = (resp) => {
-    debugger;
     let formatted = {...resp};
     formatted.artists = resp.artists.reduce((a = "", b) => {
         return a + " & " + b.name;

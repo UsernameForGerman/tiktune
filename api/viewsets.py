@@ -6,11 +6,12 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED,\
     HTTP_204_NO_CONTENT, HTTP_304_NOT_MODIFIED
 from django.utils.timezone import datetime, timedelta
+from json import loads
 
 # project
 from .models import SearchHistory, Song
 from .serializers import SongSerializer, TikTokSerializer, SearchHistorySerializer, StatsSerializer
-from .tasks import find_save_songs
+from .tasks import find_save_songs, get_audd_songs
 
 
 class SearchViewSet(ViewSet):
@@ -79,7 +80,9 @@ class SearchViewSet(ViewSet):
                             song=None,
                             tiktok_url=request.query_params.get('url', '')
                         )
-                        find_save_songs.delay(serializer.data['tiktok_url'])
+
+                        song_info = loads(get_audd_songs(serializer.data['tiktok_url']))
+                        find_save_songs.delay(song_info)
                         return Response(
                             headers={
                                 'retry-after': 1

@@ -18,7 +18,7 @@ let MobileHeader = (props) => {
                                 <div className={classes.desc}>
                                     <FormattedMessage id={"desc"}/>
                                 </div>
-                                <Instruction/>
+                                <Instruction mobile/>
                             </>
                             : <></>
                         }

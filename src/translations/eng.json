@@ -24,5 +24,6 @@
   "search_history_label" : "Search history",
   "wrong_search_label" : "Not what you were looking for?",
   "try_again_label" : "Try again",
-  "searches_label" : "searches"
+  "searches_label" : "searches",
+  "unknown_song_label" : "No results"
 }

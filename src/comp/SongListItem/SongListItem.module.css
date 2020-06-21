@@ -37,6 +37,10 @@
     justify-content: space-around;
 }
 
+.desktop_btns{
+    width: 50%;
+}
+
 .googlePlayLinkIcon{
     width: 70%;
 }
@@ -93,6 +97,9 @@
 }
 
 .downloads{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     color: gray;
     font-weight: bold;
     margin-top: 10px;

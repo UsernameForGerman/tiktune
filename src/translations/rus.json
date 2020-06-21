@@ -24,5 +24,6 @@
   "search_history_label" : "История поиска",
   "wrong_search_label" : "Не то, что искали?",
   "try_again_label" : "Попробуйте еще",
-  "searches_label" : "поисков"
+  "searches_label" : "поисков",
+  "unknown_song_label" : "Нет результатов"
 }

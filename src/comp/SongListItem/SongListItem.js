@@ -12,16 +12,16 @@ let SongListItem = (props) => {
         <div className={`${classes.SongListItem}`}>
             <div className={classes.ava}>
                 <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
-                <span className={classes.downloads}>
+                <div className={classes.downloads}>
                     {props.amount}
-                </span>
+                </div>
             </div>
             <div className={classes.info}>
                 <div className={classes.name}>
                     {props.name}
                 </div>
                 <div className={classes.singer}>
-                    {props.artists.name}
+                    {props.artists[0].name}
                 </div>
                 <div className={classes.btns}>
                     {props.spotify_url

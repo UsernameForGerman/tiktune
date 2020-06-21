@@ -11,7 +11,7 @@ let TrendsPage = (props) => {
                       {props.list}
                   </div>
             }
-            <div className={classes.col}>
+            <div className={classes.col2}>
                 <Adsense/>
                 <Adsense/>
             </div>

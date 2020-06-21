@@ -60,7 +60,16 @@ class SearchViewSet(ViewSet):
                                 '-timestamp'
                             )
                             while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
-                                session_search_history = session_search_history[:-1]
+                                if len(session_search_history) > 2:
+                                    session_search_history = session_search_history[:len(session_search_history) - 2]
+                                elif len(session_search_history) == 1:
+                                    session_search_history = SearchHistory.objects.none()
+                                elif len(new_search_history) > 2:
+                                    new_search_history = new_search_history[:len(new_search_history) - 2]
+                                elif len(new_search_history) == 1:
+                                    new_search_history = SearchHistory.objects.none()
+                                else:
+                                    raise Warning('Max history number is too small')
                             new_search_history = new_search_history | session_search_history
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data

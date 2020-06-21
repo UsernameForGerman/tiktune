@@ -32,7 +32,6 @@ class api {
          'axios-retry' : {
             retries: 5,
             retryCondition : (resp) => {
-               debugger;
                return resp.status !== 200
             },
             retryDelay: (retryCount) => {

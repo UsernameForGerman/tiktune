@@ -30,7 +30,7 @@ let SongListItem = (props) => {
                           </a>
                         : <></>
                     }
-                    {props.appleLink
+                    {props.itunes_url
                         ? <a className={classes.appleLink} href={props.itunes_url}>
                             <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
                             <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>

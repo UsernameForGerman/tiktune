@@ -6,6 +6,7 @@
 .searchResult{
     display: flex;
     flex-direction: column;
+    margin: 10px 0px;
 }
 
 .ava{
@@ -105,4 +106,8 @@
 .spotify{
     width: 40px;
     height: 40px;
+}
+
+.searchesLabel{
+    margin-left: 10px;
 }

@@ -43,7 +43,9 @@ let renderSong = (resp) => {
                     </div>
                     <span className={classes.downloads}>
                         {props.amount}
-                        <FormattedMessage id={"requests_label"}/>
+                        <div className={classes.searchesLabel}>
+                            <FormattedMessage id={"searches_label"}/>
+                        </div>
                     </span>
                 </div>
             </div>

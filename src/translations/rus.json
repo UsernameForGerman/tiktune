@@ -23,5 +23,6 @@
   "search_result_label" : "Результаты поиска",
   "search_history_label" : "История поиска",
   "wrong_search_label" : "Не то, что искали?",
-  "try_again_label" : "Попробуйте еще"
+  "try_again_label" : "Попробуйте еще",
+  "searches_label" : "поисков"
 }

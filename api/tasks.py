@@ -83,6 +83,7 @@ def find_audd(tiktok_url):
         song_info = loads(get_audd_songs(tiktok_url))
         if song_info['status'] == "success":
             song = song_info['result']
+            print(song)
 
             # create artists for song
             artists = [song['artist']]

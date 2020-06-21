@@ -5,7 +5,7 @@ import DesktopContainer from "./comp/Containers/DesktopContainer/DesktopContaine
 import React from "react";
 import MainPage from "./comp/Desktop/MainPage/MainPage";
 import TrendsPageContainer from "./comp/Desktop/Trends/TrendsPageContainer";
-import ResultPageContainer from "./comp/Desktop/Resultpage/ResultPageContainer";
+import ResultPageContainer from "./comp/Desktop/ResultPage/ResultPageContainer";
 
 let DesktopApp = (props) => {
     return(

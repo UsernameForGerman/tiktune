@@ -4,8 +4,8 @@
   "copy_link_label" : "Copy link",
   "paste_link_label" : "Paste link",
   "eng_label" : "English",
-  "rus_label" : "Russian",
-  "chinese_label" : "Chinese",
+  "rus_label" : "Русский",
+  "chinese_label" : "中文",
   "lifehack_label" : "Want to find music faster?",
   "tap_share_label" : "Press «Share» in Safari menu",
   "choose_icon_label" : "Choose «Add to Home Screen» icon",
@@ -21,5 +21,6 @@
   "song_is_not_in_stores_label" : "This song is not in Apple Music or Google Play Music",
   "unable_to_resolve_label" : "The song is illegible",
   "search_result_label" : "Search result",
-  "search_history_label" : "Search history"
+  "search_history_label" : "Search history",
+  "wrong_search_label" : "Not what you were looking for?"
 }

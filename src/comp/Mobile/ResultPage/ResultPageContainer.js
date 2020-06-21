@@ -1,17 +1,17 @@
 import {connect} from "react-redux";
 import searchSelector from "../../../selectors/searchSelector";
-import renderList from "../../../DAL/utils/renderer";
 import Preloader from "../../common/Preloader/Preloader";
 import React from "react";
 import ResultPage from "./ResultPage";
+import classes from "./ResultPage.module.css"
+import renderList from "../../../DAL/utils/mobileRenderer";
 
 let ResultPageContainer = (props) => {
     let renderedList = renderList(props.list);
-    debugger;
     return(
         <>
             {props.isFetching
-                ? <Preloader/>
+                ? <div className={classes.preloader}><Preloader/></div>
                 : <ResultPage {...props} renderedList={renderedList}/>
             }
         </>

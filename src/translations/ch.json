@@ -3,14 +3,14 @@
   "share_label" : "点击“分享”",
   "copy_link_label" : "拷贝链接",
   "paste_link_label" : "粘贴链接",
-  "eng_label" : "英语",
-  "rus_label" : "俄语",
+  "eng_label" : "English",
+  "rus_label" : "Русский",
   "chinese_label" : "中文",
   "lifehack_label" : "想更快地查找音乐吗？",
   "tap_share_label" : "点击Safari菜单中的“共享”按钮",
   "choose_icon_label" : "单击图标符号 «添加到主屏幕»",
   "requests_label" : "搜索",
-  "songs_found_label" : "共找到{value} 首音轨",
+  "songs_found_label" : "共找到 首音轨",
   "visits_label" : "次播放 tiktune ",
   "have_ideas_label" : "有问题？",
   "bug_found_label" : "发现一个错误？",
@@ -21,5 +21,6 @@
   "song_is_not_in_stores_label" : "这首歌不在Apple Music或Google Play音乐中",
   "unable_to_resolve_label" : "这首歌难以辨认",
   "search_result_label" : "搜索结果",
-  "search_history_label" : "搜索历史记录"
+  "search_history_label" : "搜索历史记录",
+  "wrong_search_label" : "不是您要找的东西？"
 }

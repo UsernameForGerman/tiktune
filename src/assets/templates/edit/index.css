@@ -265,8 +265,6 @@ input.question:invalid ~ input[type="submit"], textarea.question:invalid ~ input
     margin: 0px;
 }
 
-
-
 #footer-div {
     background-color: black;
     padding-top: 7%;

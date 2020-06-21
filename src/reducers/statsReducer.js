@@ -2,7 +2,7 @@ import stats_api from "../DAL/stats_api/stats_api";
 
 let initialState = {
     isFetching : false,
-    data : {},
+    data : [],
 }
 
 const TOGGLE_FETCHING = "STATS/TOGGLE_FETCHING";
@@ -10,7 +10,10 @@ const SET_DATA = "STATS/SET_DATA";
 
 let copyState = (state) => {
     let copy = {...state};
-    copy.data = {...state.data};
+    copy.data = [...state.data];
+    for (let i = 0; i < copy.data.length; i++){
+        copy.data[i] = {...state.data[i]};
+    }
     return copy;
 }
 
@@ -24,8 +27,8 @@ let statsReducer = (state = initialState, action) => {
 
         case SET_DATA : {
             stateCopy.data = action.data;
-            if (action.data.visits === null){
-                stateCopy.data.visits = 0;
+            if (action.data[0].visits === null){
+                stateCopy.data[0].visits = 0;
             }
             break;
         }

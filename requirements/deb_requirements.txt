@@ -1,4 +1,5 @@
 certbot
+curl
 git-core
 nginx
 software-properties-common
@@ -6,7 +7,7 @@ postgresql
 python-dev
 python-pip
 python-virtualenv
-python-pip
 python3-dev
+python3-venv
 python3-certbot-nginx
 supervisor

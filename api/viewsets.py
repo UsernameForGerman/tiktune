@@ -80,9 +80,7 @@ class SearchViewSet(ViewSet):
                             song=None,
                             tiktok_url=request.query_params.get('url', '')
                         )
-
-                        song_info = loads(get_audd_songs(serializer.data['tiktok_url']))
-                        find_save_songs.delay(song_info, serializer.data['tiktok_url'])
+                        find_save_songs(serializer.data['tiktok_url'])
                         return Response(
                             headers={
                                 'retry-after': 1

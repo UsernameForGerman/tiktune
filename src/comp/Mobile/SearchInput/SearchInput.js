@@ -35,7 +35,7 @@ let SearchInput = (props) => {
                     <FormattedMessage id={"paste_link_label"}/>
                 </div>
                 <div className={classes.inputWrapper}>
-                    <input type={"text"} ref={ref} style={!isTouched ? {width : "10%"} : {}} onClick={handleClick} onBlur={handleBlur} className={classes.input} onChange={checkHidden}/>
+                    <input type={"text"} ref={ref} style={!isTouched ? {width : "20%"} : {}} onClick={handleClick} onBlur={handleBlur} className={classes.input} onChange={checkHidden}/>
                     <NavLink to={"/search"}>
                         <SearchBtn hidden={hidden} click={search}/>
                     </NavLink>

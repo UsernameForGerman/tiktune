@@ -5,3 +5,16 @@
     justify-content: center;
     height: 85vh;
 }
+
+.desc{
+    width: 70%;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.reasonsHeading{
+    font-weight: 600;
+    font-size: 24px;
+}

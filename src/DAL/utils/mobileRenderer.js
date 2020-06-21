@@ -2,8 +2,10 @@ import classes from "../../comp/SongListItem/SongListItem.module.css";
 import spotify from "../../assets/img/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png";
 import apple from "../../assets/img/Apple_Music_Badge/Web_SVG/US-UK_Apple_Music_Badge_RGB.png";
 import appleLogo from "../../assets/img/appleMusic.png";
+import not_found from "../../assets/img/not_found.png";
 import React from "react";
 import SongList from "../../comp/common/SongList/SongList";
+import {FormattedMessage} from "react-intl";
 
 let formatResponse = (resp) => {
     let formatted = {...resp};
@@ -17,6 +19,10 @@ let formatResponse = (resp) => {
         formatted.amount = Number(formatted.amount / 1000.0) + "K"
     }
 
+    if (formatted.image === null){
+        formatted.image = not_found;
+    }
+
     return formatted;
 }
 
@@ -27,9 +33,6 @@ let renderSong = (resp) => {
             <div className={classes.row}>
                 <div className={classes.ava}>
                     <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
-                    <span className={classes.downloads}>
-                        {props.amount}
-                    </span>
                 </div>
                 <div className={classes.info}>
                     <div className={classes.name}>
@@ -38,6 +41,10 @@ let renderSong = (resp) => {
                     <div className={classes.singer}>
                         {props.artists.name}
                     </div>
+                    <span className={classes.downloads}>
+                        {props.amount}
+                        <FormattedMessage id={"requests_label"}/>
+                    </span>
                 </div>
             </div>
             <div className={`${classes.btns} ${classes.row} ${classes.resultBtns}`}>

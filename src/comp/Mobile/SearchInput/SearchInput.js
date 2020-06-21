@@ -8,9 +8,21 @@ import {NavLink} from "react-router-dom";
 let SearchInput = (props) => {
     let ref = React.createRef();
     let [hidden, setHidden] = useState(true);
+    let [isTouched, setTouched] = useState(false);
     let checkHidden = () => {
-        let bool = ref.current.value === "";
+        let value = ref.current.value;
+        let bool = value === "";
         setHidden(bool);
+    }
+
+    let handleClick = () => {
+        setTouched(true);
+    }
+
+    let handleBlur = () => {
+        let value = ref.current.value;
+        let bool = value === "";
+        setTouched(!bool);
     }
 
     let search = () => {
@@ -19,11 +31,11 @@ let SearchInput = (props) => {
     return(
         <MobileContainer>
             <div className={classes.SearchInput}>
-                <div className={classes.label}>
+                <div className={classes.label} style={!isTouched ? {transform : "translateY(25px)"} : {}}>
                     <FormattedMessage id={"paste_link_label"}/>
                 </div>
                 <div className={classes.inputWrapper}>
-                    <input type={"text"} ref={ref} className={classes.input} onChange={checkHidden}/>
+                    <input type={"text"} ref={ref} style={!isTouched ? {width : "20%"} : {}} onClick={handleClick} onBlur={handleBlur} className={classes.input} onChange={checkHidden}/>
                     <NavLink to={"/search"}>
                         <SearchBtn hidden={hidden} click={search}/>
                     </NavLink>

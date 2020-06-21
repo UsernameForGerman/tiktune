@@ -40,6 +40,7 @@ let ResultPage = (props) => {
                         </ul>
                     </div>
                     <div className={classes.search}>
+                        <h2><FormattedMessage id={"try_again_label"}/></h2>
                         <NavLink to={"/"}>
                             <SearchBtn/>
                         </NavLink>

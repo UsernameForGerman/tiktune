@@ -22,5 +22,6 @@
   "unable_to_resolve_label" : "The song is illegible",
   "search_result_label" : "Search result",
   "search_history_label" : "Search history",
-  "wrong_search_label" : "Not what you were looking for?"
+  "wrong_search_label" : "Not what you were looking for?",
+  "try_again_label" : "Try again"
 }

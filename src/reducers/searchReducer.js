@@ -30,6 +30,7 @@ class SearchReducer extends BaseReducer {
         }
         return (dispatch) => {
             dispatch(this.toggleFetchAC());
+            dispatch(this.setList([]));
             loopSend(dispatch);
         }
     }

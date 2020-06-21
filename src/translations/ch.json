@@ -22,5 +22,6 @@
   "unable_to_resolve_label" : "这首歌难以辨认",
   "search_result_label" : "搜索结果",
   "search_history_label" : "搜索历史记录",
-  "wrong_search_label" : "不是您要找的东西？"
+  "wrong_search_label" : "不是您要找的东西？",
+  "try_again_label" : "再试一次"
 }

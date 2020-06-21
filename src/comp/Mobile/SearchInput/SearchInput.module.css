@@ -2,6 +2,8 @@
     color: rgba(60,60,67,0.6);
     font-size: 2em;
     font-weight: bold;
+    transition: all ease-in .3s;
+    transform: translateY(0px);
 }
 
 .inputWrapper{
@@ -12,8 +14,13 @@
 
 .input{
     margin: 10px 0px;
+    width: 95%;
+    transition: all ease-in .3s;
     border: none;
     border-bottom: 1px black solid;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     outline: none;
     font-size: 1.5em;
 }

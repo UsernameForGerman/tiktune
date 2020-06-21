@@ -78,8 +78,9 @@ def get_audd_songs(tiktok_url):
 
     return res.text
 
-def find_audd(song_info, tiktok_url):
+def find_audd(tiktok_url):
     try:
+        song_info = loads(get_audd_songs(tiktok_url))
         if song_info['status'] == "success":
             song = song_info['result']
 
@@ -127,9 +128,9 @@ def find_audd(song_info, tiktok_url):
 
 
 @shared_task
-def find_save_songs(tiktok_url: str, song_info=None, api='audd'):
+def find_save_songs(tiktok_url: str, api='audd'):
     if api == 'audd':
-        return find_audd(song_info, tiktok_url)
+        return find_audd(tiktok_url)
     elif api == 'acr':
         return find_acr(tiktok_url)
     else:

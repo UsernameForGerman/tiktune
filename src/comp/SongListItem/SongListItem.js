@@ -23,15 +23,18 @@ let SongListItem = (props) => {
                 <div className={classes.singer}>
                     {props.artists.name}
                 </div>
-                <div className={classes.btns}>
-                    <a href={props.spotify_url}>
-                        <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
-                    </a>
-                    <a className={classes.appleLink} href={props.itunes_url}>
-                        <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
-                        <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
-                    </a>
-                </div>
+                {props.image !== null
+                    ? <div className={classes.btns}>
+                        <a href={props.spotify_url}>
+                            <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
+                        </a>
+                        <a className={classes.appleLink} href={props.itunes_url}>
+                            <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
+                            <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
+                        </a>
+                      </div>
+                    : <></>
+                }
             </div>
         </div>
     )

@@ -61,6 +61,7 @@ def find_acr(tiktok_url: str):
                 SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj)
 
 def get_mp3_url(tiktok_url):
+    print(tiktok_url)
     file_finder = TikTokApi()
     result = file_finder.getTikTokByUrl(url=tiktok_url)
     mp3_url = result['itemInfo']['itemStruct']['music']['playUrl']

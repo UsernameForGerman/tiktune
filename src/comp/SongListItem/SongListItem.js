@@ -8,6 +8,7 @@ let SongListItem = (props) => {
     let googleLink = (<a className={classes.googlePlayLink} href={props.play_url}>
                         <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                     </a>);
+    debugger;
     return(
         <div className={`${classes.SongListItem}`}>
             <div className={classes.ava}>
@@ -23,18 +24,21 @@ let SongListItem = (props) => {
                 <div className={classes.singer}>
                     {props.artists.name}
                 </div>
-                {props.image !== null
-                    ? <div className={classes.btns}>
-                        <a href={props.spotify_url}>
+                <div className={classes.btns}>
+                    {props.spotify_url
+                        ? <a href={props.spotify_url}>
                             <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
-                        </a>
-                        <a className={classes.appleLink} href={props.itunes_url}>
+                          </a>
+                        : <></>
+                    }
+                    {props.appleLink
+                        ? <a className={classes.appleLink} href={props.itunes_url}>
                             <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
                             <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
-                        </a>
-                      </div>
-                    : <></>
-                }
+                          </a>
+                        : <></>
+                    }
+                 </div>
             </div>
         </div>
     )

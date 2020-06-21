@@ -19,7 +19,7 @@ let formatResponse = (resp) => {
         formatted.amount = Number(formatted.amount / 1000.0) + "K"
     }
 
-    if (formatted.image === null){
+    if (formatted.image === ""){
         formatted.image = not_found;
     }
 

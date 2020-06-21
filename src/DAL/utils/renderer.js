@@ -4,6 +4,7 @@ import SongList from "../../comp/common/SongList/SongList";
 import not_found from "../../assets/img/not_found.png";
 
 let formatResponse = (resp) => {
+    debugger;
     let formatted = {...resp};
     formatted.artists = resp.artists.reduce((a = "", b) => {
         return a + " & " + b.name;
@@ -15,7 +16,7 @@ let formatResponse = (resp) => {
         formatted.amount = Number(formatted.amount / 1000.0) + "K"
     }
 
-    if (formatted.image === null){
+    if (formatted.image === ""){
         formatted.image = not_found;
     }
 

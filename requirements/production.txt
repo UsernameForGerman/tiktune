@@ -1,3 +1,5 @@
 -r ./base.txt
 
-postgresql
+postgresql==12
+uwsgi==2
+

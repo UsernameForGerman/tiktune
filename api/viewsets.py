@@ -44,6 +44,7 @@ class SearchViewSet(ViewSet):
                                 song=song
                             ) for song in songs
                         ]
+                        print(len(search_history_objs))
                         SearchHistory.objects.bulk_create(search_history_objs)
                         for search_history_obj in search_history_objs:
                             search_history_obj.save()
@@ -59,7 +60,7 @@ class SearchViewSet(ViewSet):
                                 '-timestamp'
                             )
                             while len(session_search_history) + len(new_search_history) >= self.MAX_HISTORY:
-                                session_search_history.pop()
+                                session_search_history = session_search_history[:-1]
                             new_search_history = new_search_history | session_search_history
                         request.session['songs'] = [_.id for _ in new_search_history]
                         response_data = SongSerializer(songs, many=True).data
@@ -78,7 +79,7 @@ class SearchViewSet(ViewSet):
                         SearchHistory.objects.create(
                             finding=True,
                             song=None,
-                            tiktok_url=request.query_params.get('url', '')
+                            tiktok_url=serializer.data['tiktok_url']
                         )
                         find_save_songs(serializer.data['tiktok_url'])
                         return Response(

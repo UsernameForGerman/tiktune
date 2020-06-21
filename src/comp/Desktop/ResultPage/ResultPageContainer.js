@@ -5,7 +5,7 @@ import searchSelector from "../../../selectors/searchSelector";
 import historySelector from "../../../selectors/historySelector";
 import {getHistoryThunk} from "../../../reducers/historyReducer";
 import {getSongByUrlThunk} from "../../../reducers/searchReducer";
-import renderList from "../../../utils/renderer";
+import renderList from "../../../utils/desktopRenderer";
 
 let ResultPageContainer = (props) => {
     useEffect(() => {

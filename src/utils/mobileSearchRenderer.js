@@ -21,7 +21,7 @@ let renderSong = (resp) => {
                         {props.name}
                     </div>
                     <div className={classes.singer}>
-                        {props.artists.name}
+                        {props.artists[0].name}
                     </div>
                     <div className={classes.downloads}>
                         {props.amount}

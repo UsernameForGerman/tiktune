@@ -11,16 +11,15 @@ let ResultPage = (props) => {
         props.getSong(text);
     }
     return(
-        <>
+        <div className={classes.result}>
             {props.isSongFetching ? <Preloader/>
             :    props.resultSet.length > 0
-                    ? <div className={classes.result}>
+                    ? <>
                         <SearchInput click={handleClick} refer={ref}/>
-                        <div className={classes.desc}>
-                            <FormattedMessage id={"search_result_label"}/>
+                        <div className={classes.list}>
+                            {props.resultList}
                         </div>
-                        {props.resultList}
-                    </div>
+                    </>
                     : <div className={classes.result}>
                         <SearchInput click={handleClick} refer={ref}/>
                         <div className={classes.desc}>
@@ -43,11 +42,10 @@ let ResultPage = (props) => {
             }
             {props.isHistoryFetching ? <></> :
                 <>
-                    <h2><FormattedMessage id={"search_history_label"}/></h2>
                     {props.historyList}
                 </>
             }
-        </>
+        </div>
     )
 }
 

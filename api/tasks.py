@@ -74,13 +74,14 @@ def get_mp3_url(tiktok_url):
 
 def get_audd_songs(tiktok_url):
     song_url = get_mp3_url(tiktok_url)
+    print("song url {}".format(song_url))
     session = Session()
     res = session.post('https://api.audd.io/', data={
         'url': song_url,
         'return': 'apple_music,deezer,spotify',
         'api_token': '71526d7877260531dfee40a059ca1a94'
     })
-
+    print("song search result \n {}".format(res.text))
     return res.text
 
 def find_audd(tiktok_url):

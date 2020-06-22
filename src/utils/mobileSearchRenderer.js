@@ -12,7 +12,7 @@ let renderSong = (resp) => {
     let props = formatResponse(resp);
         return(
         <div className={`${classes.searchResult}`}>
-            <div className={classes.row}>
+            <div className={classes.mobileRow}>
                 <div className={classes.ava}>
                     <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
                 </div>
@@ -31,7 +31,7 @@ let renderSong = (resp) => {
                     </div>
                 </div>
             </div>
-            <div className={`${classes.btns} ${classes.row} ${classes.resultBtns}`}>
+            <div className={`${classes.btns} ${classes.resultBtns}`}>
                 {props.spotify_url
                     ? <a href={props.spotify_url}>
                         <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>

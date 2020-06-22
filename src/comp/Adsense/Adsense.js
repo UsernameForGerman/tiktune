@@ -3,7 +3,7 @@ import classes from "./Adsense.module.css";
 
 let Adsense = (props) => {
     return(
-        <div className={classes.Adsense}>
+        <div className={classes.Adsense} style={props.styles}>
             Adsense
         </div>
     )

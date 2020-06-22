@@ -25,23 +25,6 @@ class api {
          return resp;
       })
    }
-
-   getRetry(url = "", params = "") {
-      axiosRetry(this.api);
-      return this.api.get(url + params, {
-         'axios-retry' : {
-            retries: 5,
-            retryCondition : (resp) => {
-               return resp.status !== 200
-            },
-            retryDelay: (retryCount) => {
-              return 6 * 1000;
-            }
-         }
-      }).then(resp => {
-         return resp;
-      })
-   }
 }
 
 

@@ -3,3 +3,24 @@
     margin: 10px 0px;
     font-weight: 600;
 }
+
+.list{
+    margin: 20px 0px;
+    width: 50vw;
+}
+
+.historyList{
+    width: 50vw;
+    height: 85vh;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}

@@ -4,7 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import React from "react";
 import ResultPage from "./ResultPage";
 import classes from "./ResultPage.module.css"
-import renderList from "../../../DAL/utils/mobileRenderer";
+import renderList from "../../../utils/mobileSearchRenderer";
 
 let ResultPageContainer = (props) => {
     let renderedList = renderList(props.list);

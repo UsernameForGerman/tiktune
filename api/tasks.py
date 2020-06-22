@@ -61,21 +61,27 @@ def find_acr(tiktok_url: str):
                 SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj)
 
 def get_mp3_url(tiktok_url):
+    print(tiktok_url)
     file_finder = TikTokApi()
     result = file_finder.getTikTokByUrl(url=tiktok_url)
-    mp3_url = result['itemInfo']['itemStruct']['music']['playUrl']
+    try:
+        mp3_url = result['itemInfo']['itemStruct']['music']['playUrl']
 
-    return mp3_url
+        return mp3_url
+    except Exception as e:
+        print(e)
+        return ''
 
 def get_audd_songs(tiktok_url):
     song_url = get_mp3_url(tiktok_url)
+    print("song url {}".format(song_url))
     session = Session()
     res = session.post('https://api.audd.io/', data={
         'url': song_url,
         'return': 'apple_music,deezer,spotify',
         'api_token': '71526d7877260531dfee40a059ca1a94'
     })
-
+    print("song search result \n {}".format(res.text))
     return res.text
 
 def find_audd(tiktok_url):
@@ -103,10 +109,11 @@ def find_audd(tiktok_url):
             try:
                 search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
                 search_history.song = song_obj
-                search_history.finding = False
+                # search_history.finding = False
                 search_history.save(update_fields=['song', 'finding'])
             except SearchHistory.DoesNotExist:
-                SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=False)
+                # SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=False)
+                SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=True)
 
             return True
         else:

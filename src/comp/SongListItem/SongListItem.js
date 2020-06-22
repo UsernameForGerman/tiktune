@@ -12,26 +12,32 @@ let SongListItem = (props) => {
         <div className={`${classes.SongListItem}`}>
             <div className={classes.ava}>
                 <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
-                <span className={classes.downloads}>
+                <div className={classes.downloads}>
                     {props.amount}
-                </span>
+                </div>
             </div>
             <div className={classes.info}>
                 <div className={classes.name}>
                     {props.name}
                 </div>
                 <div className={classes.singer}>
-                    {props.artists.name}
+                    {props.artists[0].name}
                 </div>
                 <div className={classes.btns}>
-                    <a href={props.spotify_url}>
-                        <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
-                    </a>
-                    <a className={classes.appleLink} href={props.itunes_url}>
-                        <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
-                        <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
-                    </a>
-                </div>
+                    {props.spotify_url
+                        ? <a href={props.spotify_url}>
+                            <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
+                          </a>
+                        : <></>
+                    }
+                    {props.itunes_url
+                        ? <a className={classes.appleLink} href={props.itunes_url}>
+                            <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
+                            <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
+                          </a>
+                        : <></>
+                    }
+                 </div>
             </div>
         </div>
     )

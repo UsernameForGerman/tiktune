@@ -23,7 +23,7 @@ let renderSong = (resp) => {
                     <div className={classes.singer}>
                         {props.artists[0].name}
                     </div>
-                    <div className={classes.downloads}>
+                    <div className={classes.search_downloads}>
                         {props.amount}
                         <div className={classes.searchesLabel}>
                             <FormattedMessage id={"searches_label"}/>

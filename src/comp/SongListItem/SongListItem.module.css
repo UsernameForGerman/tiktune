@@ -1,11 +1,13 @@
 .SongListItem, .row{
     display: flex;
     flex-direction: row;
+    margin: 25px 0px;
 }
 
 .searchResult{
     display: flex;
     flex-direction: column;
+    margin: 10px 0px;
 }
 
 .ava{
@@ -33,7 +35,16 @@
 }
 
 .resultBtns{
+    margin-top: 10px;
     justify-content: space-around;
+}
+
+.desktop_btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    width: 40%;
 }
 
 .googlePlayLinkIcon{
@@ -58,6 +69,7 @@
     width: 20px;
     height: 20px;
 }
+
 
 .appleWrapper{
     height: 50px;
@@ -92,6 +104,9 @@
 }
 
 .downloads{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     color: gray;
     font-weight: bold;
     margin-top: 10px;
@@ -105,4 +120,8 @@
 .spotify{
     width: 40px;
     height: 40px;
+}
+
+.searchesLabel{
+    margin-left: 10px;
 }

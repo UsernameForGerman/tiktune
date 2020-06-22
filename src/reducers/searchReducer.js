@@ -1,5 +1,7 @@
 import search_api from "../DAL/search_api/search_api";
 import BaseReducer from "./baseReducer";
+import getEmptySong from "../utils/emptySongGenerator";
+import {getHistoryThunk} from "./historyReducer";
 
 class SearchReducer extends BaseReducer {
     constructor() {
@@ -15,6 +17,7 @@ class SearchReducer extends BaseReducer {
                 if (status === 200){
                     dispatch(this.setList(resp.data));
                     dispatch(this.toggleFetchAC());
+                    dispatch(getHistoryThunk());
                 } else if (status === 202) {
                     let retry = resp.data['retry-after'];
                     setTimeout(() => {
@@ -30,7 +33,7 @@ class SearchReducer extends BaseReducer {
         }
         return (dispatch) => {
             dispatch(this.toggleFetchAC());
-            dispatch(this.setList([]));
+            dispatch(this.setList([getEmptySong()]));
             loopSend(dispatch);
         }
     }

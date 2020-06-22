@@ -23,5 +23,7 @@
   "search_result_label" : "搜索结果",
   "search_history_label" : "搜索历史记录",
   "wrong_search_label" : "不是您要找的东西？",
-  "try_again_label" : "再试一次"
+  "try_again_label" : "再试一次",
+  "searches_label" : "搜索",
+  "unknown_song_label" : "没有结果"
 }

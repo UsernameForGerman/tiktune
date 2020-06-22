@@ -1,7 +1,7 @@
 import Preloader from "../../common/Preloader/Preloader";
 import React, {useEffect} from "react";
 import TrendsPage from "./TrendsPage";
-import renderList from "../../../DAL/utils/renderer";
+import renderList from "../../../utils/mobileTrendsRenderer";
 import TrendsSelector from "../../../selectors/trendsSelector";
 import {connect} from "react-redux";
 import {getTrendSongsThunk} from "../../../reducers/trendsReducer";

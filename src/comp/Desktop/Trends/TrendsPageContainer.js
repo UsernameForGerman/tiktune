@@ -3,7 +3,7 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import trendsSelector from "../../../selectors/trendsSelector";
 import {getTrendSongsThunk} from "../../../reducers/trendsReducer";
-import renderList from "../../../DAL/utils/renderer";
+import renderList from "../../../utils/desktopRenderer";
 
 let TrendsPageContainer = (props) => {
     useEffect(() => {

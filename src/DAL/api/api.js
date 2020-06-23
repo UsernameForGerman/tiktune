@@ -1,12 +1,10 @@
 import axios from "axios";
-import * as rax from 'retry-axios';
 import "regenerator-runtime/runtime.js";
-import axiosRetry from "axios-retry";
 
 class api {
    constructor(url) {
       this.api = axios.create({
-         baseURL: "http://127.0.0.1:9000/api/v1" + url,
+         baseURL: "http://45.143.138.48:9000/api/v1" + url,
          withCredentials: true,
          headers: {
             "Content-Type": "application/json"

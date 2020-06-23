@@ -9,6 +9,19 @@ from json import loads
 # project
 from .models import Artist, Song, SearchHistory
 
+# tiktoks = [
+#     'https://www.tiktok.com/@klavacoca/video/6840496942951255301',
+#     'https://www.tiktok.com/@katrin_pavlin/video/6830056543883496710',
+#     'https://www.tiktok.com/@elizabethcisneros436/video/6840935246611893509',
+#     'https://www.tiktok.com/@ramdeep.osahan/video/6841108885219151109',
+#     'https://www.tiktok.com/@rambllive/video/6831594006460304645',
+#     'https://www.tiktok.com/@ennie_yoyki/video/6825727255851928838',
+#     'https://www.tiktok.com/@natan_blackstar/video/6839784407356804357',
+#     'https://www.tiktok.com/@sanchiii09/video/6818934575801060610',
+#     'https://www.tiktok.com/@bitovuxa/video/6824837332064079110',
+# ]
+
+
 def get_mp3_bytes_code(tiktok_url):
     file_finder = TikTokApi()
     result = file_finder.getTikTokByUrl(url=tiktok_url)
@@ -79,6 +92,7 @@ def get_audd_songs(tiktok_url):
     res = session.post('https://api.audd.io/', data={
         'url': song_url,
         'return': 'apple_music,deezer,spotify',
+        'market': 'ru',
         'api_token': '71526d7877260531dfee40a059ca1a94'
     })
     print("song search result \n {}".format(res.text))
@@ -87,7 +101,7 @@ def get_audd_songs(tiktok_url):
 def find_audd(tiktok_url):
     try:
         song_info = loads(get_audd_songs(tiktok_url))
-        if song_info['status'] == "success":
+        if song_info['status'] == "success" and song_info['result'] is not None:
             song = song_info['result']
             print(song)
 
@@ -107,7 +121,7 @@ def find_audd(tiktok_url):
 
             # set song to searching history
             try:
-                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
+                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True, finding=True)
                 search_history.song = song_obj
                 # search_history.finding = False
                 search_history.save(update_fields=['song', 'finding'])
@@ -118,7 +132,8 @@ def find_audd(tiktok_url):
             return True
         else:
             try:
-                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
+                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True, finding=True)
+
                 search_history.song = None
                 search_history.finding = False
                 search_history.save(update_fields=['song', 'finding'])
@@ -127,12 +142,15 @@ def find_audd(tiktok_url):
     except Exception as e:
         print(e)
         try:
-            search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True)
-            search_history.song = None
-            search_history.finding = False
-            search_history.save(update_fields=['song', 'finding'])
+            search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True, finding=True)
+            search_history.delete()
         except SearchHistory.DoesNotExist:
-            SearchHistory.objects.create(tiktok_url=tiktok_url, song=None, finding=False)
+            pass
+        #     search_history.song = None
+        #     search_history.finding = False
+        #     search_history.save(update_fields=['song', 'finding'])
+        # except SearchHistory.DoesNotExist:
+        #     SearchHistory.objects.create(tiktok_url=tiktok_url, song=None, finding=False)
 
 
 @shared_task

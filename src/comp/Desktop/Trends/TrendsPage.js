@@ -6,7 +6,7 @@ let TrendsPage = (props) => {
     return(
         <section className={classes.Trends}>
             {props.isFetching
-                ? <Preloader/>
+                ? <div className={classes.preloadWrapper}><Preloader/></div>
                 : <div className={`${classes.list} ${classes.col}`}>
                       {props.list}
                   </div>

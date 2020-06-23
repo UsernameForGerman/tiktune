@@ -21,7 +21,7 @@ let ResultPage = (props) => {
             }/>
             <div className={classes.row}>
                 <div className={classes.col}>
-                    {props.isSongFetching ? <Preloader/>
+                    {props.isSongFetching ? <div className={classes.preloadWrapper}><Preloader/></div>
                     :    props.resultSet.length > 0
                             ?
                                 <div className={classes.list}>

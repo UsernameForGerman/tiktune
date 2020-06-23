@@ -9,6 +9,15 @@
     width: 50vw;
 }
 
+.preloadWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    margin: 40px;
+}
+
 .historyList{
     width: 50vw;
     height: 85vh;

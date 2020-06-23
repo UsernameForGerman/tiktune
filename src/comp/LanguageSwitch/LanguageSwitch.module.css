@@ -5,6 +5,7 @@
 }
 
 .language{
+    font-weight: bold;
     color: gray;
     margin: 5px 0px;
     cursor: pointer;

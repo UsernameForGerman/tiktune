@@ -1,5 +1,7 @@
 const HtmlWebPackPlugin = require( 'html-webpack-plugin' );
+const Dotenv = require('dotenv-webpack');
 const path = require( 'path' );
+require('dotenv').config();
 module.exports = {
     context: __dirname,
     entry: './src/index.js',
@@ -12,6 +14,9 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         port : 3000
+    },
+    node: {
+       fs: "empty"
     },
     module: {
         rules: [
@@ -63,6 +68,10 @@ module.exports = {
             template: path.resolve( __dirname, 'public/index.html' ),
             filename: 'index.html',
             favicon: "./src/assets/img/favicon.png"
+        }),
+        new Dotenv({
+          path: path.resolve( __dirname, '.env' ), // Path to .env file (this is the default)
+          safe: false // load .env.example (defaults to "false" which does not use dotenv-safe)
         })
     ]
 };

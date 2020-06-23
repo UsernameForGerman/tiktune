@@ -1,7 +1,5 @@
 import axios from "axios";
-import * as rax from 'retry-axios';
 import "regenerator-runtime/runtime.js";
-import axiosRetry from "axios-retry";
 
 class api {
    constructor(url) {

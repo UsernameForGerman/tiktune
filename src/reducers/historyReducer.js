@@ -19,7 +19,6 @@ class HistoryReducer extends BaseReducer{
                 })
 
                 .then((resp) => {
-                    debugger;
                     let songs = resp.data.map(elem => elem.song);
                     dispatch(this.setList(songs));
                     dispatch(this.toggleFetchAC());

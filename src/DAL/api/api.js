@@ -4,7 +4,7 @@ import "regenerator-runtime/runtime.js";
 class api {
    constructor(url) {
       this.api = axios.create({
-         baseURL: "http://localhost:8000/api/v1" + url,
+         baseURL: "http://45.143.138.48:9000/api/v1" + url,
          withCredentials: true,
          headers: {
             "Content-Type": "application/json"

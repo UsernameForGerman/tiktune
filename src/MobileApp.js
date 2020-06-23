@@ -24,7 +24,7 @@ let MobileApp = (props) => {
                 <Route>
                     <Redirect to={"/"}/>
                 </Route>
-                <Footer setLoc={props.setLoc}/>
+                <Footer {...props}/>
         </>
     );
 }

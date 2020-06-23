@@ -8,7 +8,7 @@ let Nav = (props) => {
             <NavLink className={classes.link} activeClassName={classes.active} to={"/trends"}>
                 <FormattedMessage id={"trends_label"}/>
             </NavLink>
-            <NavLink className={classes.link} activeClassName={classes.active} to={"/"} exact>
+            <NavLink className={classes.link} activeClassName={classes.active} to={"/search"} exact>
                 <FormattedMessage id={"search_label"}/>
             </NavLink>
         </div>

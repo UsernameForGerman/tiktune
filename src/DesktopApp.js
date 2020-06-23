@@ -12,10 +12,10 @@ let DesktopApp = (props) => {
         <>
             <DesktopContainer>
                 <Route path={"/:link"}>
-                    <DesktopHeader withLogo setLoc={props.setLoc}/>
+                    <DesktopHeader withLogo {...props}/>
                 </Route>
                 <Route path={"/"} exact>
-                    <MainPage setLoc={props.setLoc}/>
+                    <MainPage {...props}/>
                 </Route>
                 <Route path={"/search"}>
                     <ResultPageContainer/>

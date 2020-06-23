@@ -8,13 +8,13 @@ let LanguageSwitch = (props) => {
     let setCh = () => props.setLoc('ch');
     return(
         <div className={classes.LanguageSwitch} style={props.styles}>
-            <div className={classes.language} onClick={setRus}>
+            <div className={classes.language} onClick={setRus} style={props.locale === 'ru' ? {color : "black"} : {}}>
                 <FormattedMessage id={"rus_label"}/>
             </div>
-            <div className={classes.language} onClick={setEng}>
+            <div className={classes.language} onClick={setEng} style={props.locale === 'en' ? {color : "black"} : {}}>
                 <FormattedMessage id={"eng_label"}/>
             </div>
-            <div className={classes.language} onClick={setCh}>
+            <div className={classes.language} onClick={setCh} style={props.locale === 'ch' ? {color : "black"} : {}}>
                 <FormattedMessage id={"chinese_label"}/>
             </div>
         </div>

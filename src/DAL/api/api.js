@@ -1,10 +1,13 @@
 import axios from "axios";
 import "regenerator-runtime/runtime.js";
 
+const TIKTUNE_BASE_URL = process.env.TIKTUNE_API_URL;
+console.log(process.env);
+
 class api {
    constructor(url) {
       this.api = axios.create({
-         baseURL: "http://45.143.138.48:9000/api/v1" + url,
+         baseURL: "http://"+ TIKTUNE_BASE_URL +"/api/v1" + url,
          withCredentials: true,
          headers: {
             "Content-Type": "application/json"

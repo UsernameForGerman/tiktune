@@ -3,6 +3,7 @@ import React from "react";
 import Nav from "../../Nav/Nav";
 import logo from "../../../assets/img/logo@2x.png";
 import LanguageSwitch from "../../LanguageSwitch/LanguageSwitch";
+import {NavLink} from "react-router-dom";
 let DesktopHeader = (props) => {
     return(
         <header className={classes.Header}>
@@ -11,12 +12,12 @@ let DesktopHeader = (props) => {
                     width : "10vw"
                 }}/>
                 {props.withLogo
-                    ? <img src={logo} className={classes.logo} alt={"TikTune logo"}/>
+                    ? <NavLink to={"/"}><img src={logo} className={classes.logo} alt={"TikTune logo"}/></NavLink>
                     : <></>
                 }
             </div>
             <div className={`${classes.col} ${classes.secondCol}`}>
-                <LanguageSwitch setLoc={props.setLoc} styles={{
+                <LanguageSwitch {...props} styles={{
                     alignItems : "flex-end"
                 }}/>
             </div>

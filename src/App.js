@@ -26,8 +26,8 @@ function App() {
                 <div className={"App"}>
                     <BrowserRouter basename={process.env.PUBLIC_URL}>
                         {isMobile
-                            ? <MobileApp setLoc={setLocale}/>
-                            : <DesktopApp setLoc={setLocale}/>
+                            ? <MobileApp setLoc={setLocale} locale={locale}/>
+                            : <DesktopApp setLoc={setLocale} locale={locale}/>
                         }
                     </BrowserRouter>
                 </div>

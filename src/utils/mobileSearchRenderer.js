@@ -6,6 +6,7 @@ import React from "react";
 import SongList from "../comp/common/SongList/SongList";
 import {FormattedMessage} from "react-intl";
 import formatResponse from "./responseFormatter";
+import googlePlay from "../assets/img/googlePlay.png";
 
 let renderSong = (resp) => {
     let props = formatResponse(resp);
@@ -24,16 +25,20 @@ let renderSong = (resp) => {
                     </div>
                     <div className={classes.search_downloads}>
                         {props.amount}
-                        <div className={classes.searchesLabel}>
-                            <FormattedMessage id={"searches_label"}/>
-                        </div>
+                        {props.amount
+                            ? <div className={classes.searchesLabel}>
+                                 <FormattedMessage id={"searches_label"}/>
+                              </div>
+                            : <></>
+                        }
+
                     </div>
                 </div>
             </div>
             <div className={`${classes.btns} ${classes.resultBtns}`}>
-                {props.spotify_url
-                    ? <a href={props.spotify_url}>
-                        <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
+                {props.play_url
+                    ? <a className={classes.googlePlayLink} href={props.play_url}>
+                          <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                       </a>
                     : <></>
                 }

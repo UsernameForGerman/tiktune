@@ -2,12 +2,8 @@ import React from "react";
 import classes from "./SongListItem.module.css";
 import apple from "../../assets/img/Apple_Music_Badge/Web_SVG/US-UK_Apple_Music_Badge_RGB.png";
 import appleLogo from "../../assets/img/appleMusic.png"
-import spotify from "../../assets/img/spotify-icons-logos/icons/01_RGB/02_PNG/Spotify_Icon_RGB_Green.png"
 import googlePlay from "../../assets/img/googlePlay.png";
 let SongListItem = (props) => {
-    let googleLink = (<a className={classes.googlePlayLink} href={props.play_url}>
-                        <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
-                    </a>);
     return(
         <div className={`${classes.SongListItem}`}>
             <div className={classes.ava}>
@@ -24,9 +20,9 @@ let SongListItem = (props) => {
                     {props.artists[0].name}
                 </div>
                 <div className={classes.btns}>
-                    {props.spotify_url
-                        ? <a href={props.spotify_url}>
-                            <img src={spotify} className={classes.spotify} alt={"spotify icon"}/>
+                    {props.play_url
+                        ? <a className={classes.googlePlayLink} href={props.play_url}>
+                              <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                           </a>
                         : <></>
                     }

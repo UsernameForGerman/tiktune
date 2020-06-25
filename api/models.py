@@ -15,6 +15,7 @@ class StreamingModel(Model):
     DEEZER = 'https://www.deezer.com/'
     SPOTIFY = 'https://open.spotify.com/'
     APPLE = 'https://music.apple.com/'
+    YOUTUBE = 'https://music.youtube.com/'
 
     deezer_id = SlugField('deezer id', max_length=512, blank=True, null=True, unique=True)
     itunes_id = SlugField('apple id', max_length=512, blank=True, null=True, unique=True)
@@ -136,6 +137,12 @@ class Song(StreamingModel):
 
         song.save()
         return song.id
+
+    def get_play_url(self) -> str:
+        if self.name and self.artists.all():
+            song_name = '+'.join(self.name.split())
+            artists_name = '+'.join(['+'.join(artist.name.split()) for artist in self.artists.all()])
+            return self.YOUTUBE + 'search?q={}+{}'.format(song_name, artists_name)
 
     def get_itunes_url(self) -> str:
         if self.itunes_id is not None and self.APPLE in self.itunes_id:

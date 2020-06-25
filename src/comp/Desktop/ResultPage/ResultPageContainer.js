@@ -12,7 +12,7 @@ let ResultPageContainer = (props) => {
         props.getHistory()
     }, props.historyList.length);
 
-    let resultList = renderList(props.resultSet);
+    let resultList = renderList(props.resultSet, true);
     let historyList = renderList(props.historyList);
     return(
         <ResultPage {...props} resultList={resultList} historyList={historyList}/>

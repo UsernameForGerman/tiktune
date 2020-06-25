@@ -27,24 +27,7 @@ let ResultPage = (props) => {
                                 <div className={classes.list}>
                                     {props.resultList}
                                 </div>
-                            : <div className={classes.result}>
-                                <div className={classes.desc}>
-                                    <FormattedMessage id={"not_found_label"}/>
-                                </div>
-                                <div className={classes.reasons}>
-                                    <div className={classes.reasonsHeading}>
-                                        <FormattedMessage id={"probably_label"}/>
-                                    </div>
-                                    <ul className={classes.reasonsList}>
-                                        <li className={classes.reasonsListItem}>
-                                            <FormattedMessage id={"song_is_not_in_stores_label"}/>
-                                        </li>
-                                        <li className={classes.reasonsListItem}>
-                                            <FormattedMessage id={"unable_to_resolve_label"}/>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            : <></>
                     }
                     {props.isHistoryFetching ? <></> :
                         <div className={classes.historyList}>

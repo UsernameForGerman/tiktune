@@ -9,7 +9,7 @@ import {NavLink} from "react-router-dom";
 let ResultPage = (props) => {
     return(
         <MobileContainer>
-            {props.list[0]
+            {props.list[0] && props.list[0].name.length
                 ? <div className={classes.result}>
                     <div className={classes.desc}>
                         <FormattedMessage id={"search_result_label"}/>

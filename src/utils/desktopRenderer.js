@@ -46,8 +46,8 @@ let renderSong = (resp) => {
     )
 }
 
-let renderList = (data) => {
-    return(<SongList list={
+let renderList = (data, result = false) => {
+    return(<SongList result={result} list={
         data.map(elem => {
             return renderSong(elem);
         })

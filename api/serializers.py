@@ -1,5 +1,5 @@
 from rest_framework.serializers import Serializer, ImageField, CharField, URLField, ModelSerializer, IntegerField, \
-    DateTimeField, SerializerMethodField
+    DateTimeField, SerializerMethodField, SlugField
 
 from .models import Song, Artist, SearchHistory
 
@@ -58,11 +58,11 @@ class SearchHistorySerializer(ModelSerializer):
 
     class Meta:
         model = SearchHistory
-        fields = ('song', 'tiktok_url', 'timestamp')
+        fields = ('song', 'tiktok_id', 'timestamp')
 
 class SearchHistorySessionSerializer(Serializer):
     song = CharField(max_length=256)
-    tiktok_url = URLField()
+    tiktok_id = SlugField()
     timestamp = DateTimeField()
 
 class StatsSerializer(Serializer):

@@ -1,12 +1,15 @@
 
-# libs
+# libs django
 from rest_framework.viewsets import ViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED,\
     HTTP_204_NO_CONTENT, HTTP_304_NOT_MODIFIED
 from django.utils.timezone import datetime, timedelta
-from json import loads
+
+# custom libs
+from json import loads, dumps
+from requests import Session
 
 # project
 from .models import SearchHistory, Song
@@ -17,9 +20,41 @@ from .tasks import find_save_songs, get_audd_songs
 class SearchViewSet(ViewSet):
     MAX_HISTORY = 20
 
-    def get_queryset(self):
+    def get_tiktok_id(self, tiktok_url):
+        if 'vm.tiktok.com' in tiktok_url:
+            session = Session()
+            response = session.get(tiktok_url, headers={
+                "method": "GET",
+                "accept-encoding": "gzip, deflate, br",
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'dnt': '1',
+                'cache-control': 'max-age=0',
+                'pragma': 'no-cache',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'none',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+                'accept-language': 'en-US,en;q=0.9'
+            })
+            mobile_url = response.history[len(response.history) - 1].url
+
+            if '/v/' in mobile_url and '.html' in mobile_url:
+                post_id = mobile_url.split('/v/')[1].split('.html')[0]
+            else:
+                return ''
+        elif "@" in tiktok_url and "/video/" in tiktok_url:
+            post_id = tiktok_url.split("/video/")[1].split("?")[0]
+        else:
+            return ''
+
+        print(post_id)
+        return post_id
+
+    def get_queryset(self, tiktok_id=None):
         return SearchHistory.objects.filter(
-            tiktok_url__iexact=self.request.query_params.get('url', '')
+            tiktok_id=tiktok_id
         )
 
     def list(self, request: Request) -> Response:
@@ -31,7 +66,8 @@ class SearchViewSet(ViewSet):
                 'tiktok_url': request.query_params.get('url')
             })
             if serializer.is_valid():
-                search_history = self.get_queryset()
+                tiktok_id = self.get_tiktok_id(serializer.data['tiktok_url'])
+                search_history = self.get_queryset(tiktok_id)
                 if search_history.filter(song__isnull=True, finding=False):
                     return Response('Song not found', status=HTTP_404_NOT_FOUND)
                 else:
@@ -41,7 +77,7 @@ class SearchViewSet(ViewSet):
                         songs = Song.objects.filter(name__in=song_names)
                         search_history_objs = [
                             SearchHistory(
-                                tiktok_url=serializer.data['tiktok_url'],
+                                tiktok_id=tiktok_id,
                                 song=song
                             ) for song in songs
                         ]
@@ -118,9 +154,9 @@ class SearchViewSet(ViewSet):
                         SearchHistory.objects.create(
                             finding=True,
                             song=None,
-                            tiktok_url=serializer.data['tiktok_url']
+                            tiktok_id=tiktok_id
                         )
-                        find_save_songs(serializer.data['tiktok_url'])
+                        find_save_songs(tiktok_id)
                         return Response(
                             headers={
                                 'retry-after': 1

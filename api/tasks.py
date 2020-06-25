@@ -73,10 +73,10 @@ def find_acr(tiktok_url: str):
             except SearchHistory.DoesNotExist:
                 SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj)
 
-def get_mp3_url(tiktok_url):
-    print(tiktok_url)
+def get_mp3_url(tiktok_id):
+    print(tiktok_id)
     file_finder = TikTokApi()
-    result = file_finder.getTikTokByUrl(url=tiktok_url)
+    result = file_finder.getTikTokById(id=tiktok_id)
     try:
         mp3_url = result['itemInfo']['itemStruct']['music']['playUrl']
 
@@ -85,8 +85,8 @@ def get_mp3_url(tiktok_url):
         print(e)
         return ''
 
-def get_audd_songs(tiktok_url):
-    song_url = get_mp3_url(tiktok_url)
+def get_audd_songs(tiktok_id):
+    song_url = get_mp3_url(tiktok_id)
     print("song url {}".format(song_url))
     session = Session()
     res = session.post('https://api.audd.io/', data={
@@ -98,9 +98,9 @@ def get_audd_songs(tiktok_url):
     print("song search result \n {}".format(res.text))
     return res.text
 
-def find_audd(tiktok_url):
+def find_audd(tiktok_id):
     try:
-        song_info = loads(get_audd_songs(tiktok_url))
+        song_info = loads(get_audd_songs(tiktok_id))
         if song_info['status'] == "success" and song_info['result'] is not None:
             song = song_info['result']
             print(song)
@@ -121,28 +121,27 @@ def find_audd(tiktok_url):
 
             # set song to searching history
             try:
-                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True, finding=True)
+                search_history = SearchHistory.objects.get(tiktok_id=tiktok_id, song__isnull=True, finding=True)
                 search_history.song = song_obj
                 # search_history.finding = False
                 search_history.save(update_fields=['song', 'finding'])
             except SearchHistory.DoesNotExist:
-                # SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=False)
-                SearchHistory.objects.create(tiktok_url=tiktok_url, song=song_obj, finding=True)
+                SearchHistory.objects.create(tiktok_id=tiktok_id, song=song_obj, finding=True)
 
             return True
         else:
             try:
-                search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True, finding=True)
+                search_history = SearchHistory.objects.get(tiktok_id=tiktok_id, song__isnull=True, finding=True)
 
                 search_history.song = None
                 search_history.finding = False
                 search_history.save(update_fields=['song', 'finding'])
             except SearchHistory.DoesNotExist:
-                SearchHistory.objects.create(tiktok_url=tiktok_url, song=None, finding=False)
+                SearchHistory.objects.create(tiktok_id=tiktok_id, song=None, finding=False)
     except Exception as e:
         print(e)
         try:
-            search_history = SearchHistory.objects.get(tiktok_url=tiktok_url, song__isnull=True, finding=True)
+            search_history = SearchHistory.objects.get(tiktok_id=tiktok_id, song__isnull=True, finding=True)
             search_history.delete()
         except SearchHistory.DoesNotExist:
             pass
@@ -154,11 +153,14 @@ def find_audd(tiktok_url):
 
 
 @shared_task
-def find_save_songs(tiktok_url: str, api='audd'):
+def find_save_songs(tiktok_id: str, api='audd'):
     if api == 'audd':
-        return find_audd(tiktok_url)
+        return find_audd(tiktok_id)
     elif api == 'acr':
-        return find_acr(tiktok_url)
+        if 'tiktok.com' in tiktok_id:
+            return find_acr(tiktok_id)
+        else:
+            raise Warning('TikTok id is not TikTok URL')
     else:
         raise NotImplementedError('Api {} not implemented'.format(api))
 

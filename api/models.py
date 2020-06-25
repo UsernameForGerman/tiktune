@@ -160,7 +160,7 @@ class Song(StreamingModel):
             return ''
 
 class SearchHistory(Model):
-    tiktok_url = URLField('TikTok url')
+    tiktok_id = SlugField('TikTok id', max_length=256)
     song = ForeignKey(Song, on_delete=CASCADE, verbose_name='found song', null=True, blank=True)
     finding = BooleanField('Song status is finding or not', default=False)
     timestamp = DateTimeField(auto_now_add=True)

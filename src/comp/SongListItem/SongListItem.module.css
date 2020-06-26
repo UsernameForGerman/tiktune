@@ -27,7 +27,7 @@
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.261);
 }
 
-.info{
+.info, .desktop_info{
     margin-left: 10px;
     display: flex;
     flex-direction: column;
@@ -156,4 +156,8 @@
 
 .searchesLabel{
     margin-left: 10px;
+}
+
+.desktop_info{
+    width: 10vw;
 }

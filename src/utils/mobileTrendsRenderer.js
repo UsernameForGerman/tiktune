@@ -22,21 +22,23 @@ let renderList = (data) => {
                             </div>
                         </div>
                         <div className={classes.info}>
-                            <div className={classes.name}>
-                                {props.name}
-                            </div>
-                            <div className={classes.singer}>
-                                {props.artists[0].name}
+                            <div className={classes.info_wrapper}>
+                                <div className={classes.name}>
+                                    {props.name}
+                                </div>
+                                <div className={classes.singer}>
+                                    {props.artists[0].name}
+                                </div>
                             </div>
                             <div className={classes.btns}>
                                 {props.play_url
-                                    ? <a className={classes.mobileTrendsGooglePlayLink} href={props.play_url}>
+                                    ? <a className={classes.mobileTrendsGooglePlayLink} href={props.play_url} target={"blank"}>
                                           <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                                       </a>
                                     : <></>
                                 }
                                 {props.itunes_url
-                                    ? <a className={classes.appleLink} href={props.itunes_url}>
+                                    ? <a className={classes.appleLink} href={props.itunes_url} target={"blank"}>
                                         <img src={apple} className={classes.mobileTrendsAppleWrapper} alt={"apple icon"}/>
                                         <img src={appleLogo} className={classes.mobileTrendsAppleIcon} alt={"apple"}/>
                                       </a>

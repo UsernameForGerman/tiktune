@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import logging.config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,6 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = ')24&oiunrc07hjsv^yniu5+9yq$5**via9+rfa)y0n!)3m=or$'
 
 
+
+# GENERAL
+# ------------------------------------------------------------------------------
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 # Application definition
@@ -79,6 +83,7 @@ ASGI_APPLICATION = 'tiktune.asgi.application'
 
 WSGI_APPLICATION = 'tiktune.wsgi.application'
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -98,6 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+# LANGUAGES
+# ------------------------------------------------------------------------------
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -120,11 +128,21 @@ LANGUAGES = [
 
 
 
+
+# STATIC
+# ------------------------------------------------------------------------------
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+
+# MEDIA
+# ------------------------------------------------------------------------------
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
+
+
+
+

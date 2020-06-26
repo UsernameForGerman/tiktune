@@ -19,7 +19,7 @@ let renderSong = (resp) => {
                     {props.amount}
                 </div>
             </div>
-            <div className={classes.info}>
+            <div className={classes.desktop_info}>
                 <div className={classes.name}>
                     {props.name}
                 </div>

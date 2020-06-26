@@ -13,11 +13,13 @@ let SongListItem = (props) => {
                 </div>
             </div>
             <div className={classes.info}>
-                <div className={classes.name}>
-                    {props.name}
-                </div>
-                <div className={classes.singer}>
-                    {props.artists[0].name}
+                <div className={classes.desktop_info}>
+                    <div className={classes.name}>
+                        {props.name}
+                    </div>
+                    <div className={classes.singer}>
+                        {props.artists[0].name}
+                    </div>
                 </div>
                 <div className={classes.btns}>
                     {props.play_url

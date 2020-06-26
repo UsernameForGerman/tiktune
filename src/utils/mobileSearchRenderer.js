@@ -17,11 +17,13 @@ let renderSong = (resp) => {
                     <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
                 </div>
                 <div className={classes.info}>
-                    <div className={classes.name}>
-                        {props.name}
-                    </div>
-                    <div className={classes.singer}>
-                        {props.artists[0].name}
+                    <div className={classes.info_wrapper}>
+                        <div className={classes.name}>
+                            {props.name}
+                        </div>
+                        <div className={classes.singer}>
+                            {props.artists[0].name}
+                        </div>
                     </div>
                     <div className={classes.search_downloads}>
                         {props.amount}

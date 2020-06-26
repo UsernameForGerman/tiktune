@@ -143,7 +143,6 @@ def find_audd(tiktok_id):
             finding=True,
             defaults={
                 'song': song_obj,
-                'finding': False,
             }
         )
         return True

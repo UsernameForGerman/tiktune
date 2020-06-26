@@ -23,13 +23,13 @@ let SongListItem = (props) => {
                 </div>
                 <div className={classes.btns}>
                     {props.play_url
-                        ? <a className={classes.googlePlayLink} href={props.play_url}>
+                        ? <a className={classes.googlePlayLink} href={props.play_url} target={"blank"}>
                               <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
                           </a>
                         : <></>
                     }
                     {props.itunes_url
-                        ? <a className={classes.appleLink} href={props.itunes_url}>
+                        ? <a className={classes.appleLink} href={props.itunes_url} target={"blank"}>
                             <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
                             <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
                           </a>

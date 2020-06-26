@@ -10,12 +10,14 @@ from django.utils.timezone import datetime, timedelta
 # custom libs
 from json import loads, dumps
 from requests import Session
+import logging
 
 # project
 from .models import SearchHistory, Song
 from .serializers import SongSerializer, TikTokSerializer, SearchHistorySerializer, StatsSerializer
 from .tasks import find_save_songs, get_audd_songs
 
+logger = logging.getLogger(__name__)
 
 class SearchViewSet(ViewSet):
     MAX_HISTORY = 20
@@ -23,6 +25,8 @@ class SearchViewSet(ViewSet):
     def get_tiktok_id(self, tiktok_url):
         if 'vm.tiktok.com' in tiktok_url:
             session = Session()
+
+            logger.info('Send request to {} to get video id from mobile url'.format(tiktok_url))
             response = session.get(tiktok_url, headers={
                 "method": "GET",
                 "accept-encoding": "gzip, deflate, br",
@@ -38,18 +42,24 @@ class SearchViewSet(ViewSet):
                 'upgrade-insecure-requests': '1',
                 'accept-language': 'en-US,en;q=0.9'
             })
+            logger.info('Response from tiktok {}'.format(response.status_code))
+
             mobile_url = response.history[len(response.history) - 1].url
 
             if '/v/' in mobile_url and '.html' in mobile_url:
                 post_id = mobile_url.split('/v/')[1].split('.html')[0]
             else:
+                logger.info('Reponse hisotry {}'.format(response.history))
+                logger.info(''.join([r.url for r in response.history]))
+                logger.warning('Can\'t find video ID in mobile url')
                 return ''
         elif "@" in tiktok_url and "/video/" in tiktok_url:
             post_id = tiktok_url.split("/video/")[1].split("?")[0]
         else:
+            logger.warning('Not found tiktok url and video ID')
             return ''
 
-        print(post_id)
+        logger.info('Found video ID: {}'.format(post_id))
         return post_id
 
     def get_queryset(self, tiktok_id=None):
@@ -68,11 +78,15 @@ class SearchViewSet(ViewSet):
             if serializer.is_valid():
                 tiktok_id = self.get_tiktok_id(serializer.data['tiktok_url'])
                 search_history = self.get_queryset(tiktok_id)
+                logger.info('Requested song with id {}'.format(tiktok_id))
                 if search_history.filter(song__isnull=True, finding=False):
+                    logger.info('Song {} found in DB with \"Not Found\" result'.format(serializer.data['tiktok_url']))
+
                     return Response('Song not found', status=HTTP_404_NOT_FOUND)
                 else:
                     if search_history.filter(song__isnull=False, finding=False):
-                        print("get in db")
+                        logger.info('Song {} found in DB with \"Found\" result'.format(serializer.data['tiktok_url']))
+
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)
                         search_history_objs = [
@@ -108,7 +122,8 @@ class SearchViewSet(ViewSet):
                         response_data = SongSerializer(songs, many=True).data
                         return Response(response_data, status=HTTP_200_OK)
                     elif search_history.filter(song__isnull=False, finding=True):
-                        print("update")
+                        logger.info('Song {} found. Updating DB'.format(serializer.data['tiktok_url']))
+
                         query = search_history.filter(song__isnull=False, finding=True)
                         query.update(finding=False)
                         song_names = set(search.song.name for search in search_history)
@@ -141,6 +156,8 @@ class SearchViewSet(ViewSet):
 
 
                     elif search_history.filter(song__isnull=True, finding=True):
+                        logger.info('Song {} is still in search status'.format(serializer.data['tiktok_url']))
+
                         return Response(
                             headers={
                                 'retry-after': 1
@@ -151,6 +168,8 @@ class SearchViewSet(ViewSet):
                             }
                         )
                     else:
+                        logger.info('Starting to find song {}'.format(serializer.data['tiktok_url']))
+
                         SearchHistory.objects.create(
                             finding=True,
                             song=None,
@@ -167,8 +186,11 @@ class SearchViewSet(ViewSet):
                             }
                         )
             else:
+                logger.info('Bad link provided: {}'.format(serializer.data['tiktok_url']))
+
                 return Response('Bad link provided', status=HTTP_400_BAD_REQUEST)
         else:
+            logger.info('No link provided at all')
             return Response('No link provided', status=HTTP_400_BAD_REQUEST)
 
 class TrendsViewSet(ViewSet):
@@ -179,6 +201,8 @@ class TrendsViewSet(ViewSet):
     def list(self, request: Request) -> Response:
         songs = self.get_queryset()
         response_data = SongSerializer(songs, many=True).data
+
+        logger.info('Returning list of {} trend music'.format(len(response_data)))
         return Response(response_data, status=HTTP_200_OK)
 
 class HistoryViewSet(ViewSet):
@@ -193,8 +217,12 @@ class HistoryViewSet(ViewSet):
                 '-timestamp'
             )
             response_data = SearchHistorySerializer(search_history, many=True).data
+
+            logger.info('Return {} of history'.format(len(response_data)))
+
             return Response(response_data, status=HTTP_200_OK)
         else:
+            logger.info('No history found in session data')
             return Response('No history data in session', status=HTTP_204_NO_CONTENT)
 
 class StatsViewSet(ViewSet):

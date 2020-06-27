@@ -1,18 +1,29 @@
 .SearchInput{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 10vh;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .iconClass{
-    width: 5vw !important;
+    width: 60px !important;
 }
 
 .search{
-
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .logo{
-    transform: translateY(-10vh);
+    width : 60%;
+}
+
+.wrapper{
+    margin-left: 5vw;
+    width: 80%;
+}
+
+.point{
+    width: 130px;
 }

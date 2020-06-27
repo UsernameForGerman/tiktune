@@ -1,10 +1,10 @@
 .Adsense{
     height: 40vh;
-    width: 90%;
+    width: 100%;
     padding: 10px 10px;
     border: 1px gray solid;
     font-weight: bold;
     color: gray;
-    font-size: 2em;
+    font-size: 1em;
     margin: 20px 0px;
 }

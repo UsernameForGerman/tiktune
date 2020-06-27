@@ -11,7 +11,7 @@ let SearchInput = (props) => {
         window.localStorage.setItem("last_link", val);
     }
     return(
-        <div className={classes.inputWrapper}>
+        <div className={`${classes.inputWrapper} ${props.class}`}>
             <input type={"text"} className={classes.input} value={value} ref={props.refer} onChange={handleChange} style={props.styles}/>
             <NavLink to={"/search"}>
                 <SearchBtn customClass={classes.searchBtn} click={props.click}/>

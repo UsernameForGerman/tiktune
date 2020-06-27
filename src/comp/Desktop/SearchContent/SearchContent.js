@@ -5,22 +5,28 @@ import Instruction from "../../Instruction/Instruction";
 import SearchInput from "../../common/SearchInput/SearchInput";
 let SearchContent = (props) => {
     let ref = React.createRef();
-    let handleClick = () => {
+    let handleClick = (e) => {
         let link = ref.current.value;
         window.localStorage.setItem('last_link', link);
-        props.search(link);
+        if (link.length > 0){
+            props.search(link);
+        } else {
+            e.preventDefault();
+            e.stopPropagation();
+        }
     }
     return(
         <div className={classes.SearchInput}>
-            <Instruction
-                styles={{
-                    flexDirection : "column"
-                }}
-                iconClass={classes.iconClass}
-            />
+            <img src={logo} className={classes.logo}/>
             <div className={classes.search}>
-                <img src={logo} className={classes.logo}/>
-                <SearchInput refer={ref} click={handleClick}/>
+                <Instruction
+                    styles={{
+                        flexDirection : "column"
+                    }}
+                    iconClass={classes.iconClass}
+                    pointClass={classes.point}
+                />
+                <SearchInput refer={ref} click={handleClick} class={classes.wrapper}/>
             </div>
         </div>
     )

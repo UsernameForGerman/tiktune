@@ -18,7 +18,7 @@ let messages = {
 }
 
 function App() {
-    let [locale, setLocale] = useState('ru');
+    let [locale, setLocale] = useState(navigator.language.split(/[-_]/)[0]);
     let isMobile = useMediaQuery('(max-width:1280px)');
     return (
         <IntlProvider locale={locale} messages={messages[locale]}>

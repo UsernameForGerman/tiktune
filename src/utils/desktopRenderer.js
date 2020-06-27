@@ -12,14 +12,14 @@ import googlePlay from "../assets/img/googlePlay.png";
 let renderSong = (resp) => {
     let props = formatResponse(resp);
         return(
-        <div className={`${classes.SongListItem}`}>
+        <div className={`${classes.SongListItem}`} style={!props.amount ? {width : "30vw"} : {}}>
             <div className={classes.ava}>
                 <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
                 <div className={classes.downloads}>
                     {props.amount}
                 </div>
             </div>
-            <div className={classes.desktop_info}>
+            <div className={classes.desktop_info} style={!props.amount ? {width : "20vw"} : {}}>
                 <div className={classes.name}>
                     {props.name}
                 </div>
@@ -27,21 +27,24 @@ let renderSong = (resp) => {
                     {props.artists[0].name}
                 </div>
             </div>
-            <div className={classes.desktop_btns}>
-                {props.play_url
-                    ? <a className={classes.googlePlayLink} href={props.play_url} target={"blank"}>
-                          <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
-                      </a>
-                    : <></>
-                }
-                {props.itunes_url
-                    ? <a className={classes.appleLink} href={props.itunes_url} target={"blank"}>
-                        <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
-                        <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
-                      </a>
-                    : <></>
-                }
-             </div>
+            {props.amount
+                ? <div className={classes.desktop_btns}>
+                    {props.play_url
+                        ? <a className={classes.googlePlayLink} href={props.play_url} target={"blank"}>
+                              <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
+                          </a>
+                        : <></>
+                    }
+                    {props.itunes_url
+                        ? <a className={classes.appleLink} href={props.itunes_url} target={"blank"}>
+                            <img src={apple} className={classes.appleWrapper} alt={"apple icon"}/>
+                            <img src={appleLogo} className={classes.appleIcon} alt={"apple"}/>
+                          </a>
+                        : <></>
+                    }
+                 </div>
+                : <></>
+            }
         </div>
     )
 }

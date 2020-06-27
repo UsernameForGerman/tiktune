@@ -19,9 +19,11 @@
 .instructionDesc{
     text-align: center;
     margin-top: 5px;
+    height: 40px;
+    width: 115px;
 }
 
 .instructionDesc{
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
 }

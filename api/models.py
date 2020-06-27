@@ -145,10 +145,14 @@ class Song(StreamingModel):
             return self.YOUTUBE + 'search?q={}+{}'.format(song_name, artists_name)
 
     def get_itunes_url(self) -> str:
-        if self.itunes_id is not None and self.APPLE in self.itunes_id:
-            return self.itunes_id
-        else:
-            return ''
+        if self.name and self.artists.all():
+            song_name = ' '.join(self.name.split())
+            artists_name = ' '.join(['+'.join(artist.name.split()) for artist in self.artists.all()])
+            return self.APPLE + 'search?term={} {}'.format(song_name, artists_name)
+        # if self.itunes_id is not None and self.APPLE in self.itunes_id:
+        #     return self.itunes_id
+        # else:
+        #     return ''
 
     def get_deezer_url(self) -> str:
         if self.deezer_id is not None and self.DEEZER in self.deezer_id:
@@ -173,4 +177,7 @@ class SearchHistory(Model):
     timestamp = DateTimeField(auto_now_add=True)
 
     objects = SearchHistoryObjectsManager()
+
+class Visits(Model):
+    visits = BigIntegerField('Number of visits', default=0)
 

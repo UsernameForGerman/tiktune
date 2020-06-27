@@ -40,8 +40,8 @@ def get_mp3_bytes_code(tiktok_url):
 def get_songs(tiktok_url):
     config = {
         'host': "identify-eu-west-1.acrcloud.com",
-        'access_key': "41b3ef28fd1208650ba1836883fe39a6",
-        'access_secret': "2TLwLMyd7KpEnZyPRRXpKlCwUnmiocFbsgP63my1",
+        'access_key': "8862724c406dc09588b45a0100a6ff14",
+        'access_secret': "VUZkQ7vDytAxAcizRV1YzgwmZ12Mt57fyCmQkRf2",
         'timeout': 10
     }
 

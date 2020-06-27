@@ -68,7 +68,7 @@ class SearchHistorySessionSerializer(Serializer):
 class StatsSerializer(Serializer):
     search_requests = IntegerField()
     songs = IntegerField()
-    visits = IntegerField(allow_null=True)
+    visits = IntegerField()
 
 
 

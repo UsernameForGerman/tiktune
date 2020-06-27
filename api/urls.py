@@ -18,6 +18,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .viewsets import SearchViewSet, TrendsViewSet, HistoryViewSet, StatsViewSet
+from .views import VisitView
 
 app_name = 'api'
 
@@ -28,5 +29,6 @@ router.register('history', HistoryViewSet, basename='History')
 router.register('stats', StatsViewSet, basename='Stats')
 
 urlpatterns = [
+    path('visit/', VisitView.as_view(), name='visit'),
     path('', include(router.urls))
 ]

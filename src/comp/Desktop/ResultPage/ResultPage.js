@@ -5,6 +5,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {FormattedMessage} from "react-intl";
 import Adsense from "../../Adsense/Adsense";
 let ResultPage = (props) => {
+    window.scrollTo(0,0);
     let ref = React.createRef();
     let handleClick = () => {
         let text = ref.current.value;

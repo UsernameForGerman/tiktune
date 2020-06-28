@@ -1,4 +1,6 @@
 .searchBtn{
+    width: 90px;
+    height: 44px;
     background-color: black;
     padding: 10px 10px;
     font-size: 1.25em;

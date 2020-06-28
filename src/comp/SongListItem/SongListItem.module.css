@@ -68,6 +68,8 @@
 }
 
 .appleLink{
+    display: flex;
+    height: fit-content;
     position : relative;
     margin-left: 25px;
 }
@@ -118,7 +120,7 @@
 }
 
 .name{
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -126,7 +128,7 @@
 .singer{
     font-weight: bold;
     color: gray;
-    font-size: 1.25em;
+    font-size: 1em;
     margin-bottom: 20px;
 }
 

@@ -19,7 +19,7 @@ let MobileApp = (props) => {
                     <TrendsPageContainer/>
                 </Route>
                 <Route path={"/search"}>
-                    <ResultPageContainer/>
+                    <ResultPageContainer locale={props.locale}/>
                 </Route>
                 <Route>
                     <Redirect to={"/"}/>

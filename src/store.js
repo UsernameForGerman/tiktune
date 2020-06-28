@@ -4,12 +4,14 @@ import {trendsReducer} from "./reducers/trendsReducer";
 import {searchReducer} from "./reducers/searchReducer";
 import thunk from "redux-thunk";
 import {statsReducer} from "./reducers/statsReducer";
+import {visitReducer} from "./reducers/visitReducer";
 
 let reducers = combineReducers({
     history : historyReducer,
     trends : trendsReducer,
     search : searchReducer,
-    stats : statsReducer
+    stats : statsReducer,
+    visit : visitReducer
 })
 let store = createStore(reducers, applyMiddleware(thunk));
 

@@ -7,7 +7,7 @@ import classes from "./ResultPage.module.css"
 import renderList from "../../../utils/mobileSearchRenderer";
 
 let ResultPageContainer = (props) => {
-    let renderedList = renderList(props.list);
+    let renderedList = renderList(props.list, props.locale);
     return(
         <>
             {props.isFetching

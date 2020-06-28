@@ -10,6 +10,7 @@ import rus from "./translations/rus.json";
 import eng from "./translations/eng.json";
 import chinese from "./translations/ch.json";
 import {IntlProvider} from "react-intl";
+import AppContainer from "./AppContainer";
 
 let messages = {
     ru : rus,
@@ -18,17 +19,14 @@ let messages = {
 }
 
 function App() {
-    let [locale, setLocale] = useState('ru');
+    let [locale, setLocale] = useState(navigator.language.split(/[-_]/)[0]);
     let isMobile = useMediaQuery('(max-width:1280px)');
     return (
         <IntlProvider locale={locale} messages={messages[locale]}>
             <Provider store={store}>
                 <div className={"App"}>
                     <BrowserRouter basename={process.env.PUBLIC_URL}>
-                        {isMobile
-                            ? <MobileApp setLoc={setLocale} locale={locale}/>
-                            : <DesktopApp setLoc={setLocale} locale={locale}/>
-                        }
+                        <AppContainer locale={locale} isMobile={isMobile} setLocale={setLocale}/>
                     </BrowserRouter>
                 </div>
             </Provider>

@@ -7,7 +7,7 @@ import {FormattedMessage} from "react-intl";
 let Instruction = (props) => {
     return(
         <div className={classes.Instruction} style={props.styles}>
-            <div className={classes.instructionPoint} style={props.mobile ? {width : "30%"} : {}}>
+            <div className={`${classes.instructionPoint} ${props.pointClass}`} style={props.mobile ? {width : "30%"} : {}}>
                 <img src={share} className={`${classes.img} ${props.iconClass}`} alt={"Share icon"}/>
                 <div className={classes.instructionDesc}>
                     <FormattedMessage id={"share_label"}/>

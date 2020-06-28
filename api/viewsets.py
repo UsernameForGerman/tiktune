@@ -5,15 +5,14 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_202_ACCEPTED,\
     HTTP_204_NO_CONTENT, HTTP_304_NOT_MODIFIED
-from django.utils.timezone import datetime, timedelta
+from django.shortcuts import get_object_or_404
 
 # custom libs
-from json import loads, dumps
 from requests import Session
 import logging
 
 # project
-from .models import SearchHistory, Song
+from .models import SearchHistory, Song, Visits
 from .serializers import SongSerializer, TikTokSerializer, SearchHistorySerializer, StatsSerializer
 from .tasks import find_save_songs, get_audd_songs
 
@@ -230,9 +229,11 @@ class StatsViewSet(ViewSet):
     def list(self, request: Request) -> Response:
         search_requests = SearchHistory.objects.count()
         songs = Song.objects.count()
+        visits = get_object_or_404(Visits).visits
         response_data = StatsSerializer([{
             'search_requests': search_requests,
-            'songs': songs
+            'songs': songs,
+            'visits': visits,
         }], many=True).data
 
         return Response(response_data, status=HTTP_200_OK)

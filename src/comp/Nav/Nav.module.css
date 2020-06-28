@@ -1,5 +1,5 @@
 .Nav{
-    width: 95%;
+    width: 98%;
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
@@ -10,7 +10,7 @@
     color: rgba(60,60,67,0.6);
     font-weight: bold;
     font-size: 1em;
-    margin: 0px 10px;
+    margin: 0px 5px;
     text-transform: uppercase;
     text-decoration: none;
 }

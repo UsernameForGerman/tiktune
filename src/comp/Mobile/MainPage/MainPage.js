@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {getSongByUrlThunk} from "../../../reducers/searchReducer";
 
 let MainPage = (props) => {
+    window.scrollTo(0,0);
     return (
         <>
             <Nav/>

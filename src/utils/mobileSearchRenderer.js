@@ -4,11 +4,11 @@ import apple from "../assets/img/Apple_Music_Badge/Web_SVG/US-UK_Apple_Music_Bad
 import appleLogo from "../assets/img/appleMusic.png";
 import React from "react";
 import SongList from "../comp/common/SongList/SongList";
-import {FormattedMessage} from "react-intl";
 import formatResponse from "./responseFormatter";
 import googlePlay from "../assets/img/googlePlay.png";
+import getSearches from "./getSearches";
 
-let renderSong = (resp) => {
+let renderSong = (resp, locale) => {
     let props = formatResponse(resp);
         return(
         <div className={`${classes.searchResult}`}>
@@ -29,7 +29,7 @@ let renderSong = (resp) => {
                         {props.amount}
                         {props.amount
                             ? <div className={classes.searchesLabel}>
-                                 <FormattedMessage id={"searches_label"}/>
+                                {getSearches(props.amount, locale)}
                               </div>
                             : <></>
                         }
@@ -56,10 +56,10 @@ let renderSong = (resp) => {
     )
 }
 
-let renderList = (data) => {
+let renderList = (data, locale) => {
     return(<SongList list={
         data.map(elem => {
-            return renderSong(elem);
+            return renderSong(elem, locale);
         })
     }/>);
 }

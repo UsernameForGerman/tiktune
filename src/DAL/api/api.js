@@ -5,8 +5,12 @@ const TIKTUNE_BASE_URL = process.env.TIKTUNE_API_URL;
 
 class api {
    constructor(url) {
-      this.api = axios.create({
-         baseURL: TIKTUNE_BASE_URL +"/api/v1" + url,
+      this.api = this.createApi(url);
+   }
+
+   createApi = (url, baseUrl = TIKTUNE_BASE_URL +"/api/v1") => {
+      return axios.create({
+         baseURL: baseUrl + url,
          withCredentials: true,
          headers: {
             "Content-Type": "application/json"

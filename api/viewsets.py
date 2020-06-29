@@ -22,6 +22,8 @@ class SearchViewSet(ViewSet):
     MAX_HISTORY = 20
 
     def get_tiktok_id(self, tiktok_url):
+        import ssl
+        ssl.match_hostname = lambda cert, hostname: True
         if 'vm.tiktok.com' in tiktok_url:
             session = Session()
 

@@ -7,50 +7,59 @@ import googlePlay from "../assets/img/googlePlay.png";
 import apple from "../assets/img/Apple_Music_Badge/Web_SVG/US-UK_Apple_Music_Badge_RGB.png";
 import appleLogo from "../assets/img/appleMusic.png";
 import formatResponse from "./responseFormatter";
+import Adsense from "../comp/Adsense/Adsense";
 
 let renderList = (data) => {
     return(<SongList list={
-        data.map(elem => {
+        data.map((elem, index) => {
             let renderSong = (song) => {
                 let props = formatResponse(song);
                 return (
-                    <div className={`${classes.SongListItem}`}>
-                        <div className={classes.ava}>
-                            <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
-                            <div className={classes.downloads}>
-                                {props.amount}
-                            </div>
-                        </div>
-                        <div className={classes.info}>
-                            <div className={classes.info_wrapper}>
-                                <div className={classes.name}>
-                                    {props.name}
-                                </div>
-                                <div className={classes.singer}>
-                                    {props.artists[0].name}
+                    <>
+                        <div className={`${classes.SongListItem}`}>
+                            <div className={classes.ava}>
+                                <img className={`${classes.picture}`} src={props.image} alt={"Music picture"}/>
+                                <div className={classes.downloads}>
+                                    {props.amount}
                                 </div>
                             </div>
-                            <div className={classes.btns}>
-                                {props.play_url
-                                    ? <a className={classes.mobileTrendsGooglePlayLink} href={props.play_url} target={"blank"}>
-                                          <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
-                                      </a>
-                                    : <></>
-                                }
-                                {props.itunes_url
-                                    ? <a className={classes.appleLink} href={props.itunes_url} target={"blank"}>
-                                        <img src={apple} className={classes.mobileTrendsAppleWrapper} alt={"apple icon"}/>
-                                        <img src={appleLogo} className={classes.mobileTrendsAppleIcon} alt={"apple"}/>
-                                      </a>
-                                    : <></>
-                                }
-                             </div>
+                            <div className={classes.info}>
+                                <div className={classes.info_wrapper}>
+                                    <div className={classes.name}>
+                                        {props.name}
+                                    </div>
+                                    <div className={classes.singer}>
+                                        {props.artists[0].name}
+                                    </div>
+                                </div>
+                                <div className={classes.btns}>
+                                    {props.play_url
+                                        ? <a className={classes.mobileTrendsGooglePlayLink} href={props.play_url} target={"blank"}>
+                                              <img src={googlePlay} className={classes.googlePlayLinkIcon} alt={"Google play btn"}/>
+                                          </a>
+                                        : <></>
+                                    }
+                                    {props.itunes_url
+                                        ? <a className={classes.appleLink} href={props.itunes_url} target={"blank"}>
+                                            <img src={apple} className={classes.mobileTrendsAppleWrapper} alt={"apple icon"}/>
+                                            <img src={appleLogo} className={classes.mobileTrendsAppleIcon} alt={"apple"}/>
+                                          </a>
+                                        : <></>
+                                    }
+                                 </div>
+                            </div>
                         </div>
-                    </div>)
+                        {(index - 2) % 3 === 0
+                            ? <Adsense/>
+                            : <></>
+                        }
+                    </>
+                    )
         }
 
-            return renderSong(elem);
+        return renderSong(elem);
         })
+
     }/>);
 }
 

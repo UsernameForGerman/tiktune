@@ -201,7 +201,7 @@ class SearchViewSet(ViewSet):
 
 class TrendsViewSet(ViewSet):
 
-    def get_queryset(self, max_amount=6):
+    def get_queryset(self, max_amount=10):
         return Song.objects.order_by('-amount')[:max_amount]
 
     def list(self, request: Request) -> Response:

@@ -32,10 +32,12 @@ let SearchInput = (props) => {
         <MobileContainer>
             <div className={classes.SearchInput}>
                 <div className={classes.label} style={!isTouched ? {transform : "translateY(25px)"} : {}}>
-                    <FormattedMessage id={"paste_link_label"}/>
+                    <label htmlFor={"input"}>
+                        <FormattedMessage id={"paste_link_label"}/>
+                    </label>
                 </div>
                 <div className={classes.inputWrapper}>
-                    <input type={"text"} ref={ref} style={!isTouched ? {width : "20%"} : {}} onClick={handleClick} onBlur={handleBlur} className={classes.input} onChange={checkHidden}/>
+                    <input type={"text"} id={"input"} ref={ref} style={!isTouched ? {width : "20%"} : {}} onClick={handleClick} onBlur={handleBlur} className={classes.input} onChange={checkHidden}/>
                     <NavLink to={"/search"}>
                         <SearchBtn hidden={hidden} click={search}/>
                     </NavLink>

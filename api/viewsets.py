@@ -22,6 +22,8 @@ class SearchViewSet(ViewSet):
     MAX_HISTORY = 20
 
     def get_tiktok_id(self, tiktok_url):
+        import ssl
+        ssl.match_hostname = lambda cert, hostname: True
         if 'vm.tiktok.com' in tiktok_url:
             session = Session()
 
@@ -43,12 +45,14 @@ class SearchViewSet(ViewSet):
             })
             logger.info('Response from tiktok {}'.format(response.status_code))
 
-            mobile_url = response.history[len(response.history) - 1].url
-
+            mobile_url = response.url
+            logger.info('Found full tiktok url {}'.format(mobile_url))
             if '/v/' in mobile_url and '.html' in mobile_url:
                 post_id = mobile_url.split('/v/')[1].split('.html')[0]
+            elif "@" in mobile_url and "/video/" in mobile_url:
+                post_id = mobile_url.split("/video/")[1].split("?")[0]
             else:
-                logger.info('Reponse hisotry {}'.format(response.history))
+                logger.info('Response hisotry {}'.format(response.history))
                 logger.info(''.join([r.url for r in response.history]))
                 logger.warning('Can\'t find video ID in mobile url')
                 return ''
@@ -66,6 +70,9 @@ class SearchViewSet(ViewSet):
             tiktok_id=tiktok_id
         )
 
+    def __not_empty_url(self, tiktok_url: str) -> bool:
+        return bool(tiktok_url.split('.com/')[1])
+
     def list(self, request: Request) -> Response:
         """
         Retrieve detailed Song specified by url
@@ -74,7 +81,7 @@ class SearchViewSet(ViewSet):
             serializer = TikTokSerializer(data={
                 'tiktok_url': request.query_params.get('url')
             })
-            if serializer.is_valid():
+            if serializer.is_valid() and self.__not_empty_url(serializer.data['tiktok_url']):
                 tiktok_id = self.get_tiktok_id(serializer.data['tiktok_url'])
                 search_history = self.get_queryset(tiktok_id)
                 logger.info('Requested song with id {}'.format(tiktok_id))
@@ -209,7 +216,6 @@ class HistoryViewSet(ViewSet):
     def list(self, request: Request) -> Response:
         session_data = request.session
         if 'songs' in session_data:
-            print(session_data['songs'])
             search_history = SearchHistory.objects.filter(
                 id__in=session_data['songs'],
             ).order_by(

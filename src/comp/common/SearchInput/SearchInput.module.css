@@ -9,8 +9,8 @@
     border-radius: 40px;
     outline: none;
     padding: 8px 15px;
-    padding-right: 2vw;
-    transform: translateX(-5vw);
+    padding-right: 5vw;
+    transform: translateX(-6.5vw);
     text-overflow: ellipsis;
     font-size: 1.5em;
     z-index: 1;

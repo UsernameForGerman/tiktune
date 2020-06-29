@@ -9,6 +9,7 @@ import os
 from acrcloud.recognizer import ACRCloudRecognizer
 from json import loads, JSONDecodeError
 import logging
+from requests.exceptions import ConnectionError
 
 # project
 from .models import Artist, Song, SearchHistory
@@ -82,27 +83,36 @@ def find_acr(tiktok_url: str):
 def get_mp3_url(tiktok_id):
     logger.info('Starting to find song url via TikTokApi')
     file_finder = TikTokApi()
-    result = file_finder.getTikTokById(id=tiktok_id)
+    try:
+        result = file_finder.getTikTokById(id=tiktok_id)
+    except ConnectionError as e:
+        logger.info('Connection Error occured')
+        logger.warning(e)
+        return ''
     try:
         mp3_url = result['itemInfo']['itemStruct']['music']['playUrl']
         logger.info('Found song url: \n {}'.format(mp3_url))
         return mp3_url
     except Exception as e:
-        logger.exception(e)
+        logger.warning(e)
         return ''
 
 def get_audd_songs(tiktok_id):
     song_url = get_mp3_url(tiktok_id)
-    logger.info('Starting to get song info from AUDD API with {} song_url'.format(song_url))
-    session = Session()
-    res = session.post('https://api.audd.io/', data={
-        'url': song_url,
-        'return': 'apple_music,deezer,spotify',
-        'market': 'ru',
-        'api_token': '71526d7877260531dfee40a059ca1a94'
-    })
-    logger.info('Song search via AUDD API is {}'.format(res.text))
-    return res.text
+    if song_url != '':
+        logger.info('Starting to get song info from AUDD API with {} song_url'.format(song_url))
+        session = Session()
+        res = session.post('https://api.audd.io/', data={
+            'url': song_url,
+            'return': 'apple_music,deezer,spotify',
+            'market': 'ru',
+            'api_token': '71526d7877260531dfee40a059ca1a94'
+        })
+        logger.info('Song search via AUDD API is {}'.format(res.text))
+        return res.text
+    else:
+        logger.info('Can\'t find mp3 song url')
+        return ''
 
 def find_audd(tiktok_id):
     try:

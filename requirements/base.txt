@@ -22,6 +22,7 @@ pyee==7.0.2
 pyppeteer==0.2.2
 pyppeteer-stealth==1.0.0
 pytz==2020.1
+pyopenssl
 redis==3.5.3
 requests==2.23.0
 selenium==3.141.0

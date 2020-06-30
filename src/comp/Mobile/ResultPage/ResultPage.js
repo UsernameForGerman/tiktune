@@ -7,7 +7,6 @@ import MobileContainer from "../../Containers/MobileContainer/MobileContainer";
 import {FormattedMessage} from "react-intl";
 import {NavLink} from "react-router-dom";
 let ResultPage = (props) => {
-    window.scrollTo(0,0);
     return(
         <MobileContainer>
             {props.list[0] && props.list[0].name.length

@@ -8,6 +8,7 @@ import renderList from "../../../utils/mobileSearchRenderer";
 
 let ResultPageContainer = (props) => {
     let renderedList = renderList(props.list, props.locale);
+    window.scrollTo(0,0);
     return(
         <>
             {props.isFetching

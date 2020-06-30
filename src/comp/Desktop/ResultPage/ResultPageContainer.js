@@ -14,6 +14,7 @@ let ResultPageContainer = (props) => {
 
     let resultList = renderList(props.resultSet, true);
     let historyList = renderList(props.historyList);
+    window.scrollTo(0,0);
     return(
         <ResultPage {...props} resultList={resultList} historyList={historyList}/>
     )

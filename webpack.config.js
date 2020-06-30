@@ -13,7 +13,8 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        port : 3000
+        port : 3000,
+        host: 'localhost'
     },
     node: {
        fs: "empty"

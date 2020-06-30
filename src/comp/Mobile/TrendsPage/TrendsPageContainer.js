@@ -15,6 +15,7 @@ let TrendsPageContainer = (props) => {
         props.getSongs();
     }, props.list.length)
     let list = renderList(props.list);
+    window.scrollTo(0,0);
     return (
         <>
             <Nav/>

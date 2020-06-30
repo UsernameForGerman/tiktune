@@ -10,6 +10,7 @@ let TrendsPageContainer = (props) => {
         props.getTrends();
     }, props.songsList.length);
     let list = renderList(props.songsList);
+    window.scrollTo(0,0);
     return(
         <TrendsPage list={list} isFetching={props.isFetching}/>
     )

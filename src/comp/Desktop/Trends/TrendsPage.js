@@ -3,7 +3,6 @@ import React from "react";
 import Adsense from "../../Adsense/Adsense";
 import Preloader from "../../common/Preloader/Preloader";
 let TrendsPage = (props) => {
-    window.scrollTo(0,0);
     return(
         <section className={classes.Trends}>
             {props.isFetching

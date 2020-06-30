@@ -15,7 +15,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         port : 3000,
-        host: '192.168.0.2'
+        host: 'localhost'
     },
     node: {
        fs: "empty"

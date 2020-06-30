@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require( 'html-webpack-plugin' );
 const Dotenv = require('dotenv-webpack');
 const path = require( 'path' );
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 require('dotenv').config();
 module.exports = {
     context: __dirname,
@@ -14,7 +15,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         port : 3000,
-        host: 'localhost'
+        host: '192.168.0.2'
     },
     node: {
        fs: "empty"
@@ -73,6 +74,7 @@ module.exports = {
         new Dotenv({
           path: path.resolve( __dirname, '.env' ), // Path to .env file (this is the default)
           safe: false // load .env.example (defaults to "false" which does not use dotenv-safe)
-        })
+        }),
+        new FaviconsWebpackPlugin("./src/assets/img/favicon.png")
     ]
 };

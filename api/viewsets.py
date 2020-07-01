@@ -135,7 +135,7 @@ class SearchViewSet(ViewSet):
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)
                         for song in songs:
-                            song.amount -= 1
+                            song.amount += 1
                         Song.objects.bulk_update(songs, ('amount',))
                         song_names = set(search.song.name for search in search_history)
                         songs = Song.objects.filter(name__in=song_names)

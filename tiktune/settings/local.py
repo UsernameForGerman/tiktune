@@ -42,8 +42,6 @@ CORS_ALLOW_METHODS = [
     'HEAD',
 ]
 
-
-
 # LOGGING
 # ------------------------------------------------------------------------------
 LOGGING = {
@@ -62,9 +60,9 @@ LOGGING = {
         },
     },
     'loggers': {
-        '': {
+        'django': {
             'level': 'INFO',
             'handlers': ['console']
-        }
+        },
     },
 }

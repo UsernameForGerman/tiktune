@@ -26,7 +26,6 @@ let ResultPage = (props) => {
                             ?
                                 <div className={classes.list}>
                                     {props.resultList}
-                                    <Adsense/>
                                 </div>
                             : <></>
                     }

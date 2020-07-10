@@ -56,7 +56,7 @@ let renderList = (data, result = false) => {
             return (
                 <>
                     {renderSong(elem)}
-                    {index === 2 && !result ? <Adsense/> : <></>}
+                    {index === 2 && !result ? <></> : <></>}
                 </>
             );
         })

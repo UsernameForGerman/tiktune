@@ -26,6 +26,7 @@ let ResultPage = (props) => {
                             ?
                                 <div className={classes.list}>
                                     {props.resultList}
+                                    <Adsense/>
                                 </div>
                             : <></>
                     }
@@ -35,7 +36,6 @@ let ResultPage = (props) => {
                         </div>
                     }
                 </div>
-                <Adsense styles={{width : "20%"}}/>
             </div>
         </div>
     )

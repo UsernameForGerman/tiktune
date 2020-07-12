@@ -47,7 +47,6 @@ let ResultPage = (props) => {
                     </div>
                 </div>
             }
-            <Adsense/>
         </MobileContainer>
     )
 }

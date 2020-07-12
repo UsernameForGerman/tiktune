@@ -7,14 +7,10 @@ let TrendsPage = (props) => {
         <section className={classes.Trends}>
             {props.isFetching
                 ? <div className={classes.preloadWrapper}><Preloader/></div>
-                : <div className={`${classes.list} ${classes.col}`}>
+                : <div className={`${classes.list}`}>
                       {props.list}
                   </div>
             }
-            <div className={classes.col2}>
-                <Adsense/>
-                <Adsense/>
-            </div>
         </section>
     )
 }

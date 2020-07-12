@@ -8,6 +8,7 @@ import spotify from "../assets/img/spotify-icons-logos/icons/01_RGB/02_PNG/Spoti
 import apple from "../assets/img/Apple_Music_Badge/Web_SVG/US-UK_Apple_Music_Badge_RGB.png";
 import appleLogo from "../assets/img/appleMusic.png";
 import googlePlay from "../assets/img/googlePlay.png";
+import Adsense from "../comp/Adsense/Adsense";
 
 let renderSong = (resp) => {
     let props = formatResponse(resp);
@@ -51,8 +52,13 @@ let renderSong = (resp) => {
 
 let renderList = (data, result = false) => {
     return(<SongList result={result} list={
-        data.map(elem => {
-            return renderSong(elem);
+        data.map((elem, index) => {
+            return (
+                <>
+                    {renderSong(elem)}
+                    {index === 2 && !result ? <></> : <></>}
+                </>
+            );
         })
     }/>);
 }

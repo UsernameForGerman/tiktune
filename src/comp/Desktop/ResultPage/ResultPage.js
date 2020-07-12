@@ -35,7 +35,6 @@ let ResultPage = (props) => {
                         </div>
                     }
                 </div>
-                <Adsense styles={{width : "20%"}}/>
             </div>
         </div>
     )

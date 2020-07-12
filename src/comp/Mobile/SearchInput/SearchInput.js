@@ -43,7 +43,6 @@ let SearchInput = (props) => {
                     </NavLink>
                 </div>
             </div>
-            <Adsense/>
         </MobileContainer>
     )
 }

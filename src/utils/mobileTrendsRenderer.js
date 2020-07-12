@@ -50,7 +50,7 @@ let renderList = (data) => {
                             </div>
                         </div>
                         {(index - 2) === 0
-                            ? <Adsense/>
+                            ? <></>
                             : <></>
                         }
                     </>

@@ -4,15 +4,8 @@
     justify-content: space-around;
 }
 
-.col{
-    width: 85%;
-}
-
-.col2{
-    width: 10%;
-}
-
 .list{
+    width: 100%;
     display: flex;
     flex-direction: column;
 }

@@ -11,7 +11,7 @@ let MainPage = (props) => {
         <>
             <DesktopHeader {...props}/>
             <SearchContent {...props}/>
-            <div style={{height : "29vh"}}/>
+            <div style={{height : "33vh"}}/>
         </>
     )
 }

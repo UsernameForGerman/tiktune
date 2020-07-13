@@ -106,7 +106,7 @@ def get_audd_songs(tiktok_id):
             'url': song_url,
             'return': 'apple_music,deezer,spotify',
             'market': 'ru',
-            'api_token': '71526d7877260531dfee40a059ca1a94'
+            'api_token': os.environ.get('API_TOKEN', '71526d7877260531dfee40a059ca1a94')
         })
         logger.info('Song search via AUDD API is {}'.format(res.text))
         return res.text

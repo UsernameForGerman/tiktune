@@ -1,0 +1,31 @@
+# General
+# ----------------------------------------------------------------------------
+USE_DOCKER=yes
+
+# Django
+# ----------------------------------------------------------------------------
+DEBUG=True
+SECRET_KEY=24&oiunrc07hjsv^yniu5+9yq$5**via9+rfa)y0n!)3m=or$
+DJANGO_SETTINGS_MODULE=tiktune.settings.production
+
+# Audd
+# ----------------------------------------------------------------------------
+AUDD_TOKEN=71526d7877260531dfee40a059ca1a94
+
+# Redis
+# ----------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# RabbitMQ
+# ----------------------------------------------------------------------------
+RABBITMQ_DEFAULT_USER=guest
+RABBITMQ_DEFAULT_PASS=guest
+RABBITMQ_DEFAULT_VHOST=/
+
+# Celery
+# ----------------------------------------------------------------------------
+CELERY_BROKER_URL=amqp://guest:guest@rabbit:5672
+
+# Flower
+CELERY_FLOWER_USER=yhxbSHlxrOJDqjMZrXGKEhWnjbkxRNgU
+CELERY_FLOWER_PASSWORD=tCRunqlbbMmMZD0fnrBc8OdJT1m85CzZoG58i1ONqhaDST7IKfM2TMY1$
